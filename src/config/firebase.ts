@@ -1,3 +1,4 @@
+// I will remove firebase in favor of vercel neon and storage blobs
 // initialize fb app
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
