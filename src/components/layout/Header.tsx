@@ -44,10 +44,10 @@ const MainHeader = () => {
 							width={300}
 							height={100}
 							src="/logos/horizontal-gradient.svg"
-							alt="Familia Print by Leonidas"
+							alt="Familia Print Logo"
               className="inline-block relative"
 						/>
-						<span className="text-4xl text-white inline-block absolute bottom-[.555rem]">
+						<span className="text-4xl text-red-400 inline-block absolute bottom-[.555rem]">
 							&nbsp; {languageContext.language === "en" ? "by" : "por"} Leónidas
 						</span>
 					</Link>
@@ -100,7 +100,7 @@ const MainHeader = () => {
                       onClick={() => setShowSideBar(false)}
 											className="text-2xl md:text-3xl font-bold text-blue-100 hover:text-blue-200 transition-all"
 											href="/login">
-											Login
+											{languageContext.language === "en" ? "Login" : "Ingresar"}
 										</Link>
 									)}
 								</li>

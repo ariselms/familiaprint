@@ -11,6 +11,10 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        passiondark: "#A7163D",
+        passionlight: "#BA525E",
+        marinedark: "#013E9F",
+        marinelight: "#5268BA",
       },
     },
   },

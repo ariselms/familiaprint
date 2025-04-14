@@ -13,7 +13,7 @@ export const Cog: React.FC<CogProps> = ({ onClick }) => {
 			viewBox="0 0 24 24"
 			strokeWidth="1.5"
 			stroke="currentColor"
-			className="size-8 text-blue-200 cursor-pointer hover:text-blue-300 hover:rotate-12 transition-all duration-300 ease-in-out">
+			className="size-8 text-gray-200 cursor-pointer hover:rotate-12 transition-all duration-300 ease-in-out">
 			<path
 				strokeLinecap="round"
 				strokeLinejoin="round"

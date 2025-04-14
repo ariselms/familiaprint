@@ -8,7 +8,7 @@ const Jumbotron: React.FC = () => {
   const {language} = useLanguageContext();
 
   return (
-    <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+    <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
       <div className="rounded-xl h-80 bg-gradient-to-r from-blue-500 to-cyan-500 lg:col-span-2 flex flex-col items-start justify-between px-4 py-10 md:px-8 md:py-12 border border-blue-400 border-2 relative">
         <Image
           className="absolute top-4 right-4 rotate-12 opacity-25 z-0"

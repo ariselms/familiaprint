@@ -19,7 +19,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Familia Print by Leonidas",
+  title: "Familia Print",
 };
 
 export default function RootLayout({
@@ -50,7 +50,7 @@ export default function RootLayout({
 				/>
 				<link rel="manifest" href="/site.webmanifest" />
 			</Head>
-			<html lang="en" className="bg-gray-900 text-gray-50">
+			<html lang="en" className="bg-gray-950 text-gray-50">
 				<body
 					className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
 					<AuthContextProvider>
