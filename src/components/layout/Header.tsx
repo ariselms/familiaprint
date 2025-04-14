@@ -47,7 +47,7 @@ const MainHeader = () => {
 							alt="Familia Print Logo"
               className="inline-block relative"
 						/>
-						<span className="text-4xl text-red-400 inline-block absolute bottom-[.555rem]">
+						<span className="text-4xl text-marinedark inline-block absolute bottom-[.555rem]">
 							&nbsp; {languageContext.language === "en" ? "by" : "por"} Leónidas
 						</span>
 					</Link>

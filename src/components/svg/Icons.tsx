@@ -1,5 +1,3 @@
-import { url } from "inspector";
-
 export interface CogProps {
 	onClick: () => void;
 }
@@ -13,7 +11,7 @@ export const Cog: React.FC<CogProps> = ({ onClick }) => {
 			viewBox="0 0 24 24"
 			strokeWidth="1.5"
 			stroke="currentColor"
-			className="size-8 text-gray-200 cursor-pointer hover:rotate-12 transition-all duration-300 ease-in-out">
+			className="size-8 fill-marinedark cursor-pointer hover:rotate-12 transition-all duration-300 ease-in-out">
 			<path
 				strokeLinecap="round"
 				strokeLinejoin="round"

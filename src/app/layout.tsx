@@ -7,6 +7,7 @@ import Head from "next/head";
 import MainHeader from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { AuthContextProvider } from "@/context/authContext";
+import FullResBackground from "@/components/FullResBackground";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -50,9 +51,10 @@ export default function RootLayout({
 				/>
 				<link rel="manifest" href="/site.webmanifest" />
 			</Head>
-			<html lang="en" className="bg-gray-950 text-gray-50">
+			<html lang="en" className="bg-blue-100 text-gray-50 relative">
 				<body
 					className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+					{/* <FullResBackground /> */}
 					<AuthContextProvider>
 						<StorageContextProvider>
 							<LanguageContextProvider>
