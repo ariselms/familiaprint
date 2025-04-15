@@ -39,15 +39,15 @@ const MainHeader = () => {
 				<div className="flex justify-between items-start px-4 pb-4 pt-8">
 					<Link
 						href="/"
-						className={`${birthstone.className} text-5xl md:text-6xl font-bold text-blue-200 hover:text-blue-300 transition-all`}>
+						className={`${birthstone.className} w-full flex flex-col items-center md:items-baseline text-5xl md:text-6xl font-bold text-blue-200 hover:text-blue-300 transition-all`}>
 						<Image
 							width={300}
 							height={100}
 							src="/logos/horizontal-gradient.svg"
 							alt="Familia Print Logo"
-              className="inline-block relative"
+							className="inline-block relative"
 						/>
-						<span className="text-4xl text-marinedark inline-block absolute bottom-[.555rem]">
+						<span className="text-4xl text-marinedark">
 							&nbsp; {languageContext.language === "en" ? "by" : "por"} Leónidas
 						</span>
 					</Link>
@@ -56,7 +56,7 @@ const MainHeader = () => {
 			</nav>
 			{showSideBar && (
 				<>
-					<aside className="absolute right-0 top-0 w-10/12 md:w-3/6 bg-blue-950 h-screen z-30 transition-all ease-in-out p-4">
+					<aside className="absolute right-0 top-0 w-10/12 md:w-3/6 bg-blue-950/80 backdrop-blur-lg h-screen z-30 transition-all ease-in-out p-4">
 						<XClose onClick={() => setShowSideBar(false)} />
 						<form>
 							<div className="flex flex-col">
@@ -97,7 +97,7 @@ const MainHeader = () => {
 										</Link>
 									) : (
 										<Link
-                      onClick={() => setShowSideBar(false)}
+											onClick={() => setShowSideBar(false)}
 											className="text-2xl md:text-3xl font-bold text-blue-100 hover:text-blue-200 transition-all"
 											href="/login">
 											{languageContext.language === "en" ? "Login" : "Ingresar"}

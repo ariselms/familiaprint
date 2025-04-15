@@ -13,7 +13,7 @@ const ServiceCategoriesHeader = () => {
   const {language} = useLanguageContext();
 
 	return (
-		<h3 className="text-5xl lg:text-6xl font-bold text-marinedark mb-8 text-center">
+		<h3 className="text-5xl lg:text-6xl font-bold text-blue-950 mb-8 text-center">
 			{language === "es" ? "Servicios" : "Services"}
 		</h3>
 	);
@@ -26,13 +26,13 @@ const ServicesCategoriesCard = ({
 }: CategoriesType) => {
 
 	const {language} = useLanguageContext();
-	
+
 	return (
 		<Link href={`/services/${id}`}>
 			<div className="rounded-xl p-4 bg-gradient-to-b from-blue-200/40 to-sky-200/40 overflow-hidden h-auto border border-blue-200 backdrop-blur-lg
  border-2 cursor-pointer">
-				<div className="h-20">
-					<h4 className="font-bold text-2xl text-marinedark mb-2">
+				<div className="h-8">
+					<h4 className="font-bold text-2xl text-blue-950 mb-2 text-center">
 						{language === "es" ? spName : enName}
 					</h4>
 				</div>
