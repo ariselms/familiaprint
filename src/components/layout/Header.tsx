@@ -115,7 +115,7 @@ const MainHeader = () => {
 								<li className="mb-4">
 									<Link
 										onClick={() => setShowSideBar(false)}
-										href="/"
+										href="/quote"
 										className="text-2xl md:text-3xl font-bold text-blue-100 hover:text-blue-200 transition-all">
 										{languageContext.language === "en"
 											? "Get a quote"
@@ -125,7 +125,7 @@ const MainHeader = () => {
 								<li className="mb-4">
 									<Link
 										onClick={() => setShowSideBar(false)}
-										href="/"
+										href="/about"
 										className="text-2xl md:text-3xl font-bold text-blue-100 hover:text-blue-200 transition-all">
 										{languageContext.language === "en"
 											? "About"
