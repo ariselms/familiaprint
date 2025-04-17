@@ -9,9 +9,9 @@ const Jumbotron: React.FC = () => {
 
   return (
 		<div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-			<div className="rounded-xl h-80 bg-gradient-to-b from-blue-200/40 to-sky-200/40 lg:col-span-2 flex flex-col items-start px-4 py-10 md:px-8 md:py-12 border border-blue-200 backdrop-blur-md border-2 relative">
+			<div className="rounded-xl h-80 bg-gradient-to-b from-blue-200/10 to-sky-200/40 lg:col-span-2 flex flex-col items-start px-4 py-10 md:px-8 md:py-12 border border-blue-200 backdrop-blur-md border-2 relative">
 				<Image
-					className="absolute bottom-4 right-4 rotate-12 z-0 w-20 h-20 md:w-28 md:h-28"
+					className="absolute bottom-4 right-4 rotate-12 z-0 w-20 h-20 xl:w-28 xl:h-28"
 					width={0}
 					height={0}
 					src="/hecho-in-pr.svg"
@@ -48,7 +48,7 @@ const Jumbotron: React.FC = () => {
 			</div>
 
 			<div
-				className="lg:col-span-1 bg-gradient-to-t from-blue-200/40 to-sky-200/40 rounded-xl px-4 py-4 md:py-8 xl:py-12 border border-blue-200 backdrop-blur-lg
+				className="lg:col-span-1 bg-gradient-to-b from-blue-200/10 to-sky-200/40 rounded-xl px-4 py-4 md:py-8 xl:py-12 border border-blue-200 backdrop-blur-lg
  border-2 flex flex-col items-start justify-between">
 				<div className="mb-4">
 					<h3 className="text-2xl font-bold ">
