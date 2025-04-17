@@ -1,4 +1,15 @@
-import MainFull from "@/components/layout/ContainerFull";
+"use client";
+
+import MainContainer from "@/components/layout/Container";
+import { useLanguageContext } from "@/context/languageContext";
+
 export default function ContactPage() {
-  return <MainFull>Contact</MainFull>;
+	const { language } = useLanguageContext();
+	return (
+		<MainContainer>
+			<h1 className="text-black text-4xl font-bold">
+				{language === "en" ? "Contact Us" : "Contáctanos"}
+			</h1>
+		</MainContainer>
+	);
 }
