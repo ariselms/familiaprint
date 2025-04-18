@@ -5,6 +5,7 @@ import { LanguageContextProvider } from "@/context/languageContext";
 import { StorageContextProvider } from "@/context/storageContext";
 import Head from "next/head";
 import MainHeader from "@/components/layout/Header";
+import HeaderWithDropDown from "@/components/layout/HeaderWithDropDown";
 import Footer from "@/components/layout/Footer";
 import { AuthContextProvider } from "@/context/authContext";
 
@@ -19,7 +20,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Familia Print by Leonidas",
+  title: "Familia Print",
 };
 
 export default function RootLayout({
@@ -50,13 +51,17 @@ export default function RootLayout({
 				/>
 				<link rel="manifest" href="/site.webmanifest" />
 			</Head>
-			<html lang="en" className="bg-gray-900 text-gray-50">
+			<html lang="en" className="text-gray-50 relative">
 				<body
 					className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+					{/* <img
+						src="/gradients/blue-purple-tltbr.jpg"
+						className="fixed left-0 top-0 w-full h-full -z-10 opacity-50"
+					/> */}
 					<AuthContextProvider>
 						<StorageContextProvider>
 							<LanguageContextProvider>
-								<MainHeader />
+								<HeaderWithDropDown />
 								{children}
 								<Footer />
 							</LanguageContextProvider>

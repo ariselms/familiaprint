@@ -30,7 +30,9 @@ export const StorageContextProvider = ({
       const catSnapshot = await getDocs(catRef);
 
       const categoriesList = catSnapshot.docs.map((doc) => {
+
         const data  = doc.data();
+        
         return {
           id: doc.id,
           spName: data.spName,
