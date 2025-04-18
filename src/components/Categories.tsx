@@ -13,8 +13,8 @@ const ServiceCategoriesHeader = () => {
   const {language} = useLanguageContext();
 
 	return (
-		<h3 className="text-5xl lg:text-6xl font-bold text-blue-950 mb-8 text-center">
-			{language === "es" ? "Servicios" : "Services"}
+		<h3 className="text-5xl lg:text-6xl mb-12 font-bold text-blue-950 text-center md:text-left">
+			{language === "es" ? "Especializaciones" : "Specialties"}
 		</h3>
 	);
 };
@@ -67,7 +67,7 @@ const ServicesCategoriesList = () => {
   }
 
 	return (
-		<section className="py-16">
+		<section className="py-32">
 			<ServiceCategoriesHeader />
 			<div className="grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
 				{storageContext?.categories.map((category) => (

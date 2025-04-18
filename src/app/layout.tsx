@@ -5,9 +5,9 @@ import { LanguageContextProvider } from "@/context/languageContext";
 import { StorageContextProvider } from "@/context/storageContext";
 import Head from "next/head";
 import MainHeader from "@/components/layout/Header";
+import HeaderWithDropDown from "@/components/layout/HeaderWithDropDown";
 import Footer from "@/components/layout/Footer";
 import { AuthContextProvider } from "@/context/authContext";
-import FullResBackground from "@/components/FullResBackground";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -51,14 +51,17 @@ export default function RootLayout({
 				/>
 				<link rel="manifest" href="/site.webmanifest" />
 			</Head>
-			<html lang="en" className="bg-blue-100 text-gray-50 relative">
+			<html lang="en" className="text-gray-50 relative">
 				<body
 					className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-					{/* <FullResBackground /> */}
+					{/* <img
+						src="/gradients/blue-purple-tltbr.jpg"
+						className="fixed left-0 top-0 w-full h-full -z-10 opacity-50"
+					/> */}
 					<AuthContextProvider>
 						<StorageContextProvider>
 							<LanguageContextProvider>
-								<MainHeader />
+								<HeaderWithDropDown />
 								{children}
 								<Footer />
 							</LanguageContextProvider>
