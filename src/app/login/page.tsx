@@ -11,7 +11,7 @@ const LoginPage = () => {
 	const { language } = useLanguageContext();
 	const [email, setEmail] = useState<string>("");
 	const [code, setCode] = useState<string>("");
-	const [codeSent, setCodeSent] = useState<boolean>(true);
+	const [codeSent, setCodeSent] = useState<boolean>(false);
 
 	const onFormSubmit = () => {
 		console.log("Form submitted");
