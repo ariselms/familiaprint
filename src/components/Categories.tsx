@@ -40,6 +40,8 @@ const ServicesCategoriesCard = ({
 }: CategoriesType) => {
 	const { language } = useLanguageContext();
 
+  console.log(imgurl);
+
 	return (
 		<Link href={`/services/${id}`} className="h-full hover:scale-105 focus:scale-105 transition-all">
 			<Card
