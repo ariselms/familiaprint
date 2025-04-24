@@ -1,10 +1,11 @@
 export interface CategoriesType {
   id: string;
-  spName: string;
-  enName: string;
-  spDescription: string;
-  enDescription: string;
-  imgUrl?: string;
+  spname: string;
+  enname: string;
+  spdescription: string;
+  endescription: string;
+  reachcapacity: boolean
+  imgurl?: string;
 }
 
 export type CategoriesListType = CategoriesType[];

@@ -1,32 +1,31 @@
 "use client";
-
-import { useEffect } from "react";
 import { useLanguageContext } from "@/context/languageContext";
-import { useStorageContext } from "@/context/storageContext";
+import { useCategoriesContext } from "@/context/categoriesContext";
+import { useEffect } from "react";
 import { useNavigationData } from "@/hooks/navigation";
 import Image from "next/image";
 import { languageOptions } from "@/static";
 import Link from "next/link";
+import { CategoriesType } from "@/types/categories";
 
 export default function Footer() {
 	const { language } = useLanguageContext();
-	const storageContext = useStorageContext();
-	const { categories } = storageContext // useStorageContext() desestructured
   const navigation = useNavigationData();
+  const {categories, getAllCategories} = useCategoriesContext();
 
-	useEffect(() => {
-		storageContext?.getAllCategories();
-	}, []);
+  useEffect(() => {
+    getAllCategories();
+  }, []);
 
 	return (
-		<footer className="bg-gray-900 border border-top border-gray-800 z-20">
+		<footer className="bg-black border border-t border-gray-300 dark:border-gray-900 z-20">
 			<div className="mx-auto max-w-7xl px-6 pb-8 pt-16 sm:pt-24 lg:px-8 lg:pt-32">
 				<div className="xl:grid xl:grid-cols-3 xl:gap-8">
 					<Image
 						width={100}
 						height={100}
-						alt="Company name"
-						src="/logos/logo-white-squared.svg"
+						alt="Familia Print Logo"
+						src="/logos/logo-gradient-squared.svg"
 						className="h-40 w-auto"
 					/>
 					<div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
@@ -37,28 +36,30 @@ export default function Footer() {
 										? "Servicios"
 										: "Services"}
 								</h3>
-								<ul role="list" className="mt-6 space-y-4">
-									{categories?.map((item) => (
+								<ul role="list" className="mt-6 space-y-4 text-white">
+									{categories?.map((item:CategoriesType) => (
 										<li key={item.id}>
 											<Link
 												href={"/services/" + item.id}
-												className="text-sm/6 text-gray-100 hover:text-white">
+												className="text-sm/6text-white hover:underline">
 												{language === languageOptions.spanish
-													? item.spName
-													: item.enName}
+													? item.spname
+													: item.enname}
 											</Link>
 										</li>
 									))}
 								</ul>
 							</div>
 							<div className="mt-10 md:mt-0">
-								<h3 className="text-sm/6 font-semibold text-white">Legal</h3>
+								<h3 className="text-sm/6 font-semibold text-white">
+									Legal
+								</h3>
 								<ul role="list" className="mt-6 space-y-4">
 									{navigation.legal.map((item) => (
 										<li key={item.name}>
 											<Link
 												href={item.href}
-												className="text-sm/6 text-gray-100 hover:text-white">
+												className="text-sm/6 text-white hover:underline">
 												{item.name}
 											</Link>
 										</li>
@@ -68,17 +69,15 @@ export default function Footer() {
 						</div>
 						<div className="md:grid md:grid-cols-2 md:gap-8">
 							<div>
-								<h3 className="text-sm/6 font-semibold text-white">
-                  {language === languageOptions.spanish
-                  ? "Empresa"
-                  : "Company"}
-                </h3>
+								<h3 className="text-sm/6 font-semibold text-black dark:text-white">
+									{language === languageOptions.spanish ? "Empresa" : "Company"}
+								</h3>
 								<ul role="list" className="mt-6 space-y-4">
 									{navigation.company.map((item) => (
 										<li key={item.name}>
 											<Link
 												href={item.href}
-												className="text-sm/6 text-gray-100 hover:text-white">
+												className="text-sm/6 text-black dark:text-white hover:underline">
 												{item.name}
 											</Link>
 										</li>
@@ -86,17 +85,15 @@ export default function Footer() {
 								</ul>
 							</div>
 							<div className="mt-10 md:mt-0">
-								<h3 className="text-sm/6 font-semibold text-white">
-                  {language === languageOptions.spanish
-                    ? "Soporte"
-                    : "Support"}
-                </h3>
+								<h3 className="text-sm/6 font-semibold text-black dark:text-white">
+									{language === languageOptions.spanish ? "Soporte" : "Support"}
+								</h3>
 								<ul role="list" className="mt-6 space-y-4">
 									{navigation.support.map((item) => (
 										<li key={item.name}>
 											<Link
 												href={item.href}
-												className="text-sm/6 text-gray-100 hover:text-white">
+												className="text-sm/6 text-black dark:text-white hover:underline">
 												{item.name}
 											</Link>
 										</li>
@@ -120,10 +117,9 @@ export default function Footer() {
 					</div>
 					<p className="mt-8 text-sm/6 text-gray-100 md:order-1 md:mt-0">
 						&copy; {new Date().getFullYear()} Familia Print by Leonidas, LLC.
-            {language === languageOptions.spanish
-              ? " Todos los derechos reservados."
-              : " All rights reserved."
-            }
+						{language === languageOptions.spanish
+							? " Todos los derechos reservados."
+							: " All rights reserved."}
 					</p>
 				</div>
 			</div>
