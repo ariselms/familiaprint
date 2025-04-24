@@ -29,18 +29,12 @@ const ServiceCategoriesHeader = () => {
 	);
 };
 
-const ServicesCategoriesCard = ({
-	id,
-	spname,
-	enname,
-	spdescription,
-	endescription,
-	reachcapacity,
-	imgurl
-}: CategoriesType) => {
+const ServicesCategoriesCard = ({category}: {category: CategoriesType}) => {
 	const { language } = useLanguageContext();
 
-  console.log(imgurl);
+  const { id, enname, spname, endescription, spdescription, imgurl } = category;
+
+  console.log(category?.imgurl);
 
 	return (
 		<Link href={`/services/${id}`} className="h-full hover:scale-105 focus:scale-105 transition-all">
@@ -83,7 +77,7 @@ const ServicesCategoriesList = () => {
 				<div className="grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-8">
 					{categories?.map((category: CategoriesType) => (
 						<div key={category.id} className="flex">
-							<ServicesCategoriesCard {...category} />
+							<ServicesCategoriesCard category={category} />
 						</div>
 					))}
 				</div>
