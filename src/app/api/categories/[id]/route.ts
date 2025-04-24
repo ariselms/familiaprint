@@ -1,6 +1,6 @@
+export const dynamic = "force-dynamic";
 import {NextResponse} from "next/server";
 import {sql} from "@vercel/postgres";
-import { Params } from "next/dist/server/request/params";
 
 export async function GET(
 	request: Request,
