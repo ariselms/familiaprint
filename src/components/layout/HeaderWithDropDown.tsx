@@ -60,8 +60,8 @@ export default function HeaderWithDropDown() {
 					</div>
 				</div>
 				<NavbarToggle />
-				<NavbarCollapse className="text-black dark:text-white cursor-pointer">
-					<NavbarLink className="text-black dark:text-white" href="/#services">
+				<NavbarCollapse className="cursor-pointer">
+					<NavbarLink className="text-black hover:none dark:text-white" href="/#services">
 						{language === languageOptions.english ? "Services" : "Servicios"}
 					</NavbarLink>
 					<NavbarLink className="text-black dark:text-white" href="/about">
