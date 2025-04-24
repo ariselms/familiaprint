@@ -53,6 +53,8 @@ const ServicesCategoriesCard = ({category}: {category: CategoriesType}) => {
 							: spdescription}
 					</p>
 				</div>
+
+        <button>Explore and order</button>
 			</Card>
 		</Link>
 	);

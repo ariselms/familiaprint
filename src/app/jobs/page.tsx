@@ -7,7 +7,7 @@ export default function JobsPage() {
 	const { language } = useLanguageContext();
 	return (
 		<MainContainer>
-			<h1 className="text-black text-4xl font-bold">
+			<h1 className="text-black dark:text-white text-4xl font-bold">
 				{language === "en" ? "Jobs" : "Vacantes"}
 			</h1>
 		</MainContainer>

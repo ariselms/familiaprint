@@ -7,7 +7,7 @@ export default function ContactPage() {
 	const { language } = useLanguageContext();
 	return (
 		<MainContainer>
-			<h1 className="text-black text-4xl font-bold">
+			<h1 className="text-black dark:text-white text-4xl font-bold">
 				{language === "en" ? "Contact Us" : "Contáctanos"}
 			</h1>
 		</MainContainer>

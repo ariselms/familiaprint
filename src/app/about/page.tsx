@@ -7,7 +7,7 @@ export default function AboutUsPage() {
 	const { language } = useLanguageContext();
 	return (
 		<MainContainer>
-			<h1 className="text-black text-4xl font-bold">
+			<h1 className="text-black dark:text-white text-4xl font-bold">
 				{language === "en" ? "About Us" : "Nosotros"}
 			</h1>
 		</MainContainer>

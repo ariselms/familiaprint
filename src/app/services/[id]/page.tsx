@@ -8,7 +8,6 @@ import ServiceBanner from "@/components/ServiceBanner";
 import Container from "@/components/layout/Container";
 import Spinner from "@/components/Spinner";
 import { languageOptions } from "@/static";
-import { url } from "inspector";
 
 const ServicesPage = () => {
 	const { id } = useParams();
