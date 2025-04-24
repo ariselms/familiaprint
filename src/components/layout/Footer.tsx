@@ -37,7 +37,7 @@ export default function Footer() {
 										: "Services"}
 								</h3>
 								<ul role="list" className="mt-6 space-y-4 text-white">
-									{categories?.map((item:CategoriesType) => (
+									{categories?.map((item: CategoriesType) => (
 										<li key={item.id}>
 											<Link
 												href={"/services/" + item.id}
@@ -51,9 +51,7 @@ export default function Footer() {
 								</ul>
 							</div>
 							<div className="mt-10 md:mt-0">
-								<h3 className="text-sm/6 font-semibold text-white">
-									Legal
-								</h3>
+								<h3 className="text-sm/6 font-semibold text-white">Legal</h3>
 								<ul role="list" className="mt-6 space-y-4">
 									{navigation.legal.map((item) => (
 										<li key={item.name}>
@@ -69,15 +67,17 @@ export default function Footer() {
 						</div>
 						<div className="md:grid md:grid-cols-2 md:gap-8">
 							<div>
-								<h3 className="text-sm/6 font-semibold text-black dark:text-white">
-									{language === languageOptions.spanish ? "Empresa" : "Company"}
+								<h3 className="text-sm/6 font-semibold text-white">
+									{language === languageOptions?.spanish
+										? "Empresa"
+										: "Company"}
 								</h3>
 								<ul role="list" className="mt-6 space-y-4">
 									{navigation.company.map((item) => (
 										<li key={item.name}>
 											<Link
 												href={item.href}
-												className="text-sm/6 text-black dark:text-white hover:underline">
+												className="text-sm/6 text-white hover:underline">
 												{item.name}
 											</Link>
 										</li>
@@ -85,7 +85,7 @@ export default function Footer() {
 								</ul>
 							</div>
 							<div className="mt-10 md:mt-0">
-								<h3 className="text-sm/6 font-semibold text-black dark:text-white">
+								<h3 className="text-sm/6 font-semibold text-white dark:text-white">
 									{language === languageOptions.spanish ? "Soporte" : "Support"}
 								</h3>
 								<ul role="list" className="mt-6 space-y-4">
@@ -93,7 +93,7 @@ export default function Footer() {
 										<li key={item.name}>
 											<Link
 												href={item.href}
-												className="text-sm/6 text-black dark:text-white hover:underline">
+												className="text-sm/6 text-white hover:underline">
 												{item.name}
 											</Link>
 										</li>
