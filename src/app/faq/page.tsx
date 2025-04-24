@@ -7,7 +7,7 @@ export default function FaqsPage() {
 	const { language } = useLanguageContext();
 	return (
 		<MainContainer>
-			<h1 className="text-black text-4xl font-bold">
+			<h1 className="text-black dark:text-white text-4xl font-bold">
 				{language === "en" ? "FAQ's" : "Preguntas frecuentes"}
 			</h1>
 		</MainContainer>

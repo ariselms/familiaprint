@@ -18,7 +18,9 @@ export const CategoriesContextProvider = ({
 
   // get all categories from firebase
   const getAllCategories = async () => {
-    const data = await fetch("/api/categories");
+    const data = await fetch("/api/categories", {
+      cache: "no-store",
+    });
     const response = await data.json();
     const categories = response.categories;
     if(categories){

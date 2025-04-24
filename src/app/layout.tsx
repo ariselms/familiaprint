@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import { LanguageContextProvider } from "@/context/languageContext";
 import { CategoriesContextProvider } from "@/context/categoriesContext";
 import HeaderWithDropDown from "@/components/layout/HeaderWithDropDown";
+import MainNavigation from "@/components/layout/MainNavigation";
 import Footer from "@/components/layout/Footer";
 import { AuthContextProvider } from "@/context/authContext";
 
@@ -59,7 +60,8 @@ export default function RootLayout({
 					<AuthContextProvider>
 						<CategoriesContextProvider>
 							<LanguageContextProvider>
-								<HeaderWithDropDown />
+								{/* <HeaderWithDropDown /> */}
+                <MainNavigation />
 								{children}
 								<Footer />
 							</LanguageContextProvider>

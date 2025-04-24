@@ -4,6 +4,7 @@ import MainContainer from "@/components/layout/Container";
 import Image from "next/image";
 import { useLanguageContext } from "@/context/languageContext";
 import AuthForm from "@/forms/AuthForm";
+import { languageOptions } from "@/static";
 const LoginPage = () => {
   const {language} = useLanguageContext();
 
@@ -17,8 +18,8 @@ const LoginPage = () => {
 					<div className="flex w-full md:w-1/2 flex-col justify-center px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
 						<div className="mx-auto w-full max-w-sm lg:w-96">
 							<div>
-								<h2 className="mt-8 text-2xl/9 font-bold tracking-tight text-blue-200">
-									{language === "en"
+								<h2 className="mt-8 text-2xl/9 font-bold tracking-tight  text-black dark:text-white">
+									{language === languageOptions.english
 										? "Sign in to your account"
 										: "Inicia sesión en tu cuenta"}
 								</h2>
@@ -26,7 +27,7 @@ const LoginPage = () => {
 
 							<div className="mt-10">
 								<div>
-                  <AuthForm onFormSubmit={onFormSubmit} />
+									<AuthForm onFormSubmit={onFormSubmit} />
 								</div>
 							</div>
 						</div>

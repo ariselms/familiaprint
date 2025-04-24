@@ -7,7 +7,7 @@ import { languageOptions } from "@/static";
 import { useEffect } from "react";
 import { useCategoriesContext } from "@/context/categoriesContext";
 import MainFull from "@/components/layout/ContainerFull";
-import { Card } from "flowbite-react";
+import { Button, Card } from "flowbite-react";
 
 
 const ServiceCategoriesHeader = () => {
@@ -29,21 +29,15 @@ const ServiceCategoriesHeader = () => {
 	);
 };
 
-const ServicesCategoriesCard = ({
-	id,
-	spname,
-	enname,
-	spdescription,
-	endescription,
-	reachcapacity,
-	imgurl
-}: CategoriesType) => {
+const ServicesCategoriesCard = ({category}: {category: CategoriesType}) => {
 	const { language } = useLanguageContext();
 
-  console.log(imgurl);
+  const { id, enname, spname, endescription, spdescription, imgurl } = category;
 
 	return (
-		<Link href={`/services/${id}`} className="h-full hover:scale-105 focus:scale-105 transition-all">
+		<Link
+			href={`/services/${id}`}
+			className="h-full hover:scale-105 focus:scale-105 transition-all">
 			<Card
 				imgAlt="Meaningful alt text for an image that is not purely decorative"
 				imgSrc={imgurl}
@@ -59,6 +53,10 @@ const ServicesCategoriesCard = ({
 							: spdescription}
 					</p>
 				</div>
+
+				<Button className="cursor-pointer" color={"red"}>
+					Explore and order
+				</Button>
 			</Card>
 		</Link>
 	);
@@ -83,7 +81,7 @@ const ServicesCategoriesList = () => {
 				<div className="grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-8">
 					{categories?.map((category: CategoriesType) => (
 						<div key={category.id} className="flex">
-							<ServicesCategoriesCard {...category} />
+							<ServicesCategoriesCard category={category} />
 						</div>
 					))}
 				</div>
