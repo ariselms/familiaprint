@@ -1,81 +1,91 @@
 "use client";
-
 import { useLanguageContext } from "@/context/languageContext";
-import { useStorageContext } from "@/context/storageContext";
 import type { CategoriesType } from "@/types/categories";
-import Image from "next/image";
 import Link from "next/link";
-import { useEffect } from "react";
 import Spinner from "@/components/Spinner";
+import { languageOptions } from "@/static";
+import { useEffect } from "react";
+import { useCategoriesContext } from "@/context/categoriesContext";
+import MainFull from "@/components/layout/ContainerFull";
+import { Card } from "flowbite-react";
+
 
 const ServiceCategoriesHeader = () => {
-
-  const {language} = useLanguageContext();
+	const { language } = useLanguageContext();
 
 	return (
-		<h3 className="text-5xl lg:text-6xl mb-12 font-bold text-blue-950 text-center md:text-left">
-			{language === "es" ? "Especializaciones" : "Specialties"}
-		</h3>
+		<>
+			<h2 className="text-3xl md:text-4xl mb-12 font-bold text-black dark:text-white text-center">
+				{language === languageOptions?.spanish
+					? "Especializaciones"
+					: "Specialties"}
+			</h2>
+			<p className="mb-16 text-lg font-normal text-gray-700 lg:text-xl sm:px-16 lg:px-48 dark:text-gray-300 text-center">
+				{language === languageOptions.english
+					? "We offer a wide range of services within the following categories. Choose the one that best fits what you are looking for and discover all the varieties we offer. If you need it, we have it."
+					: "Ofrecemos una gran variedad de servicio dentro de las siguientes categorías. Escoge la que mejor se adapte a lo que estás buscando y descubre todas las variedades que ofrecemos. Si lo necesitas, lo tenemos."}
+			</p>
+		</>
 	);
 };
 
 const ServicesCategoriesCard = ({
 	id,
-	spName,
-	enName
+	spname,
+	enname,
+	spdescription,
+	endescription,
+	reachcapacity,
+	imgurl
 }: CategoriesType) => {
-
-	const {language} = useLanguageContext();
+	const { language } = useLanguageContext();
 
 	return (
-		<Link href={`/services/${id}`}>
-			<div className="rounded-xl p-4 bg-gradient-to-b from-blue-200/40 to-sky-200/40 overflow-hidden h-auto border border-blue-200 backdrop-blur-lg
- border-2 cursor-pointer">
-				<div className="h-8">
-					<h4 className="font-bold text-2xl text-blue-950 mb-2 text-center">
-						{language === "es" ? spName : enName}
-					</h4>
+		<Link href={`/services/${id}`} className="h-full hover:scale-105 focus:scale-105 transition-all">
+			<Card
+				imgAlt="Meaningful alt text for an image that is not purely decorative"
+				imgSrc={imgurl}
+				className="h-full flex flex-col" // Removed justify-between
+			>
+				<div className="flex-grow">
+					<h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+						{language === languageOptions.english ? enname : spname}
+					</h5>
+					<p className="font-normal text-gray-700 dark:text-gray-400">
+						{language === languageOptions.english
+							? endescription
+							: spdescription}
+					</p>
 				</div>
-				<div className="mt-4 h-80 md:h-96 overflow-hidden rounded-xl border border-blue-200 border-2">
-					<Image
-						src="https://images.pexels.com/photos/1058276/pexels-photo-1058276.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-						className="w-full h-auto h-full rounded-xl object-cover hover:scale-125 transition duration-300 ease-in"
-						alt={language === "es" ? spName : enName}
-						width={200}
-						height={200}
-						onError={(e) => {
-							e.currentTarget.src = "/favicon-32x32.png";
-						}}
-					/>
-				</div>
-			</div>
+			</Card>
 		</Link>
 	);
 };
 
 const ServicesCategoriesList = () => {
-	const storageContext = useStorageContext();
+	const { categories, loadingCategories, getAllCategories } =
+		useCategoriesContext();
 
 	useEffect(() => {
-		storageContext?.getAllCategories();
+		getAllCategories();
 	}, []);
 
-  if(storageContext?.loadingCategories){
-    return (
-      <Spinner />
-    )
-  }
+	if (loadingCategories) {
+		return <Spinner />;
+	}
 
 	return (
-		<section className="py-32">
-			<ServiceCategoriesHeader />
-			<div className="grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
-				{storageContext?.categories.map((category) => (
-					<div key={category.id}>
-						<ServicesCategoriesCard {...category} />
-					</div>
-				))}
-			</div>
+		<section className="py-24 bg-gray-200 dark:bg-gray-900" id="services">
+			<MainFull>
+				<ServiceCategoriesHeader />
+				<div className="grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-8">
+					{categories?.map((category: CategoriesType) => (
+						<div key={category.id} className="flex">
+							<ServicesCategoriesCard {...category} />
+						</div>
+					))}
+				</div>
+			</MainFull>
 		</section>
 	);
 };

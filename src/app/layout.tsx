@@ -3,9 +3,7 @@ import { ThemeModeScript } from "flowbite-react";
 import { Geist, Geist_Mono } from "next/font/google";
 import type { Metadata } from "next";
 import { LanguageContextProvider } from "@/context/languageContext";
-import { StorageContextProvider } from "@/context/storageContext";
-import Head from "next/head";
-import MainHeader from "@/components/layout/Header";
+import { CategoriesContextProvider } from "@/context/categoriesContext";
 import HeaderWithDropDown from "@/components/layout/HeaderWithDropDown";
 import Footer from "@/components/layout/Footer";
 import { AuthContextProvider } from "@/context/authContext";
@@ -32,8 +30,7 @@ export default function RootLayout({
   return (
 		<>
 			<html
-				lang="en"
-				className="text-gray-50 relative"
+				className="scroll-smooth dark:bg-black"
 				suppressHydrationWarning>
 				<head>
 					<ThemeModeScript />
@@ -59,19 +56,16 @@ export default function RootLayout({
 				</head>
 				<body
 					className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-					{/* <img
-						src="/gradients/blue-purple-tltbr.jpg"
-						className="fixed left-0 top-0 w-full h-full -z-10 opacity-50"
-					/> */}
 					<AuthContextProvider>
-						<StorageContextProvider>
+						<CategoriesContextProvider>
 							<LanguageContextProvider>
 								<HeaderWithDropDown />
 								{children}
 								<Footer />
 							</LanguageContextProvider>
-						</StorageContextProvider>
+						</CategoriesContextProvider>
 					</AuthContextProvider>
+          <script src="/js/flowbite.js"></script>
 				</body>
 			</html>
 		</>
