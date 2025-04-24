@@ -9,24 +9,21 @@ import {
 	Dropdown,
 	DropdownItem,
 	Navbar,
+	NavbarLink,
 	NavbarCollapse,
 	NavbarToggle
 } from "flowbite-react";
 import Link from "next/link";
 import LanguageHandler from "@/components/forms/LanguageHandler";
+import Spinner from "@/components/Spinner";
 
 export default function HeaderWithDropDown() {
 	const languageContext = useLanguageContext();
 	const { language } = useLanguageContext();
-	const categoriesContext = useCategoriesContext();
-	const { categories, loadingCategories, getAllCategories } = useCategoriesContext(); // useCategoriesContext() desestructured
-	const navigation = useNavigationData();
 
 	useEffect(() => {
 		const currentLanguage = languageContext?.verifyLanguageFromLocalStorage();
 		languageContext?.setLanguage(currentLanguage);
-
-    getAllCategories();
 	}, []);
 
 	const handleLanguageChange = (lang: string) => {
@@ -36,7 +33,10 @@ export default function HeaderWithDropDown() {
 
 	return (
 		<header>
-			<Navbar className="p-4 rounded-none bg-white dark:bg-gray-950" fluid rounded>
+			<Navbar
+				className="p-4 rounded-none bg-white dark:bg-gray-950"
+				fluid
+				rounded>
 				<Link className="flex items-center" href="/">
 					<img
 						src="/logos/horizontal-black.svg"
@@ -51,51 +51,28 @@ export default function HeaderWithDropDown() {
 				</Link>
 				<div className="flex items-center md:order-2">
 					<div className="flex items-center">
-            <LanguageHandler
-              handleLanguageChange={handleLanguageChange}
-              languageContext={languageContext}
-              languageOptions={languageOptions}
-            />
+						<LanguageHandler
+							handleLanguageChange={handleLanguageChange}
+							languageContext={languageContext}
+							languageOptions={languageOptions}
+						/>
 						<DarkThemeToggle />
 					</div>
-					<NavbarToggle />
 				</div>
+				<NavbarToggle />
 				<NavbarCollapse className="text-black dark:text-white cursor-pointer">
-					<Dropdown
-						arrowIcon={true}
-						inline
-						label={
-							language === languageOptions.english ? "Services" : "Servicios"
-						}>
-						{categories.map((item:any) => (
-							<DropdownItem
-								key={item.id}
-								className="flex items-center justify-center gap-x-2.5">
-								<Link href={`/services/${item.id}`}>
-									{language === languageOptions.english
-										? item.enname
-										: item.spname}
-								</Link>
-							</DropdownItem>
-						))}
-					</Dropdown>
-					<Dropdown
-						arrowIcon={true}
-						inline
-						label={
-							language === languageOptions.english ? "Company" : "Empresa"
-						}>
-						{navigation.company.map((item) => (
-							<DropdownItem
-								key={item.href}
-								className="flex items-center justify-center gap-x-2.5">
-								<Link href={item.href}>{item.name}</Link>
-							</DropdownItem>
-						))}
-					</Dropdown>
-					<Link className="text-black dark:text-white" href="/login">
-						{language === languageOptions.english ? "Login" : "Sessión"}
-					</Link>
+					<NavbarLink className="text-black dark:text-white" href="/#services">
+						{language === languageOptions.english ? "Services" : "Servicios"}
+					</NavbarLink>
+					<NavbarLink className="text-black dark:text-white" href="/about">
+						{language === languageOptions.english ? "About us" : "Nosotros"}
+					</NavbarLink>
+					<NavbarLink className="text-black dark:text-white" href="/quote">
+						{language === languageOptions.english ? "Get a quote" : "Estimados"}
+					</NavbarLink>
+					<NavbarLink className="text-black dark:text-white" href="/login">
+						{language === languageOptions.english ? "Login" : "Sesión"}
+					</NavbarLink>
 				</NavbarCollapse>
 			</Navbar>
 		</header>

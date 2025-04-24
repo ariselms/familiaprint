@@ -7,7 +7,7 @@ import { languageOptions } from "@/static";
 import { useEffect } from "react";
 import { useCategoriesContext } from "@/context/categoriesContext";
 import MainFull from "@/components/layout/ContainerFull";
-import { Card } from "flowbite-react";
+import { Button, Card } from "flowbite-react";
 
 
 const ServiceCategoriesHeader = () => {
@@ -34,10 +34,10 @@ const ServicesCategoriesCard = ({category}: {category: CategoriesType}) => {
 
   const { id, enname, spname, endescription, spdescription, imgurl } = category;
 
-  console.log(category?.imgurl);
-
 	return (
-		<Link href={`/services/${id}`} className="h-full hover:scale-105 focus:scale-105 transition-all">
+		<Link
+			href={`/services/${id}`}
+			className="h-full hover:scale-105 focus:scale-105 transition-all">
 			<Card
 				imgAlt="Meaningful alt text for an image that is not purely decorative"
 				imgSrc={imgurl}
@@ -54,7 +54,9 @@ const ServicesCategoriesCard = ({category}: {category: CategoriesType}) => {
 					</p>
 				</div>
 
-        <button>Explore and order</button>
+				<Button className="cursor-pointer" color={"red"}>
+					Explore and order
+				</Button>
 			</Card>
 		</Link>
 	);
