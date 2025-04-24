@@ -1,50 +1,62 @@
-"use client"
+"use client";
 
+import { useState } from "react";
 import MainContainer from "@/components/layout/Container";
-import Image from "next/image";
-import { useLanguageContext } from "@/context/languageContext";
 import AuthForm from "@/forms/AuthForm";
+import { useLanguageContext } from "@/context/languageContext";
 import { languageOptions } from "@/static";
-const LoginPage = () => {
-  const {language} = useLanguageContext();
+import CodeForm from "@/forms/CodeForm";
 
-  const onFormSubmit = () => {
-    console.log("Form submitted");
-  };
+const LoginPage = () => {
+	const { language } = useLanguageContext();
+	const [email, setEmail] = useState<string>("");
+	const [code, setCode] = useState<string>("");
+	const [codeSent, setCodeSent] = useState<boolean>(true);
+
+	const onFormSubmit = () => {
+		console.log("Form submitted");
+	};
+
+	const onCodeSubmit = () => {
+		console.log("Code submitted");
+	};
+
 	return (
 		<MainContainer>
-			<section className="py-32">
-				<div className="flex min-h-full">
-					<div className="flex w-full md:w-1/2 flex-col justify-center px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
-						<div className="mx-auto w-full max-w-sm lg:w-96">
-							<div>
-								<h2 className="mt-8 text-2xl/9 font-bold tracking-tight  text-black dark:text-white">
-									{language === languageOptions.english
-										? "Sign in to your account"
-										: "Inicia sesión en tu cuenta"}
-								</h2>
-							</div>
-
-							<div className="mt-10">
-								<div>
-									<AuthForm onFormSubmit={onFormSubmit} />
-								</div>
-							</div>
-						</div>
-					</div>
-					<div className="relative w-3/6 hidden md:block">
-						<Image
-							width={100}
-							height={100}
-							alt=""
-							src="https://images.pexels.com/photos/191429/pexels-photo-191429.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-							className="absolute rounded-xl inset-0 size-full object-cover"
-						/>
-					</div>
-				</div>
-			</section>
+			<div className="w-full flex flex-col items-center justify-center py-32">
+				{!codeSent && (
+					<>
+						<h3 className="text-2xl/9 font-bold tracking-tight  text-black dark:text-white mb-4">
+							{language === languageOptions.english
+								? "Sign in to your account"
+								: "Inicia sesión en tu cuenta"}
+						</h3>
+						<p className="leading-7 font-normal text-gray-700 dark:text-gray-400 mb-8">
+							{language === languageOptions.english
+								? "Submit your email and we will send you a code to be able to access your account."
+								: "Ingresa tu correo y te enviaremos un codigo para poder acceder a tu cuenta."}
+						</p>
+						<AuthForm onFormSubmit={onFormSubmit} />
+					</>
+				)}
+				{codeSent && (
+					<>
+						<h3 className="text-2xl/9 font-bold tracking-tight  text-black dark:text-white mb-4">
+							{language === languageOptions.english
+								? "Verify your email"
+								: "Verifica tu correo electrónico"}
+						</h3>
+						<p className="leading-7 font-normal text-gray-700 dark:text-gray-400 mb-8">
+							{language === languageOptions.english
+								? "We have sent you an email with a code to verify your account and login."
+								: "Te hemos enviado un correo con un codigo para verificar tu cuenta e iniciar sesión."}
+						</p>
+						<CodeForm onCodeSubmit={onCodeSubmit} />
+					</>
+				)}
+			</div>
 		</MainContainer>
 	);
-}
+};
 
 export default LoginPage;
