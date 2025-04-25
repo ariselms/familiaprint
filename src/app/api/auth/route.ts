@@ -71,3 +71,16 @@ export async function POST(request: Request) {
     console.error(error);
   }
 }
+
+// TODO:
+// 1. set email credentials in namecheap
+// 2. complete workflow by persisting the user
+// 3. double check the workflow and refactor as necessary
+// 4. test the workflow several times
+// 5. start working in the quote page
+// 6. start working in the subscription emails
+// 10.set up sub categories and everything that it implies
+// 9. set up orders functionality with cart and checkout
+// 7. complete the products for sale functionaltiy
+// 8. start working in react admin  to implement crud operations for super admins
+// 11. start working in an upgrade that will allow users to preview certain products before buying them
