@@ -1,18 +1,23 @@
 "use client";
 import React from "react";
 import { useLanguageContext } from "@/context/languageContext";
-import { usePathname } from "next/navigation";
 import { Button, Label, TextInput } from "flowbite-react";
 import { languageOptions } from "@/static";
 
+const AuthForm = ({
+	onEmailChange,
+	onFormSubmit
+}: {
+	onEmailChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	onFormSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+}) => {
 
-const AuthForm = ({ onFormSubmit }: { onFormSubmit: () => void }) => {
-	const {language} = useLanguageContext();
-	const pathname = usePathname();
+	const { language } = useLanguageContext();
 
 	return (
-
-		<form onSubmit={onFormSubmit} className="w-full md:w-xl flex flex-col gap-4">
+		<form
+			onSubmit={onFormSubmit}
+			className="w-full md:w-xl flex flex-col gap-4">
 			<div>
 				<div className="mb-2 block">
 					<Label htmlFor="email1">
@@ -28,6 +33,7 @@ const AuthForm = ({ onFormSubmit }: { onFormSubmit: () => void }) => {
 							: "micorreo@correo.com"
 					}
 					required
+					onChange={onEmailChange}
 				/>
 			</div>
 			<Button color={"red"} type="submit">

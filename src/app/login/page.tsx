@@ -6,19 +6,97 @@ import AuthForm from "@/forms/AuthForm";
 import { useLanguageContext } from "@/context/languageContext";
 import { languageOptions } from "@/static";
 import CodeForm from "@/forms/CodeForm";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 const LoginPage = () => {
+  const router = useRouter();
 	const { language } = useLanguageContext();
+	const [message, setMessage] = useState<string | unknown>("");
 	const [email, setEmail] = useState<string>("");
 	const [code, setCode] = useState<string>("");
 	const [codeSent, setCodeSent] = useState<boolean>(false);
 
-	const onFormSubmit = () => {
-		console.log("Form submitted");
+	const onEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setEmail(e.target.value);
 	};
 
-	const onCodeSubmit = () => {
-		console.log("Code submitted");
+	const onCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setCode(e.target.value);
+	};
+
+	const onFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+
+		try {
+
+			const request = await fetch("/api/log", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify({ email, language })
+			});
+
+			const response = await request.json();
+
+			if (response.success) {
+				setCodeSent(true);
+				setMessage(response.message);
+        toast.success(response.message);
+			} else {
+				console.error(response.message);
+				throw new Error(response.message);
+			}
+
+		} catch (error) {
+
+			console.error(error);
+			const errorMessage = error instanceof Error ? error.message : "An error occurred";
+			setMessage(errorMessage);
+      toast.error(errorMessage);
+
+		}
+	};
+
+	const onCodeSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+
+		try {
+      console.log(code, email)
+      if (!code || !email) {
+        throw new Error("Email and code are required");
+      }
+
+      if (code.length !== 6) {
+        const errorMessage = language === languageOptions.english ? "Code must be 6 digits" : "El código debe tener 6 digitos";
+        throw new Error(errorMessage);
+      }
+
+			const request = await fetch("/api/auth", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify({ email, code, language })
+			});
+
+			const response = await request.json();
+
+			if (response.success) {
+				// TODO: redirect to home page
+        toast.success(response.message);
+        router.push("/admin");
+			} else {
+				console.error(response.message);
+			}
+		} catch (error) {
+			console.error(error);
+      const errorMessage =
+        error instanceof Error ? error.message : "An error occurred";
+      setMessage(errorMessage);
+      toast.error(errorMessage);
+		}
 	};
 
 	return (
@@ -36,7 +114,10 @@ const LoginPage = () => {
 								? "Submit your email and we will send you a code to be able to access your account."
 								: "Ingresa tu correo y te enviaremos un codigo para poder acceder a tu cuenta."}
 						</p>
-						<AuthForm onFormSubmit={onFormSubmit} />
+						<AuthForm
+							onFormSubmit={onFormSubmit}
+							onEmailChange={onEmailChange}
+						/>
 					</>
 				)}
 				{codeSent && (
@@ -51,7 +132,7 @@ const LoginPage = () => {
 								? "We have sent you an email with a code to verify your account and login."
 								: "Te hemos enviado un correo con un codigo para verificar tu cuenta e iniciar sesión."}
 						</p>
-						<CodeForm onCodeSubmit={onCodeSubmit} />
+						<CodeForm onCodeSubmit={onCodeSubmit} onCodeChange={onCodeChange} />
 					</>
 				)}
 			</div>
