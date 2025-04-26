@@ -2,14 +2,35 @@
 
 import MainContainer from "@/components/layout/Container";
 import { useLanguageContext } from "@/context/languageContext";
+import Jumbotron from "@/components/Jumbotron";
+import QuoteForm from "@/components/forms/QuoteForm";
 
 export default function QuotePage() {
-  const {language} = useLanguageContext();
-  return (
-		<MainContainer>
-			<h1 className="text-black dark:text-white text-4xl font-bold">
-				{language === "en" ? "Quote" : "Cotizaciones"}
-			</h1>
-		</MainContainer>
+	const { language } = useLanguageContext();
+	return (
+		<>
+			<Jumbotron
+				propsData={{
+					enHeader: "Request a free quote",
+					spHeader: "Solicita un cotización gratis",
+					enDescription:
+						"Choose between the following options and we will contact you as soon as possible.",
+					spDescription:
+						"Escoge entre las siguientes opciones y nos pondremos en contacto contigo lo antes posible.",
+					hasButtons: false,
+					enFirstButtonText: "Check our services",
+					enFirstButtonLink: "#services",
+					spFirstButtonText: "Explora servicios",
+					enSecondButtonText: "Free quotes",
+					enSecondButtonLink: "/quote",
+					spSecondButtonText: "Cotización gratis"
+				}}
+			/>
+			<section className="py-24 bg-gray-200 dark:bg-gray-900">
+				<MainContainer>
+          <QuoteForm />
+				</MainContainer>
+			</section>
+		</>
 	);
 }

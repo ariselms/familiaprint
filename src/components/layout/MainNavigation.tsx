@@ -115,7 +115,7 @@ export default function MainNavigation() {
 								className="text-black dark:text-white hover:underline"
 								href="/quote">
 								{language === languageOptions.spanish
-									? "Estimados"
+									? "Cotización Gratis"
 									: "Free Quote"}
 							</Link>
 						</li>

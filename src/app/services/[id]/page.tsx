@@ -11,9 +11,11 @@ import { languageOptions } from "@/static";
 
 const ServicesPage = () => {
 	const { id } = useParams();
+
 	const { category, loadingCategories, getCategoryById } =
 		useCategoriesContext();
-	const { language } = useLanguageContext();
+
+  const { language } = useLanguageContext();
 
 	useEffect(() => {
 		getCategoryById(String(id));
