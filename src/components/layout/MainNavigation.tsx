@@ -9,35 +9,47 @@ import Link from "next/link";
 import LanguageHandler from "@/components/forms/LanguageHandler";
 
 export default function MainNavigation() {
-  const [showMenu, setShowMenu] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+	const [showMenu, setShowMenu] = useState(false);
+	const [isMobile, setIsMobile] = useState(false);
 	const languageContext = useLanguageContext();
 	const { language } = useLanguageContext();
 
 	useEffect(() => {
 		const currentLanguage = languageContext?.verifyLanguageFromLocalStorage();
 		languageContext?.setLanguage(currentLanguage);
-    // check window width
-    const windowWidth = window?.innerWidth;
-    if(windowWidth && windowWidth >= 768){
-      setShowMenu(true);
-      setIsMobile(false);
-    }
-	}, []);
+
+		const handleResize = () => {
+			const windowWidth = window?.innerWidth;
+			const isDesktop = windowWidth >= 768;
+			setShowMenu(isDesktop);
+			setIsMobile(!isDesktop);
+		};
+
+		// Initial check on mount
+		handleResize();
+
+		// Add event listener for resize
+		window?.addEventListener("resize", handleResize);
+
+		// Clean up the event listener
+		return () => {
+			window?.removeEventListener("resize", handleResize);
+		};
+	}, [languageContext]); // Add languageContext to the dependency array if it can change
 
 	const handleLanguageChange = (lang: string) => {
 		const selectedLanguage = languageContext?.setLanguageAndLocalStorage(lang);
 		languageContext?.setLanguage(selectedLanguage);
 	};
 
-  const handleMenu = () => {
-    setShowMenu(!showMenu);
-  }
+	const handleMenu = () => {
+		setShowMenu(!showMenu);
+	};
 
 	return (
 		<header>
 			<nav className="p-4 rounded-none bg-white dark:bg-gray-950 flex items-center justify-between relative">
-        {/* logo */}
+				{/* logo */}
 				<Link
 					onClick={() => {
 						isMobile && setShowMenu(false);
@@ -56,7 +68,7 @@ export default function MainNavigation() {
 					/>
 				</Link>
 
-        {/* language handler and dark theme toggle */}
+				{/* language handler and dark theme toggle */}
 				<div className="flex items-center order-3">
 					<div className="flex items-center">
 						<LanguageHandler
@@ -69,7 +81,7 @@ export default function MainNavigation() {
 					<MenuIcon onClick={handleMenu} />
 				</div>
 
-        {/* menu links */}
+				{/* menu links */}
 				{showMenu && (
 					<ul
 						id="menu"
@@ -78,6 +90,7 @@ export default function MainNavigation() {
 							<Link
 								onClick={() => {
 									isMobile && setShowMenu(false);
+									console.log(isMobile, showMenu);
 								}}
 								className="text-black dark:text-white hover:underline"
 								href="/">
@@ -102,7 +115,7 @@ export default function MainNavigation() {
 								className="text-black dark:text-white hover:underline"
 								href="/quote">
 								{language === languageOptions.spanish
-									? "Estimados"
+									? "Cotización Gratis"
 									: "Free Quote"}
 							</Link>
 						</li>

@@ -4,7 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import type { Metadata } from "next";
 import { LanguageContextProvider } from "@/context/languageContext";
 import { CategoriesContextProvider } from "@/context/categoriesContext";
-import HeaderWithDropDown from "@/components/layout/HeaderWithDropDown";
+import { ToastContainer } from "react-toastify";
 import MainNavigation from "@/components/layout/MainNavigation";
 import Footer from "@/components/layout/Footer";
 import { AuthContextProvider } from "@/context/authContext";
@@ -57,6 +57,7 @@ export default function RootLayout({
 				</head>
 				<body
 					className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+          <ToastContainer />
 					<AuthContextProvider>
 						<CategoriesContextProvider>
 							<LanguageContextProvider>

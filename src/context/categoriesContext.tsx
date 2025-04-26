@@ -22,7 +22,7 @@ export const CategoriesContextProvider = ({
       cache: "no-store",
     });
     const response = await data.json();
-    const categories = response.categories;
+    const categories = response.data;
     if(categories){
       setCategories(categories);
       setLoadingCategories(false)
@@ -34,7 +34,7 @@ export const CategoriesContextProvider = ({
   const getCategoryById = async (id: string) => {
     const data = await fetch(`/api/categories/${id}`);
     const response = await data.json();
-    const category = response.category;
+    const category = response.data;
     console.log(category)
     if(category){
       setCategory(category[0]);

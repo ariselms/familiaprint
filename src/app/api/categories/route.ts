@@ -7,14 +7,18 @@ export async function GET() {
   try {
     const { rows: categories } = await sql`SELECT * FROM categories`;
 
-    console.log(categories)
-
     return NextResponse.json({
       success: true,
-      categories: categories
-    });
+      message: "Categories fetched successfully",
+      data: categories
+    }, { status: 200 });
 
   } catch (error) {
     console.error(error)
+    NextResponse.json({
+      success: false,
+      message: "Error fetching categories",
+      data: null
+    }, { status: 500 });
   }
 }

@@ -14,9 +14,16 @@ export async function GET(
 
 		return NextResponse.json({
 			success: true,
-			category: category
-		});
+      message: "Category fetched successfully",
+      data: category
+		}, { status: 200 });
 	} catch (error) {
 		console.error(error);
+
+    return NextResponse.json({
+      success: false,
+      message: "Error fetching category",
+      data: null
+    }, { status: 500 });
 	}
 }
