@@ -43,7 +43,7 @@ export async function POST(request: Request) {
 
       if (decodedCode === code) {
 
-        const authenticationSuccessMessage = language === languageOptions.english ? "User authenticated successfully." : "Usuario autenticado conxito.";
+        const authenticationSuccessMessage = language === languageOptions.english ? "User authenticated successfully." : "Usuario autenticado exitosamente.";
 
         const serverResponse = NextResponse.json({
 					success: true,
@@ -73,7 +73,7 @@ export async function POST(request: Request) {
 }
 
 // TODO:
-// 1. set email credentials in namecheap
+// 1. set email credentials in namecheap DONE
 // 2. complete workflow by persisting the user
 // 3. double check the workflow and refactor as necessary
 // 4. test the workflow several times

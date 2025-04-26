@@ -15,6 +15,8 @@ export async function POST(request: Request) {
 
 	const existingUser = await sql`SELECT * FROM users WHERE email = ${email}`;
 
+  console.log(existingUser.rows);
+
 	const emaillSubject =
 		language === languageOptions.english
 			? "Verification Code"
@@ -117,18 +119,6 @@ export async function POST(request: Request) {
 								? "A code has been sent to your email."
 								: "Se ha enviado un código a tu correo.",
 						data: null
-					},
-					{ status: 200 }
-				);
-
-				return NextResponse.json(
-					{
-						success: true,
-						message:
-							language === languageOptions.english
-								? "A code has been sent to your email."
-								: "Se ha enviado un código a tu correo.",
-						data: updatedUser
 					},
 					{ status: 200 }
 				);
