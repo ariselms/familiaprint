@@ -1,12 +1,10 @@
 "use client";
 
 import MainContainer from "@/components/layout/Container";
-import { useLanguageContext } from "@/context/languageContext";
 import Jumbotron from "@/components/Jumbotron";
 import QuoteForm from "@/components/forms/QuoteForm";
 
 export default function QuotePage() {
-	const { language } = useLanguageContext();
 	return (
 		<>
 			<Jumbotron

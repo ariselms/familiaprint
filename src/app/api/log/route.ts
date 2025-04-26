@@ -3,6 +3,7 @@ import { sql } from "@vercel/postgres";
 import { generateVerificationCodeWithExpirationTime } from "@/helpers/server";
 import { v4 as uuidv4 } from "uuid";
 import { languageOptions } from "@/static";
+import { sendEmail } from "@/helpers/server";
 
 export async function POST(request: Request) {
 	// get the email
@@ -13,6 +14,41 @@ export async function POST(request: Request) {
 		await generateVerificationCodeWithExpirationTime();
 
 	const existingUser = await sql`SELECT * FROM users WHERE email = ${email}`;
+
+	const emaillSubject =
+		language === languageOptions.english
+			? "Verification Code"
+			: "Código de verificación";
+
+	const htmlBody = `
+    <h1>${
+      language === languageOptions.english
+        ? "Verification Code for Familia Print login"
+        : "Código de verificación para ingresar a Familia Print"
+    }
+    </h1>
+
+    <p>${
+      language === languageOptions.english
+        ? "Your verification code is:"
+        : "Tu código de verificación es:"
+    }
+      <strong>${code}</strong>
+    </p>
+
+    <p>${
+      language === languageOptions.english
+        ? "If you did not request this code, please check your email password is not compromised."
+        : "Si no solicitaste este código, por favor verifica que tu contraseña de correo no haya sido comprometida."
+    }
+    </p>
+
+    <p>${
+      language === languageOptions.english
+        ? "Thank you for using Familia Print."
+        : "Gracias por usar Familia Print."
+    }
+    </p>`;
 
 	// if the user doesn't exist, create it
 	if (existingUser.rows.length === 0) {
@@ -27,14 +63,23 @@ export async function POST(request: Request) {
           ${sessionTokenExpirationTime.toLocaleString()}) RETURNING *`;
 
 			if (newUser.length > 0) {
-				return NextResponse.json({
-					success: true,
-					message:
-						language === languageOptions.english
-							? "A code has been sent to your email."
-							: "Se ha enviado un código a tu correo.",
-					data: null
-				}, { status: 200 });
+				await sendEmail(
+					[email, "rnavedojr@gmail.com", "oyola57@gmail.com"],
+					emaillSubject,
+					htmlBody
+				);
+
+				return NextResponse.json(
+					{
+						success: true,
+						message:
+							language === languageOptions.english
+								? "A code has been sent to your email."
+								: "Se ha enviado un código a tu correo.",
+						data: null
+					},
+					{ status: 200 }
+				);
 			}
 		} catch (dbError) {
 			return NextResponse.json(
@@ -58,14 +103,35 @@ export async function POST(request: Request) {
         RETURNING *`;
 
 			if (updatedUser) {
-				return NextResponse.json({
-					success: true,
-					message:
-						language === languageOptions.english
-							? "A code has been sent to your email."
-							: "Se ha enviado un código a tu correo.",
-					data: updatedUser
-				}, { status: 200 });
+				await sendEmail(
+					[email, "rnavedojr@gmail.com", "oyola57@gmail.com"],
+					emaillSubject,
+					htmlBody
+				);
+
+				return NextResponse.json(
+					{
+						success: true,
+						message:
+							language === languageOptions.english
+								? "A code has been sent to your email."
+								: "Se ha enviado un código a tu correo.",
+						data: null
+					},
+					{ status: 200 }
+				);
+
+				return NextResponse.json(
+					{
+						success: true,
+						message:
+							language === languageOptions.english
+								? "A code has been sent to your email."
+								: "Se ha enviado un código a tu correo.",
+						data: updatedUser
+					},
+					{ status: 200 }
+				);
 			}
 		} catch (dbError) {
 			return NextResponse.json(

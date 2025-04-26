@@ -104,26 +104,27 @@ export default function LeadForm() {
           Zip: candidate.Zip,
           ProjectType: projectTypeString.toString(),
           ProjectEstimateTimeframe: candidate.ProjectEstimateTimeframe,
-          Comments: candidate.Comments
+          Comments: candidate.Comments,
+          Language: language
         }
 
         console.log(quote)
 
         // send the request
-				// const request = await fetch(`/api/quote`, {
-        //   method: "POST",
-        //   headers: {
-        //     "Content-Type": "application/json"
-        //   },
-        //   body: JSON.stringify(quote)
-        // });
+				const request = await fetch(`/api/quote`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(quote)
+        });
 
-        // const response = await request.json();
+        const response = await request.json();
 
-        const response = {
-          success: true,
-          message: "Your information has been submitted successfully. You will hear from us soon."
-        } // comment or remove after working on endpoint for quote
+        // const response = {
+        //   success: true,
+        //   message: "Your information has been submitted successfully. You will hear from us soon."
+        // } // comment or remove after working on endpoint for quote
 
         if(response.success) {
 
