@@ -89,7 +89,7 @@ export async function POST(req: Request) {
         ${
 					Language === languageOptions.english
 						? "Thank you for your interest in Familia Print services, we will contact you shortly using the provided information."
-						: "Gracias por tu interés en 4zImprov services, nos pondremos en contacto contigo usando la información proporcionada."
+						: "Gracias por tu interés en Familia Print services, nos pondremos en contacto contigo usando la información proporcionada."
 				}
       </p>
 
@@ -110,7 +110,7 @@ export async function POST(req: Request) {
 		const emailSubject =
 			Language === languageOptions.english
 				? "Thank you for your interest in Familia Print services."
-				: "Gracias por tu interés en 4zImprov services.";
+				: "Gracias por tu interés en los servicios de Familia Print.";
 
 		// Send an email to the user
 		await sendEmail(
