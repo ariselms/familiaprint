@@ -125,7 +125,7 @@ export async function GET() {
   }
 }
 
-export async function DELETE(request: Request) {
+export async function DELETE() {
 
   const cookieStore = cookies();
   (await cookieStore).delete("sessiontoken");

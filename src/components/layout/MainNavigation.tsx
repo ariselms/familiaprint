@@ -32,8 +32,6 @@ export default function MainNavigation() {
 		// Initial check on mount
 		handleResize();
 
-		persistUser();
-
 		// Add event listener for resize
 		window?.addEventListener("resize", handleResize);
 
