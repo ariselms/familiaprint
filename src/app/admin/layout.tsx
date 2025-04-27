@@ -13,9 +13,6 @@ export default async function AuthenticatedLayout({
 	children: React.ReactNode;
 }>) {
 	const cookie = (await cookies()).get("sessiontoken");
-	const language = (await cookies()).get("language");
-
-  console.log(cookie);
 
 	if (!cookie) {
 		redirect("/login");

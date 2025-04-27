@@ -74,7 +74,7 @@ export async function POST(request: Request) {
   }
 }
 
-export async function GET(request: Request) {
+export async function GET() {
 
   const cookieStore = cookies();
   const authCookie = (await cookieStore).get("sessiontoken");
