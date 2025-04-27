@@ -14,6 +14,7 @@ export default async function AuthenticatedLayout({
 	children: React.ReactNode;
 }>) {
 	const cookie = (await cookies()).get("sessiontoken");
+  const language = (await cookies()).get("language");
 
 	if (!cookie) {
 		redirect("/login");
@@ -56,16 +57,8 @@ export default async function AuthenticatedLayout({
 	return (
 		<main>
 			<section>
-				<div>
-					{cookie?.name} - {cookie?.value}
-				</div>
-        <div>
-          {user?.email}
-        </div>
-
 				<nav className="bg-gray-200 dark:bg-gray-900 py-16">
-					{/* <MainContainer>
-            {cookie.value}
+				  <MainContainer>
 						<h3 className="text-3xl mb-2 dark:text-white">
 							{language?.value === languageOptions?.english
 								? "Profile"
@@ -79,9 +72,9 @@ export default async function AuthenticatedLayout({
 									<strong>Nombre: </strong>
 								)}
 								{language?.value === languageOptions?.english ? (
-                  response?.data?.name || "Not set yet"
+                  user?.firstname || "Not set yet"
                 ) : (
-                  response?.data?.name || "Sin establecer aun"
+                  user?.firstname || "Sin establecer aun"
                 )}
 							</span>
 							<span className="me-8 dark:text-gray-200">
@@ -91,13 +84,13 @@ export default async function AuthenticatedLayout({
 									<strong>Correo electrónico: </strong>
 								)}
 								{language?.value === languageOptions?.english
-									? response?.data?.email || "Not set yet"
-									: response?.data?.email || "Sin establecer aún"}
+									? user?.email || "Not set yet"
+									: user?.email || "Sin establecer aún"}
 							</span>
 						</div>
-					</MainContainer> */}
+					</MainContainer>
 				</nav>
-				{/* <MainContainer>
+				<MainContainer>
 					<Tabs
 						aria-label="Default tabs"
 						variant="underline"
@@ -109,7 +102,7 @@ export default async function AuthenticatedLayout({
 									? "Edit Profile"
 									: "Editar Perfil"
 							}>
-							<UserProfileForm user={response?.data} />
+							<UserProfileForm user={user} />
 						</TabItem>
 						<TabItem
 							title={
@@ -122,7 +115,7 @@ export default async function AuthenticatedLayout({
 								: "Esta funcionalidad se encuentra bajo desarrollo, regresa pronto para administrar tus órdenes en línea."}
 						</TabItem>
 					</Tabs>
-				</MainContainer> */}
+				</MainContainer>
 			</section>
 			{children}
 		</main>
