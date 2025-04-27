@@ -15,6 +15,8 @@ export default async function AuthenticatedLayout({
 	const cookie = (await cookies()).get("sessiontoken");
 	const language = (await cookies()).get("language");
 
+  console.log(cookie);
+
 	if (!cookie) {
 		redirect("/login");
 	}
@@ -38,6 +40,7 @@ export default async function AuthenticatedLayout({
 			<section>
 				<nav className="bg-gray-200 dark:bg-gray-900 py-16">
 					<MainContainer>
+            {cookie.value}
 						<h3 className="text-3xl mb-2 dark:text-white">
 							{language?.value === languageOptions.english
 								? "Profile"
@@ -81,7 +84,8 @@ export default async function AuthenticatedLayout({
 									? "Edit Profile"
 									: "Editar Perfil"
 							}>
-							<UserProfileForm user={response?.data} />
+              User
+							{/* <UserProfileForm user={response?.data} /> */}
 						</TabItem>
 						<TabItem
 							title={
