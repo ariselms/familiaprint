@@ -8,6 +8,7 @@ import { MenuIcon } from "@/components/svg/Icons";
 import Link from "next/link";
 import LanguageHandler from "@/components/forms/LanguageHandler";
 import { useAuthContext } from "@/context/authContext";
+import { usePathname } from "next/navigation";
 
 export default function MainNavigation() {
 	const [showMenu, setShowMenu] = useState(false);
@@ -15,6 +16,7 @@ export default function MainNavigation() {
 	const languageContext = useLanguageContext();
 	const { language } = useLanguageContext();
 	const { user, persistUser, signOutUser } = useAuthContext();
+  const pathname = usePathname();
 
 	useEffect(() => {
 		const currentLanguage = languageContext?.verifyLanguageFromLocalStorage();
@@ -38,8 +40,10 @@ export default function MainNavigation() {
 		// Clean up the event listener
 		return () => {
 			window?.removeEventListener("resize", handleResize);
+
+      persistUser();
 		};
-	}, [languageContext]); // Add languageContext to the dependency array if it can change
+	}, [languageContext, pathname]); // Add languageContext to the dependency array if it can change
 
 	const handleLanguageChange = (lang: string) => {
 		const selectedLanguage = languageContext?.setLanguageAndLocalStorage(lang);
@@ -94,7 +98,6 @@ export default function MainNavigation() {
 							<Link
 								onClick={() => {
 									isMobile && setShowMenu(false);
-									console.log(isMobile, showMenu);
 								}}
 								className="text-black dark:text-white hover:underline"
 								href="/">

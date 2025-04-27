@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MainContainer from "@/components/layout/Container";
 import AuthForm from "@/forms/AuthForm";
 import { useLanguageContext } from "@/context/languageContext";
+import { useAuthContext } from "@/context/authContext";
 import { languageOptions } from "@/static";
 import CodeForm from "@/forms/CodeForm";
 import { useRouter } from "next/navigation";
@@ -11,11 +12,17 @@ import { toast } from "react-toastify";
 
 const LoginPage = () => {
   const router = useRouter();
+  const { user } = useAuthContext();
 	const { language } = useLanguageContext();
 	const [email, setEmail] = useState<string>("");
 	const [code, setCode] = useState<string>("");
 	const [codeSent, setCodeSent] = useState<boolean>(false);
 
+  useEffect(() => {
+    if (user) {
+      router.push("/admin");
+    }
+  },[user]);
 	const onEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setEmail(e.target.value);
 	};

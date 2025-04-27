@@ -1,7 +1,7 @@
 "use client";
 import type { AuthContextType } from "@/types/contextTypes";
 import React, { createContext, useState } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 export const AuthContext = createContext<AuthContextType | null>(null);
 
@@ -11,6 +11,8 @@ export const AuthContextProvider = ({
 	children: React.ReactNode;
 }) => {
 	const [user, setUser] = useState<any>(null);
+
+  const router = useRouter();
 
 	const signOutUser = async () => {
     const request = await fetch(`/api/auth/`, {
@@ -24,7 +26,6 @@ export const AuthContextProvider = ({
 
     if (response.success) {
       setUser(null);
-      const router = useRouter();
       router.push("/login");
     }
 	};
@@ -45,7 +46,6 @@ export const AuthContextProvider = ({
       setUser(response.data);
     } else {
       console.error(response.message);
-      const router = useRouter();
       router.push("/login");
     }
 	};

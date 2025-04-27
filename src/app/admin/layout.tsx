@@ -2,10 +2,9 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { serverBaseUrl } from "@/static";
-import Link from "next/link";
 import MainContainer from "@/components/layout/Container";
 import {languageOptions} from "@/static";
-import { Button, TabItem, Tabs } from "flowbite-react";
+import { TabItem, Tabs } from "flowbite-react";
 import UserProfileForm from "@/components/forms/UserProfile";
 
 export default async function AuthenticatedLayout({
@@ -45,27 +44,36 @@ export default async function AuthenticatedLayout({
 								: "Perfil"}
 						</h3>
 						<div className="flex items-center mb-8">
-							<span className="me-2 dark:text-gray-200">
+							<span className="me-8 dark:text-gray-200">
 								{language?.value === languageOptions.english ? (
-									<strong>Name</strong>
+									<strong>Name: </strong>
 								) : (
-									<strong>Nombre</strong>
+									<strong>Nombre: </strong>
 								)}
-								: {response?.data?.name || language?.value === languageOptions.english ? "Not set yet" : "Sin establecer aún"}
+								{language?.value === languageOptions.english ? (
+                  response?.data?.name || "Not set yet"
+                ) : (
+                  response?.data?.name || "Sin establecer aun"
+                )}
 							</span>
-							<span className="me-2 dark:text-gray-200">
+							<span className="me-8 dark:text-gray-200">
 								{language?.value === languageOptions.english ? (
-									<strong>Email</strong>
+									<strong>Email: </strong>
 								) : (
-									<strong>Correo electrónico</strong>
+									<strong>Correo electrónico: </strong>
 								)}
-								: {response?.data?.email || language?.value === languageOptions.english ? "Not set yet" : "Sin establecer aún"}
+								{language?.value === languageOptions.english
+									? response?.data?.email || "Not set yet"
+									: response?.data?.email || "Sin establecer aún"}
 							</span>
 						</div>
 					</MainContainer>
 				</nav>
 				<MainContainer>
-					<Tabs aria-label="Default tabs" variant="underline" className="text-black dark:text-white">
+					<Tabs
+						aria-label="Default tabs"
+						variant="underline"
+						className="text-black dark:text-white">
 						<TabItem
 							className="text-black dark:text-white"
 							title={
@@ -81,8 +89,9 @@ export default async function AuthenticatedLayout({
 									? "Orders"
 									: "Pedidos"
 							}>
-							Esta funcionalidad se encuentra bajo desarrollo, regresa pronto
-							para administrar tus órdenes en línea.
+							{language?.value === languageOptions.english
+								? "This feature is under development, come back soon to manage your online orders."
+								: "Esta funcionalidad se encuentra bajo desarrollo, regresa pronto para administrar tus órdenes en línea."}
 						</TabItem>
 					</Tabs>
 				</MainContainer>
