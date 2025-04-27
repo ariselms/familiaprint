@@ -44,9 +44,6 @@ export const AuthContextProvider = ({
 
     if (response.success) {
       setUser(response.data);
-    } else {
-      console.error(response.message);
-      router.push("/login");
     }
 	};
 
