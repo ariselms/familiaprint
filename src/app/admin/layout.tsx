@@ -36,6 +36,7 @@ export default async function AuthenticatedLayout({
 		<main>
 			<section>
         Dashboard
+        {cookie?.name} - {cookie?.value}
 				<nav className="bg-gray-200 dark:bg-gray-900 py-16">
 					{/* <MainContainer>
             {cookie.value}
