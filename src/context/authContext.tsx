@@ -44,6 +44,7 @@ export const AuthContextProvider = ({
 
     if (response.success) {
       setUser(response.data);
+      return;
     }
 	};
 

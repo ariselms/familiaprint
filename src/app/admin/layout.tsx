@@ -28,7 +28,7 @@ export default async function AuthenticatedLayout({
 
 	const response = await request.json();
 
-	if (!response.success) {
+	if (!response?.success) {
 		redirect("/login");
 	}
 
