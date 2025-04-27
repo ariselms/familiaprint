@@ -34,6 +34,10 @@ export const AuthContextProvider = ({
 	// user persistance
 	const persistUser = async () => {
 
+    if(user){
+      return
+    }
+
     const request = await fetch(`/api/auth/`, {
       method: "GET",
       headers: {
