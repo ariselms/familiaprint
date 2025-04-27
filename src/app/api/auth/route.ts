@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { sql } from "@vercel/postgres";
 import { languageOptions } from "@/static";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 export async function POST(request: Request) {
 
@@ -123,15 +124,31 @@ export async function GET() {
 }
 
 export async function DELETE() {
+	try {
 
-  const cookieStore = cookies();
-  (await cookieStore).delete("sessiontoken");
+		const cookieStore = cookies();
+		(await cookieStore).delete("sessiontoken");
 
-  return NextResponse.json({
-    success: true,
-    message: "User logged out successfully",
-    data: null
-  }, { status: 200 });
+		return NextResponse.json(
+			{
+				success: true,
+				message: "User logged out successfully",
+				data: null
+			},
+			{ status: 200 }
+		);
+	} catch (error) {
+		console.error(error);
+
+		return NextResponse.json(
+			{
+				success: false,
+				message: "Error logging out user",
+				data: null
+			},
+			{ status: 500 }
+		);
+	}
 }
 
 // TODO:

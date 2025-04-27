@@ -18,6 +18,12 @@ export default function MainNavigation() {
 	const { user, persistUser, signOutUser } = useAuthContext();
   const pathname = usePathname();
 
+  useEffect(() => {
+
+    persistUser();
+
+  }, [pathname]);
+
 	useEffect(() => {
 		const currentLanguage = languageContext?.verifyLanguageFromLocalStorage();
 		languageContext?.setLanguage(currentLanguage);
@@ -32,8 +38,6 @@ export default function MainNavigation() {
 		// Initial check on mount
 		handleResize();
 
-		persistUser();
-
 		// Add event listener for resize
 		window?.addEventListener("resize", handleResize);
 
@@ -41,7 +45,7 @@ export default function MainNavigation() {
 		return () => {
 			window?.removeEventListener("resize", handleResize);
 		};
-	}, [languageContext, pathname]); // Add languageContext to the dependency array if it can change
+	}, [languageContext]); // Add languageContext to the dependency array if it can change
 
 	const handleLanguageChange = (lang: string) => {
 		const selectedLanguage = languageContext?.setLanguageAndLocalStorage(lang);

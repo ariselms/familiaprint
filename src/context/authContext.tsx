@@ -2,6 +2,7 @@
 import type { AuthContextType } from "@/types/contextTypes";
 import React, { createContext, useState } from "react";
 import { useRouter } from "next/navigation";
+import { serverBaseUrl } from "@/static";
 
 export const AuthContext = createContext<AuthContextType | null>(null);
 
@@ -15,7 +16,7 @@ export const AuthContextProvider = ({
   const router = useRouter();
 
 	const signOutUser = async () => {
-    const request = await fetch(`/api/auth/`, {
+    const request = await fetch(`${serverBaseUrl}/api/auth/`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json"
@@ -44,7 +45,8 @@ export const AuthContextProvider = ({
 
     if (response.success) {
       setUser(response.data);
-      return;
+    } else {
+      setUser(null);
     }
 	};
 
