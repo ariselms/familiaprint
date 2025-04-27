@@ -32,14 +32,14 @@ export default function MainNavigation() {
 		// Initial check on mount
 		handleResize();
 
+		persistUser();
+
 		// Add event listener for resize
 		window?.addEventListener("resize", handleResize);
 
 		// Clean up the event listener
 		return () => {
 			window?.removeEventListener("resize", handleResize);
-
-      persistUser();
 		};
 	}, [languageContext, pathname]); // Add languageContext to the dependency array if it can change
 

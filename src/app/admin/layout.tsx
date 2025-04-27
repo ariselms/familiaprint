@@ -12,7 +12,7 @@ export default async function AuthenticatedLayout({
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
-	// const cookie = (await cookies()).get("sessiontoken");
+	const cookie = (await cookies()).get("sessiontoken");
 
 	// if (!cookie) {
 	// 	redirect("/login");
