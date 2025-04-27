@@ -6,6 +6,7 @@ import MainContainer from "@/components/layout/Container";
 import {languageOptions} from "@/static";
 import { TabItem, Tabs } from "flowbite-react";
 import UserProfileForm from "@/components/forms/UserProfile";
+import { sql } from "@vercel/postgres";
 
 export default async function AuthenticatedLayout({
 	children
@@ -18,13 +19,33 @@ export default async function AuthenticatedLayout({
 		redirect("/login");
 	}
 
-	const request = await fetch(`${serverBaseUrl}/api/validate`, {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json"
-		},
-		body: JSON.stringify({ cookie })
-	});
+  const {name, value} = cookie;
+
+  let user;
+
+  const { rows: userDb } =
+    await sql`SELECT * FROM users WHERE sessiontoken = ${value}`;
+
+  user = userDb[0];
+
+  console.log(user);
+
+  if (!user) {
+    redirect("/login");
+  }
+
+  if (user.sessiontokenexpiration < new Date()) {
+    redirect("/login");
+  }
+
+
+	// const request = await fetch(`${serverBaseUrl}/api/validate`, {
+	// 	method: "POST",
+	// 	headers: {
+	// 		"Content-Type": "application/json"
+	// 	},
+	// 	body: JSON.stringify({ cookie })
+	// });
 
 	// const response = await request.json();
 
@@ -35,7 +56,13 @@ export default async function AuthenticatedLayout({
 	return (
 		<main>
 			<section>
-        {cookie?.name} - {cookie?.value}
+				<div>
+					{cookie?.name} - {cookie?.value}
+				</div>
+        <div>
+          {user?.email}
+        </div>
+
 				<nav className="bg-gray-200 dark:bg-gray-900 py-16">
 					{/* <MainContainer>
             {cookie.value}
