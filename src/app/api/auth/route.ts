@@ -111,9 +111,6 @@ export async function GET() {
 				{ status: 200 }
 			);
 		}
-
-    throw new Error("User not found");
-
   } catch (error) {
     console.error(error);
 
