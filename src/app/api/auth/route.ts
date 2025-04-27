@@ -112,6 +112,13 @@ export async function GET() {
 				{ status: 200 }
 			);
 		}
+
+    return NextResponse.json({
+      success: false,
+      message: "User not found",
+      data: null
+    }, { status: 404 });
+
   } catch (error) {
     console.error(error);
 
@@ -127,6 +134,7 @@ export async function DELETE() {
 	try {
 
 		const cookieStore = cookies();
+
 		(await cookieStore).delete("sessiontoken");
 
 		return NextResponse.json(
