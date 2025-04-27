@@ -14,9 +14,9 @@ export default async function AuthenticatedLayout({
 }>) {
 	const cookie = (await cookies()).get("sessiontoken");
 
-	// if (!cookie) {
-	// 	redirect("/login");
-	// }
+	if (!cookie) {
+		redirect("/login");
+	}
 
 	// const request = await fetch(`${serverBaseUrl}/api/validate`, {
 	// 	method: "POST",
@@ -35,7 +35,6 @@ export default async function AuthenticatedLayout({
 	return (
 		<main>
 			<section>
-        Dashboard
         {cookie?.name} - {cookie?.value}
 				<nav className="bg-gray-200 dark:bg-gray-900 py-16">
 					{/* <MainContainer>
