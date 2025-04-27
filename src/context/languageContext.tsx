@@ -11,9 +11,20 @@ export const LanguageContextProvider = ({
 }) => {
   const [language, setLanguage] = useState<string>("es");
 
-  const setLanguageAndLocalStorage = (lang: string) => {
+  const setLanguageAndLocalStorage = async (lang: string) => {
     setLanguage(lang);
     localStorage.setItem("language", lang);
+
+    await fetch("/api/language", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ language: lang }),
+    })
+
+    window?.location.reload();
+
     return lang;
   };
 

@@ -38,3 +38,19 @@ export const moreActions = [
 		icon: PhoneIcon
 	}
 ];
+
+let baseUrl;
+
+if(process.env.NEXT_PUBLIC_VERCEL_ENV === "development") {
+  baseUrl = "http://localhost:3000";
+}
+
+if(process.env.NEXT_PUBLIC_VERCEL_ENV === "preview") {
+  baseUrl = "https://familiaprint-dev.vercel.app";
+}
+
+if(process.env.NEXT_PUBLIC_VERCEL_ENV === "production") {
+  baseUrl = "https://familiaprint.com";
+}
+
+export const serverBaseUrl = baseUrl;

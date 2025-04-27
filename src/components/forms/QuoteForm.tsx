@@ -47,7 +47,6 @@ export default function LeadForm() {
 	const handleProjectTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		if (e.target.checked) {
 			setProjectType([...projectType, e.target.value]);
-      console.log(projectType)
 		} else {
 			setProjectType(projectType.filter((item) => item !== e.target.value));
 		}
@@ -107,8 +106,6 @@ export default function LeadForm() {
           Comments: candidate.Comments,
           Language: language
         }
-
-        console.log(quote)
 
         // send the request
 				const request = await fetch(`/api/quote`, {

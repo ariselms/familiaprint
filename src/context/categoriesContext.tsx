@@ -35,7 +35,6 @@ export const CategoriesContextProvider = ({
     const data = await fetch(`/api/categories/${id}`);
     const response = await data.json();
     const category = response.data;
-    console.log(category)
     if(category){
       setCategory(category[0]);
       setLoadingCategories(false)

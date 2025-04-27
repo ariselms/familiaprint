@@ -25,7 +25,7 @@ export interface LanguageContextType {
 
   verifyLanguageFromLocalStorage: () => string;
 
-  setLanguageAndLocalStorage: (lang: string) => string;
+  setLanguageAndLocalStorage: (lang: string) => any;
 }
 
 export interface StorageContextType {
@@ -46,9 +46,6 @@ export interface StorageContextType {
 
 export interface AuthContextType {
 	user: any | null;
-	createUser: (email: string, password: string) => Promise<UserCredential> | undefined;
-  signInUser: (email: string, password: string) => Promise<UserCredential> | undefined;
-  signOutUser: () => void;
-  persistUser: () => void;
-  authError: string | null;
+	signOutUser: () => void;
+	persistUser: () => Promise<void>;
 }

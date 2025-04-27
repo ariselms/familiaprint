@@ -61,9 +61,8 @@ export default function RootLayout({
 					<AuthContextProvider>
 						<CategoriesContextProvider>
 							<LanguageContextProvider>
-								{/* <HeaderWithDropDown /> */}
                 <MainNavigation />
-								{children}
+								  {children}
 								<Footer />
 							</LanguageContextProvider>
 						</CategoriesContextProvider>

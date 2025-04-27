@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MainContainer from "@/components/layout/Container";
 import AuthForm from "@/forms/AuthForm";
 import { useLanguageContext } from "@/context/languageContext";
+import { useAuthContext } from "@/context/authContext";
 import { languageOptions } from "@/static";
 import CodeForm from "@/forms/CodeForm";
 import { useRouter } from "next/navigation";
@@ -11,12 +12,17 @@ import { toast } from "react-toastify";
 
 const LoginPage = () => {
   const router = useRouter();
+  const { user } = useAuthContext();
 	const { language } = useLanguageContext();
-	const [message, setMessage] = useState<string | unknown>("");
 	const [email, setEmail] = useState<string>("");
 	const [code, setCode] = useState<string>("");
 	const [codeSent, setCodeSent] = useState<boolean>(false);
 
+  useEffect(() => {
+    if (user) {
+      router.push("/admin");
+    }
+  },[user]);
 	const onEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setEmail(e.target.value);
 	};
@@ -42,7 +48,6 @@ const LoginPage = () => {
 
 			if (response.success) {
 				setCodeSent(true);
-				setMessage(response.message);
         toast.success(response.message);
 			} else {
 				console.error(response.message);
@@ -53,7 +58,6 @@ const LoginPage = () => {
 
 			console.error(error);
 			const errorMessage = error instanceof Error ? error.message : "An error occurred";
-			setMessage(errorMessage);
       toast.error(errorMessage);
 
 		}
@@ -63,7 +67,6 @@ const LoginPage = () => {
 		e.preventDefault();
 
 		try {
-      console.log(code, email)
       if (!code || !email) {
         throw new Error("Email and code are required");
       }
@@ -84,7 +87,6 @@ const LoginPage = () => {
 			const response = await request.json();
 
 			if (response.success) {
-				// TODO: redirect to home page
         toast.success(response.message);
         router.push("/admin");
 			} else {
@@ -94,7 +96,6 @@ const LoginPage = () => {
 			console.error(error);
       const errorMessage =
         error instanceof Error ? error.message : "An error occurred";
-      setMessage(errorMessage);
       toast.error(errorMessage);
 		}
 	};
