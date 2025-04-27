@@ -42,37 +42,37 @@ export default async function AuthenticatedLayout({
 					<MainContainer>
             {cookie.value}
 						<h3 className="text-3xl mb-2 dark:text-white">
-							{language?.value === languageOptions.english
+							{language?.value === languageOptions?.english
 								? "Profile"
 								: "Perfil"}
 						</h3>
 						<div className="flex items-center mb-8">
 							<span className="me-8 dark:text-gray-200">
-								{language?.value === languageOptions.english ? (
+								{language?.value === languageOptions?.english ? (
 									<strong>Name: </strong>
 								) : (
 									<strong>Nombre: </strong>
 								)}
-								{language?.value === languageOptions.english ? (
+								{language?.value === languageOptions?.english ? (
                   response?.data?.name || "Not set yet"
                 ) : (
                   response?.data?.name || "Sin establecer aun"
                 )}
 							</span>
 							<span className="me-8 dark:text-gray-200">
-								{language?.value === languageOptions.english ? (
+								{language?.value === languageOptions?.english ? (
 									<strong>Email: </strong>
 								) : (
 									<strong>Correo electrónico: </strong>
 								)}
-								{language?.value === languageOptions.english
+								{language?.value === languageOptions?.english
 									? response?.data?.email || "Not set yet"
 									: response?.data?.email || "Sin establecer aún"}
 							</span>
 						</div>
 					</MainContainer>
 				</nav>
-				<MainContainer>
+				{/* <MainContainer>
 					<Tabs
 						aria-label="Default tabs"
 						variant="underline"
@@ -84,8 +84,7 @@ export default async function AuthenticatedLayout({
 									? "Edit Profile"
 									: "Editar Perfil"
 							}>
-              User
-							{/* <UserProfileForm user={response?.data} /> */}
+							<UserProfileForm user={response?.data} />
 						</TabItem>
 						<TabItem
 							title={
@@ -98,7 +97,7 @@ export default async function AuthenticatedLayout({
 								: "Esta funcionalidad se encuentra bajo desarrollo, regresa pronto para administrar tus órdenes en línea."}
 						</TabItem>
 					</Tabs>
-				</MainContainer>
+				</MainContainer> */}
 			</section>
 			{children}
 		</main>
