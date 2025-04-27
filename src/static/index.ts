@@ -50,7 +50,7 @@ if(process.env.NEXT_PUBLIC_VERCEL_ENV === "preview") {
 }
 
 if(process.env.NEXT_PUBLIC_VERCEL_ENV === "production") {
-  baseUrl = "https://www.familiaprint.com/admin";
+  baseUrl = "https://www.familiaprint.com";
 }
 
 export const serverBaseUrl = baseUrl;
