@@ -7,12 +7,14 @@ import { DarkThemeToggle } from "flowbite-react";
 import { MenuIcon } from "@/components/svg/Icons";
 import Link from "next/link";
 import LanguageHandler from "@/components/forms/LanguageHandler";
+import { useAuthContext } from "@/context/authContext";
 
 export default function MainNavigation() {
 	const [showMenu, setShowMenu] = useState(false);
 	const [isMobile, setIsMobile] = useState(false);
 	const languageContext = useLanguageContext();
 	const { language } = useLanguageContext();
+	const { user, persistUser, signOutUser } = useAuthContext();
 
 	useEffect(() => {
 		const currentLanguage = languageContext?.verifyLanguageFromLocalStorage();
@@ -27,6 +29,8 @@ export default function MainNavigation() {
 
 		// Initial check on mount
 		handleResize();
+
+		persistUser();
 
 		// Add event listener for resize
 		window?.addEventListener("resize", handleResize);
@@ -119,16 +123,45 @@ export default function MainNavigation() {
 									: "Free Quote"}
 							</Link>
 						</li>
-						<li className="p-2 md:p-0 text-center cursor-pointer hover:bg-gray-300 md:hover:bg-transparent hover:dark:bg-gray-700 md:dark:hover:bg-transparent trastition-all">
-							<Link
-								onClick={() => {
-									isMobile && setShowMenu(false);
-								}}
-								className="text-black dark:text-white hover:underline"
-								href="/login">
-								{language === languageOptions.spanish ? "Ingresar" : "Login"}
-							</Link>
-						</li>
+						{user ? (
+							<li className="p-2 md:p-0 text-center cursor-pointer hover:bg-gray-300 md:hover:bg-transparent hover:dark:bg-gray-700 md:dark:hover:bg-transparent trastition-all">
+								{" "}
+								<Link
+									onClick={() => {
+										isMobile && setShowMenu(false);
+									}}
+									className="text-black dark:text-white hover:underline"
+									href="/admin">
+									{language === languageOptions.spanish ? "Perfil" : "Profile"}
+								</Link>
+							</li>
+						) : (
+							<li className="p-2 md:p-0 text-center cursor-pointer hover:bg-gray-300 md:hover:bg-transparent hover:dark:bg-gray-700 md:dark:hover:bg-transparent trastition-all">
+								{" "}
+								<Link
+									onClick={() => {
+										isMobile && setShowMenu(false);
+									}}
+									className="text-black dark:text-white hover:underline"
+									href="/login">
+									{language === languageOptions.spanish ? "Ingresar" : "Login"}
+								</Link>
+							</li>
+						)}
+						{user && (
+							<li className="p-2 md:p-0 text-center cursor-pointer hover:bg-gray-300 md:hover:bg-transparent hover:dark:bg-gray-700 md:dark:hover:bg-transparent trastition-all">
+								{" "}
+								<Link
+									onClick={() => {
+										isMobile && setShowMenu(false);
+										signOutUser();
+									}}
+									className="text-red-600 dark:text-red-500 hover:underline"
+									href="/login">
+									{language === languageOptions.spanish ? "Salir" : "Logout"}
+								</Link>
+							</li>
+						)}
 					</ul>
 				)}
 			</nav>

@@ -1,3 +1,5 @@
+"use client";
+
 export default function AdminPage() {
-  return <div>Admin</div>;
+  return <div></div>;
 }

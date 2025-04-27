@@ -15,8 +15,6 @@ export async function POST(request: Request) {
 
 	const existingUser = await sql`SELECT * FROM users WHERE email = ${email}`;
 
-  console.log(existingUser.rows);
-
 	const emaillSubject =
 		language === languageOptions.english
 			? "Verification Code"

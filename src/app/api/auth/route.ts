@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { sql } from "@vercel/postgres";
 import { languageOptions } from "@/static";
+import { cookies } from "next/headers";
 
 export async function POST(request: Request) {
 
@@ -52,6 +53,7 @@ export async function POST(request: Request) {
 				});
 
         serverResponse.cookies.set("sessiontoken", user.sessiontoken);
+        serverResponse.cookies.set("language", language);
 
         return serverResponse;
 
@@ -70,6 +72,69 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error(error);
   }
+}
+
+export async function GET(request: Request) {
+
+  const cookieStore = cookies();
+  const authCookie = (await cookieStore).get("sessiontoken");
+
+  try {
+    const { rows: userExist } =
+			await sql`SELECT * FROM users WHERE sessiontoken = ${authCookie?.value}`;
+
+    if (userExist.length > 0) {
+			const user = userExist[0];
+
+      if (user.sessiontokenexpiration < new Date()) {
+        return NextResponse.json({
+          success: false,
+          message: "Session token has expired",
+          data: null
+        });
+      }
+
+      if (user.sessiontoken !== authCookie?.value) {
+        return NextResponse.json({
+          success: false,
+          message: "Invalid session token",
+          data: null
+        });
+      }
+
+			return NextResponse.json(
+				{
+					success: true,
+					message: "User fetched successfully",
+					data: user
+				},
+				{ status: 200 }
+			);
+		}
+
+    throw new Error("User not found");
+
+  } catch (error) {
+    console.error(error);
+
+    return NextResponse.json({
+      success: false,
+      message: "Error fetching user",
+      data: null
+    }, { status: 500 });
+  }
+}
+
+export async function DELETE(request: Request) {
+
+  const cookieStore = cookies();
+  (await cookieStore).delete("sessiontoken");
+
+  return NextResponse.json({
+    success: true,
+    message: "User logged out successfully",
+    data: null
+  }, { status: 200 });
 }
 
 // TODO:
