@@ -38,8 +38,9 @@ export default async function AuthenticatedLayout({
 	return (
 		<main>
 			<section>
+        Dashboard
 				<nav className="bg-gray-200 dark:bg-gray-900 py-16">
-					<MainContainer>
+					{/* <MainContainer>
             {cookie.value}
 						<h3 className="text-3xl mb-2 dark:text-white">
 							{language?.value === languageOptions?.english
@@ -70,7 +71,7 @@ export default async function AuthenticatedLayout({
 									: response?.data?.email || "Sin establecer aún"}
 							</span>
 						</div>
-					</MainContainer>
+					</MainContainer> */}
 				</nav>
 				{/* <MainContainer>
 					<Tabs
