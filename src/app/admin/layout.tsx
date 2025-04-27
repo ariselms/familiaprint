@@ -26,7 +26,7 @@ export default async function AuthenticatedLayout({
 		body: JSON.stringify({ cookie })
 	});
 
-	const response = await request.json();
+	// const response = await request.json();
 
 	// if (!response?.success) {
 	// 	redirect("/login");
