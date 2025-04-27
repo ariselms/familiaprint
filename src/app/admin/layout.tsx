@@ -12,25 +12,25 @@ export default async function AuthenticatedLayout({
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
-	const cookie = (await cookies()).get("sessiontoken");
+	// const cookie = (await cookies()).get("sessiontoken");
 
-	if (!cookie) {
-		redirect("/login");
-	}
+	// if (!cookie) {
+	// 	redirect("/login");
+	// }
 
-	const request = await fetch(`${serverBaseUrl}/api/validate`, {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json"
-		},
-		body: JSON.stringify({ cookie })
-	});
+	// const request = await fetch(`${serverBaseUrl}/api/validate`, {
+	// 	method: "POST",
+	// 	headers: {
+	// 		"Content-Type": "application/json"
+	// 	},
+	// 	body: JSON.stringify({ cookie })
+	// });
 
-	const response = await request.json();
+	// const response = await request.json();
 
-	if (!response?.success) {
-		redirect("/login");
-	}
+	// if (!response?.success) {
+	// 	redirect("/login");
+	// }
 
 	return (
 		<main>
