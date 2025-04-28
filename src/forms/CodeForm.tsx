@@ -1,13 +1,16 @@
 import { Button, Label, TextInput } from "flowbite-react";
 import { useLanguageContext } from "@/context/languageContext";
 import { languageOptions } from "@/static";
+import { Spinner } from "flowbite-react";
 
 export default function CodeForm({
   onCodeChange,
-	onCodeSubmit
+	onCodeSubmit,
+  loading
 }: {
 	onCodeChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 	onCodeSubmit: (e: React.FormEvent<HTMLFormElement>) => void
+  loading: boolean
 }) {
 	const { language } = useLanguageContext();
 
@@ -32,9 +35,18 @@ export default function CodeForm({
 				/>
 			</div>
 			<Button color={"red"} type="submit">
-				{language === languageOptions.english
-					? "Verify Code"
-					: "Verificar Código"}
+        {loading ? (
+          <>
+            <Spinner size="sm" className="mr-2" light />
+            {language === languageOptions.english
+              ? "Processing..."
+              : "Procesando..."}
+          </>
+        ) : languageOptions.english ? (
+          "Verify"
+        ) : (
+          "Verificar"
+        )}
 			</Button>
 		</form>
 	);

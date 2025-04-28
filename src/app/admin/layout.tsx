@@ -29,8 +29,6 @@ export default async function AuthenticatedLayout({
 
   user = userDb[0];
 
-  console.log(user);
-
   if (!user) {
     redirect("/login");
   }
