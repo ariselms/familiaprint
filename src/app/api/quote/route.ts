@@ -23,7 +23,9 @@ export async function POST(req: Request) {
 		} = body;
 
 		const htmlBody = `
-      <h1>You have requested a quote with the following information.</h1>
+      <h1>${Language === languageOptions.english
+        ? "You have requested a quote with the following information:"
+        : "Ha solicitado una cotización con la siguiente información:"}</h1>
 
       <p>
         <strong>
