@@ -3,13 +3,16 @@ import React from "react";
 import { useLanguageContext } from "@/context/languageContext";
 import { Button, Label, TextInput } from "flowbite-react";
 import { languageOptions } from "@/static";
+import { Spinner } from "flowbite-react";
 
 const AuthForm = ({
 	onEmailChange,
-	onFormSubmit
+	onFormSubmit,
+  loading
 }: {
 	onEmailChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	onFormSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  loading: boolean
 }) => {
 
 	const { language } = useLanguageContext();
@@ -37,7 +40,18 @@ const AuthForm = ({
 				/>
 			</div>
 			<Button color={"red"} type="submit">
-				{language === languageOptions.english ? "Send Code" : "Enviar Código"}
+        {loading ? (
+          <>
+            <Spinner size="sm" className="mr-2" light />
+            {language === languageOptions.english
+              ? "Processing..."
+              : "Procesando..."}
+          </>
+        ) : languageOptions.english ? (
+          "Send"
+        ) : (
+          "Enviar"
+        )}
 			</Button>
 		</form>
 	);

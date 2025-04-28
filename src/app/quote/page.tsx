@@ -24,7 +24,7 @@ export default function QuotePage() {
 					spSecondButtonText: "Cotización gratis"
 				}}
 			/>
-			<section className="py-24 bg-gray-200 dark:bg-gray-900">
+			<section className="py-16 bg-gray-200 dark:bg-gray-900">
 				<MainContainer>
           <QuoteForm />
 				</MainContainer>

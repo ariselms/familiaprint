@@ -39,8 +39,6 @@ export default function LeadForm() {
 	});
 
 	useEffect(() => {
-		setLoading(false);
-
     getAllCategories();
 	}, []);
 
@@ -118,11 +116,6 @@ export default function LeadForm() {
 
         const response = await request.json();
 
-        // const response = {
-        //   success: true,
-        //   message: "Your information has been submitted successfully. You will hear from us soon."
-        // } // comment or remove after working on endpoint for quote
-
         if(response.success) {
 
           document.querySelectorAll("input").forEach((input) => {
@@ -151,7 +144,9 @@ export default function LeadForm() {
             Comments: ""
           });
 
-          const toastMessage = language === languageOptions.english ? "Your information has been submitted successfully. You will hear from us soon." : "Su información ha sido enviada con éxito. Nos pondremos en contacto con usted pronto.";
+          const toastMessage = language === languageOptions.english
+            ? "Your information has been submitted successfully. You will hear from us soon."
+            : "Su información ha sido enviada con éxito. Nos pondremos en contacto con usted pronto.";
 
           toast.success(
             toastMessage,
@@ -471,14 +466,14 @@ export default function LeadForm() {
 							<div className="project-information p-4 border border-gray-900/10 dark:border-gray-700 rounded-2xl">
 								<fieldset>
 									<legend className="text-sm font-semibold leading-6 text-gray-900 dark:text-gray-100">
-                    {language === languageOptions.english
-                      ? "Project Estimate Timeframe"
-                      : "Tiempo estimado del proyecto"}
+										{language === languageOptions.english
+											? "Project Estimate Timeframe"
+											: "Tiempo estimado del proyecto"}
 									</legend>
 									<p className="mt-1 text-sm leading-6 text-gray-600 dark:text-gray-200">
-                    {language === languageOptions.english
-                      ? "Let us know when do you want this project to be completed."
-                      : "Déjanos saber cuando quieres que este proyecto se complete."}
+										{language === languageOptions.english
+											? "Let us know when do you want this project to be completed."
+											: "Déjanos saber cuando quieres que este proyecto se complete."}
 									</p>
 									<div className="mt-6 space-y-6">
 										<div className="flex items-center gap-x-3">
@@ -492,9 +487,9 @@ export default function LeadForm() {
 											<Label
 												htmlFor="push-everything"
 												className="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-100">
-                        {language === languageOptions.english
-                          ? "1-2 weeks"
-                          : "1-2 semanas"}
+												{language === languageOptions.english
+													? "1-2 weeks"
+													: "1-2 semanas"}
 											</Label>
 										</div>
 										<div className="flex items-center gap-x-3">
@@ -508,9 +503,9 @@ export default function LeadForm() {
 											<Label
 												htmlFor="push-email"
 												className="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-100">
-                        {language === languageOptions.english
-                          ? "2-3 weeks"
-                          : "2-3 semanas"}
+												{language === languageOptions.english
+													? "2-3 weeks"
+													: "2-3 semanas"}
 											</Label>
 										</div>
 										<div className="flex items-center gap-x-3">
@@ -524,9 +519,9 @@ export default function LeadForm() {
 											<Label
 												htmlFor="push-nothing"
 												className="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-100">
-                        {language === languageOptions.english
-                          ? "1 month or later"
-                          : "1 mes o más"}
+												{language === languageOptions.english
+													? "1 month or later"
+													: "1 mes o más"}
 											</Label>
 										</div>
 									</div>
@@ -535,13 +530,13 @@ export default function LeadForm() {
 							<fieldset>
 								<legend className="text-sm font-semibold leading-6 text-gray-900 dark:text-gray-100">
 									{language === languageOptions.english
-                    ? "Comments"
-                    : "Comentarios"}
+										? "Comments"
+										: "Comentarios"}
 								</legend>
 								<p className="mt-1 text-sm leading-6 text-gray-600 dark:text-gray-200">
-                  {language === languageOptions.english
-                    ? "Do you have any comments about your project that we need to know?"
-                    : "Tienes algún comentario sobre tu proyecto que necesitamos saber?"}
+									{language === languageOptions.english
+										? "Do you have any comments about your project that we need to know?"
+										: "Tienes algún comentario sobre tu proyecto que necesitamos saber?"}
 								</p>
 								<div className="mt-6 space-y-6">
 									<div className="gap-x-3">
@@ -549,7 +544,7 @@ export default function LeadForm() {
 											rows={6}
 											id="comments"
 											name="Comments"
-											className="w-full border border-gray-900/10 dark:border-gray-700  rounded-2xl p-3 text-black focus:ring-red  -600"
+											className="w-full border border-gray-900/10 dark:border-gray-700  rounded-2xl p-3 text-black"
 											value={candidate.Comments}
 											onChange={handleChange}
 										/>
@@ -564,13 +559,22 @@ export default function LeadForm() {
 					<Link
 						href="/"
 						className="text-sm font-semibold leading-6 text-gray-900 dark:text-gray-100">
-            {language === languageOptions.english ? "Cancel" : "Cancelar"}
+						{language === languageOptions.english ? "Cancel" : "Cancelar"}
 					</Link>
 					<Button
 						color={"red"}
 						type="submit"
-						className="w-20 h-auto flex justify-center px-3 py-2 text-sm font-semibold focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-red-800 transition-all">
-						{loading ? <Spinner /> : language === languageOptions.english ? "Send" : "Enviar"}
+						className="h-auto flex justify-center px-3 py-2 text-sm font-semibold focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-red-800 transition-all">
+						{loading ? (
+							<>
+								<Spinner size="sm" className="mr-2" light />
+                {language === languageOptions.english ? "Processing..." : "Procesando..."}
+							</>
+						) : languageOptions.english ? (
+							"Send"
+						) : (
+							"Enviar"
+						)}
 					</Button>
 				</div>
 			</form>
@@ -594,14 +598,14 @@ export default function LeadForm() {
 								</strong>
 							</DialogTitle>
 							<ul className="mt-2 text-sm/6 text-black">
-                {Object.keys(errors).map((key) => {
-                  return (
-                    <li key={key} className="text-sm text-red-500">
-                      {errors[key]}
-                    </li>
-                  );
-                })}
-              </ul>
+								{Object.keys(errors).map((key) => {
+									return (
+										<li key={key} className="text-sm text-red-500">
+											{errors[key]}
+										</li>
+									);
+								})}
+							</ul>
 							<div className="mt-4">
 								<Button
 									color={"red"}

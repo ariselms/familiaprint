@@ -6,8 +6,6 @@ export async function POST(request: Request) {
 
     const { language } = await request.json();
 
-    console.log(language);
-
     const serverResponse = NextResponse.json({
       success: true,
       message: "Language changed successfully",

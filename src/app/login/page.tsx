@@ -17,6 +17,7 @@ const LoginPage = () => {
 	const [email, setEmail] = useState<string>("");
 	const [code, setCode] = useState<string>("");
 	const [codeSent, setCodeSent] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     if (user) {
@@ -33,6 +34,8 @@ const LoginPage = () => {
 
 	const onFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
+
+    setLoading(true);
 
 		try {
 
@@ -60,11 +63,15 @@ const LoginPage = () => {
 			const errorMessage = error instanceof Error ? error.message : "An error occurred";
       toast.error(errorMessage);
 
-		}
+		} finally {
+      setLoading(false);
+    }
 	};
 
 	const onCodeSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
+
+    setLoading(true);
 
 		try {
       if (!code || !email) {
@@ -97,12 +104,14 @@ const LoginPage = () => {
       const errorMessage =
         error instanceof Error ? error.message : "An error occurred";
       toast.error(errorMessage);
-		}
+		} finally {
+      setLoading(false);
+    }
 	};
 
 	return (
 		<MainContainer>
-			<div className="w-full flex flex-col items-center justify-center py-32">
+			<div className="w-full flex flex-col items-center justify-center py-16">
 				{!codeSent && (
 					<>
 						<h3 className="text-2xl/9 font-bold tracking-tight  text-black dark:text-white mb-4">
@@ -118,6 +127,7 @@ const LoginPage = () => {
 						<AuthForm
 							onFormSubmit={onFormSubmit}
 							onEmailChange={onEmailChange}
+              loading={loading}
 						/>
 					</>
 				)}
@@ -133,7 +143,11 @@ const LoginPage = () => {
 								? "We have sent you an email with a code to verify your account and login."
 								: "Te hemos enviado un correo con un codigo para verificar tu cuenta e iniciar sesión."}
 						</p>
-						<CodeForm onCodeSubmit={onCodeSubmit} onCodeChange={onCodeChange} />
+						<CodeForm
+              onCodeSubmit={onCodeSubmit}
+              onCodeChange={onCodeChange}
+              loading={loading}
+            />
 					</>
 				)}
 			</div>
