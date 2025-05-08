@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import { sql } from "@vercel/postgres";
 import { languageOptions } from "@/static";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 
 export async function POST(request: Request) {
 

@@ -43,6 +43,7 @@ export default function MainNavigation() {
 
 		// Clean up the event listener
 		return () => {
+
 			window?.removeEventListener("resize", handleResize);
 		};
 	}, [languageContext]); // Add languageContext to the dependency array if it can change

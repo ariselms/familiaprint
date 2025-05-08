@@ -9,17 +9,17 @@ import Link from "next/link";
 import { toast } from "react-toastify";
 // only import what you want to use
 import {
-  Button,
-  Checkbox,
-  Label,
-  Radio,
-  Textarea,
-  TextInput,
+	Button,
+	Checkbox,
+	Label,
+	Radio,
+	Textarea,
+	TextInput
 } from "flowbite-react";
 
 export default function LeadForm() {
-  const { language } = useLanguageContext();
-  const { categories, getAllCategories } = useCategoriesContext();
+	const { language } = useLanguageContext();
+	const { categories, getAllCategories } = useCategoriesContext();
 	const [loading, setLoading] = useState(false);
 	let [isOpen, setIsOpen] = useState(false);
 	const [projectType, setProjectType] = useState<string[]>([]);
@@ -39,7 +39,7 @@ export default function LeadForm() {
 	});
 
 	useEffect(() => {
-    getAllCategories();
+		getAllCategories();
 	}, []);
 
 	const handleProjectTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -59,17 +59,40 @@ export default function LeadForm() {
 
 	const validateForm = () => {
 		let tempErrors: any = {};
-		if (candidate.First === "") tempErrors.First = language === languageOptions.english ? "First name" : "Nombre";
-		if (candidate.Last === "") tempErrors.Last = language === languageOptions.english ? "Last name" : "Apellido";
-		if (candidate.Email === "") tempErrors.Email = language === languageOptions.english ? "Email" : "Correo electrónico";
-		if (candidate.Phone === "") tempErrors.Phone = language === languageOptions.english ? "Phone" : "Teléfono";
-		if (candidate.Street === "") tempErrors.Street = language === languageOptions.english ? "Street" : "Calle";
-		if (candidate.City === "") tempErrors.City = language === languageOptions.english ? "City" : "Ciudad";
-		if (candidate.State === "") tempErrors.State = language === languageOptions.english ? "State" : "Estado";
-		if (candidate.Zip === "") tempErrors.Zip = language === languageOptions.english ? "Zip" : "Código postal";
-		if (projectType.length === 0) tempErrors.ProjectType = language === languageOptions.english ? "Project type" : "Tipo de proyecto";
+		if (candidate.First === "")
+			tempErrors.First =
+				language === languageOptions.english ? "First name" : "Nombre";
+		if (candidate.Last === "")
+			tempErrors.Last =
+				language === languageOptions.english ? "Last name" : "Apellido";
+		if (candidate.Email === "")
+			tempErrors.Email =
+				language === languageOptions.english ? "Email" : "Correo electrónico";
+		if (candidate.Phone === "")
+			tempErrors.Phone =
+				language === languageOptions.english ? "Phone" : "Teléfono";
+		if (candidate.Street === "")
+			tempErrors.Street =
+				language === languageOptions.english ? "Street" : "Calle";
+		if (candidate.City === "")
+			tempErrors.City =
+				language === languageOptions.english ? "City" : "Ciudad";
+		if (candidate.State === "")
+			tempErrors.State =
+				language === languageOptions.english ? "State" : "Estado";
+		if (candidate.Zip === "")
+			tempErrors.Zip =
+				language === languageOptions.english ? "Zip" : "Código postal";
+		if (projectType.length === 0)
+			tempErrors.ProjectType =
+				language === languageOptions.english
+					? "Project type"
+					: "Tipo de proyecto";
 		if (candidate.ProjectEstimateTimeframe === "")
-			tempErrors.ProjectEstimateTimeframe = language === languageOptions.english ? "Project estimate timeframe" : "Tiempo estimado del proyecto";
+			tempErrors.ProjectEstimateTimeframe =
+				language === languageOptions.english
+					? "Project estimate timeframe"
+					: "Tiempo estimado del proyecto";
 
 		setErrors(tempErrors);
 
@@ -85,87 +108,80 @@ export default function LeadForm() {
 			const validationErrors = validateForm();
 
 			// candidate.ProjectType = projectType.toString();
-      // convert the array to a string for the email
+			// convert the array to a string for the email
 			let projectTypeString: string = projectType.toString();
 
 			if (Object.keys(validationErrors).length === 0) {
+				const quote = {
+					First: candidate.First,
+					Last: candidate.Last,
+					Email: candidate.Email,
+					Phone: candidate.Phone,
+					Street: candidate.Street,
+					City: candidate.City,
+					State: candidate.State,
+					Zip: candidate.Zip,
+					ProjectType: projectTypeString.toString(),
+					ProjectEstimateTimeframe: candidate.ProjectEstimateTimeframe,
+					Comments: candidate.Comments,
+					Language: language
+				};
 
-        const quote = {
-          First: candidate.First,
-          Last: candidate.Last,
-          Email: candidate.Email,
-          Phone: candidate.Phone,
-          Street: candidate.Street,
-          City: candidate.City,
-          State: candidate.State,
-          Zip: candidate.Zip,
-          ProjectType: projectTypeString.toString(),
-          ProjectEstimateTimeframe: candidate.ProjectEstimateTimeframe,
-          Comments: candidate.Comments,
-          Language: language
-        }
-
-        // send the request
+				// send the request
 				const request = await fetch(`/api/quote`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(quote)
-        });
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify(quote)
+				});
 
-        const response = await request.json();
+				const response = await request.json();
 
-        if(response.success) {
+				if (response.success) {
+					document.querySelectorAll("input").forEach((input) => {
+						if (input.type === "checkbox" || input.type === "radio") {
+							input.checked = false;
+							input.classList.remove("ring-2", "ring-red-500");
+						} else {
+							input.value = "";
+							input.classList.remove("ring-2", "ring-red-500");
+						}
+					});
 
-          document.querySelectorAll("input").forEach((input) => {
-            if (input.type === "checkbox" || input.type === "radio") {
-              input.checked = false;
-              input.classList.remove("ring-2", "ring-red-500");
-            } else {
-              input.value = "";
-              input.classList.remove("ring-2", "ring-red-500");
-            }
-          });
+					setProjectType([]);
 
-          setProjectType([]);
+					setCandidate({
+						First: "",
+						Last: "",
+						Email: "",
+						Phone: "",
+						Street: "",
+						City: "",
+						State: "",
+						Zip: "",
+						ProjectType: projectType,
+						ProjectEstimateTimeframe: "",
+						Comments: ""
+					});
 
-          setCandidate({
-            First: "",
-            Last: "",
-            Email: "",
-            Phone: "",
-            Street: "",
-            City: "",
-            State: "",
-            Zip: "",
-            ProjectType: projectType,
-            ProjectEstimateTimeframe: "",
-            Comments: ""
-          });
+					const toastMessage =
+						language === languageOptions.english
+							? "Your information has been submitted successfully. You will hear from us soon."
+							: "Su información ha sido enviada con éxito. Nos pondremos en contacto con usted pronto.";
 
-          const toastMessage = language === languageOptions.english
-            ? "Your information has been submitted successfully. You will hear from us soon."
-            : "Su información ha sido enviada con éxito. Nos pondremos en contacto con usted pronto.";
-
-          toast.success(
-            toastMessage,
-            {
-              position: "top-right",
-              autoClose: 5000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined
-            }
-          );
-        } else {
-
-          throw new Error(response.message);
-
-        }
-
+					toast.success(toastMessage, {
+						position: "top-right",
+						autoClose: 5000,
+						hideProgressBar: false,
+						closeOnClick: true,
+						pauseOnHover: true,
+						draggable: true,
+						progress: undefined
+					});
+				} else {
+					throw new Error(response.message);
+				}
 			} else {
 				window.scrollTo(0, 0);
 
@@ -208,8 +224,9 @@ export default function LeadForm() {
 			}
 		} catch (error) {
 			console.error(error);
-      const errorMessage = error instanceof Error ? error.message : "An error occurred";
-      toast.error(errorMessage);
+			const errorMessage =
+				error instanceof Error ? error.message : "An error occurred";
+			toast.error(errorMessage);
 		} finally {
 			setLoading(false);
 			window.scrollTo(0, 0);
@@ -431,15 +448,15 @@ export default function LeadForm() {
 													<Checkbox
 														id={
 															language === languageOptions.english
-																? category.spname
-																: category.enname
+																? category.enname
+																: category.spname
 														}
 														name="ProjectType"
 														className="h-4 w-4 rounded border-gray-300 text-red-600 focus:ring-red-600"
 														value={
 															language === languageOptions.english
-																? category.spname
-																: category.enname
+																? category.enname
+																: category.spname
 														}
 														onChange={handleProjectTypeChange}
 													/>
@@ -448,13 +465,13 @@ export default function LeadForm() {
 													<Label
 														htmlFor={
 															language === languageOptions.english
-																? category.spname
-																: category.enname
+																? category.enname
+																: category.spname
 														}
 														className="font-medium text-gray-900 dark:text-gray-100">
 														{language === languageOptions.english
-															? category.spname
-															: category.enname}
+															? category.enname
+															: category.spname}
 													</Label>
 												</div>
 											</div>
@@ -565,16 +582,15 @@ export default function LeadForm() {
 						color={"red"}
 						type="submit"
 						className="h-auto flex justify-center px-3 py-2 text-sm font-semibold focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-red-800 transition-all">
-						{loading ? (
+						{loading && (
 							<>
 								<Spinner size="sm" className="mr-2" light />
-                {language === languageOptions.english ? "Processing..." : "Procesando..."}
+								{language === languageOptions.english
+									? "Processing..."
+									: "Procesando..."}
 							</>
-						) : languageOptions.english ? (
-							"Send"
-						) : (
-							"Enviar"
 						)}
+						{language === languageOptions.english ? "Send" : "Enviar"}
 					</Button>
 				</div>
 			</form>

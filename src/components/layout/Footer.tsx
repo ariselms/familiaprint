@@ -41,7 +41,7 @@ export default function Footer() {
 										<li key={item.id}>
 											<Link
 												href={"/services/" + item.id}
-												className="text-sm/6text-white hover:underline">
+												className="text-sm/6 text-white hover:underline">
 												{language === languageOptions.spanish
 													? item.spname
 													: item.enname}
