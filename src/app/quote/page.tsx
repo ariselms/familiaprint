@@ -10,7 +10,7 @@ export default function QuotePage() {
 			<Jumbotron
 				propsData={{
 					enHeader: "Request a free quote",
-					spHeader: "Solicita un cotización gratis",
+					spHeader: "Solicita una cotización gratis",
 					enDescription:
 						"Choose between the following options and we will contact you as soon as possible.",
 					spDescription:
