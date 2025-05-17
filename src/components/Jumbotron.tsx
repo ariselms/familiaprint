@@ -19,6 +19,7 @@ interface JumbotronProps {
 }
 
 const Jumbotron = ({ propsData }: { propsData: JumbotronProps }) => {
+
 	const { language } = useLanguageContext();
 
 	return (
@@ -34,24 +35,24 @@ const Jumbotron = ({ propsData }: { propsData: JumbotronProps }) => {
 						? propsData.enDescription
 						: propsData.spDescription}
 				</p>
-        {propsData.hasButtons && (
-          <div className="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0">
-            <Link
-              href={propsData.enFirstButtonLink}
-              className="py-3 px-5 sm:ms-2 text-sm font-medium text-white bg-red-600 focus:outline-none rounded-lg border border-black focus:z-10 focus:ring-4 focus:ring-red-100 dark:focus:ring-red-700 dark:text-red-200 text-center">
-              {language === languageOptions.english
-                ? propsData.enFirstButtonText
-                : propsData.spFirstButtonText}
-            </Link>
-            <Link
-              href={propsData.enSecondButtonLink}
-              className="py-3 px-5 sm:ms-2 text-sm font-medium text-black bg-gray-200 focus:outline-none rounded-lg border border-black focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-200 text-center">
-              {language === languageOptions.english
-                ? propsData.spSecondButtonText
-                : propsData.spSecondButtonText}
-            </Link>
-          </div>
-        )}
+				{propsData.hasButtons && (
+					<div className="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0">
+						<Link
+							href={propsData.enFirstButtonLink}
+							className="py-3 px-5 sm:ms-2 text-sm font-medium text-white bg-blue-700 focus:outline-none rounded-lg border border-black focus:z-10 focus:ring-4 focus:ring-blue-100 dark:focus:ring-blue-700 dark:text-blue-200 text-center">
+							{language === languageOptions.english
+								? propsData.enFirstButtonText
+								: propsData.spFirstButtonText}
+						</Link>
+						<Link
+							href={propsData.enSecondButtonLink}
+							className="py-3 px-5 sm:ms-2 text-sm font-medium text-black bg-gray-200 focus:outline-none rounded-lg border border-black focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-200 text-center">
+							{language === languageOptions.english
+								? propsData.enSecondButtonText
+								: propsData.spSecondButtonText}
+						</Link>
+					</div>
+				)}
 			</div>
 		</section>
 	);

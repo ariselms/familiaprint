@@ -73,7 +73,7 @@ export default function MainNavigation() {
 						alt="Familia Print Logo"
 					/>
 					<img
-						src="/logos/horizontal-white.svg"
+						src="/logos/horizontal-gradient.svg"
 						className="mr-3 h-6 sm:h-9 hidden dark:inline-block"
 						alt="Familia Print Logo"
 					/>

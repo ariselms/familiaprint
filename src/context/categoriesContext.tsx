@@ -1,5 +1,5 @@
 "use client";
-import { CategoriesListType, CategoriesType } from "@/types/categories";
+import { MaterialsListType, MaterialsType } from "@/types/categories";
 import type { CategoriesContextType } from "@/types/contextTypes";
 import React, { createContext, useState } from "react";
 
@@ -10,15 +10,15 @@ export const CategoriesContextProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [categories, setCategories] = useState<CategoriesListType>([]);
+  const [categories, setCategories] = useState<MaterialsListType>([]);
 
-  const [category, setCategory] = useState<CategoriesType | null>(null);
+  const [category, setCategory] = useState<MaterialsType | null>(null);
 
   const [loadingCategories, setLoadingCategories] = useState<boolean>(true)
 
   // get all categories from firebase
-  const getAllCategories = async () => {
-    const data = await fetch("/api/categories", {
+  const getAllMaterials = async () => {
+    const data = await fetch("/api/materials", {
       cache: "no-store",
     });
     const response = await data.json();
@@ -31,8 +31,8 @@ export const CategoriesContextProvider = ({
   }
 
   // get firebase category by id
-  const getCategoryById = async (id: string) => {
-    const data = await fetch(`/api/categories/${id}`);
+  const getMaterialById = async (id: string) => {
+    const data = await fetch(`/api/materials/${id}`);
     const response = await data.json();
     const category = response.data;
     if(category){
@@ -47,10 +47,10 @@ export const CategoriesContextProvider = ({
       value={{
         categories,
         setCategories,
-        getAllCategories,
+        getAllMaterials,
         category,
         setCategory,
-        getCategoryById,
+        getMaterialById,
         loadingCategories			}}>
       {children}
     </CategoriesContext.Provider>

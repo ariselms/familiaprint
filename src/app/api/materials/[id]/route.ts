@@ -10,11 +10,11 @@ export async function GET(
 
 	try {
 		const { rows: category } =
-			await sql`SELECT * FROM categories WHERE id = ${id}`;
+			await sql`SELECT * FROM materials WHERE id = ${id}`;
 
 		return NextResponse.json({
 			success: true,
-      message: "Category fetched successfully",
+      message: "Materials fetched successfully",
       data: category
 		}, { status: 200 });
 	} catch (error) {
@@ -22,7 +22,7 @@ export async function GET(
 
     return NextResponse.json({
       success: false,
-      message: "Error fetching category",
+      message: "Error fetching material",
       data: null
     }, { status: 500 });
 	}

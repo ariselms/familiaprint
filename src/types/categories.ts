@@ -1,4 +1,4 @@
-export interface CategoriesType {
+export interface MaterialsType {
   id: string;
   spname: string;
   enname: string;
@@ -8,4 +8,15 @@ export interface CategoriesType {
   imgurl?: string;
 }
 
-export type CategoriesListType = CategoriesType[];
+export type MaterialsListType = MaterialsType[];
+
+export interface ServiceType {
+  id: string;
+  spname: string;
+  enname: string;
+  spdescription: string;
+  endescription: string;
+  imgurl?: string;
+}
+
+export type ServiceListType = ServiceType[];
