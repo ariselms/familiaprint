@@ -1,21 +1,21 @@
-import { MaterialsListType, MaterialsType } from "@/types/categories";
+import { MaterialsListType, MaterialsType } from "@/types/materials";
 import { User } from "@/types/user";
 import type { UserCredential } from "firebase/auth";
 
-export interface CategoriesContextType {
-	categories: MaterialsListType;
+export interface MaterialsContextType {
+	materials: MaterialsListType;
 
-	setCategories: React.Dispatch<React.SetStateAction<MaterialsListType>>;
+	setMaterials: React.Dispatch<React.SetStateAction<MaterialsListType>>;
 
 	getAllMaterials: () => Promise<MaterialsListType | undefined>;
 
-	category: MaterialsType | null;
+	material: MaterialsType | null;
 
 	getMaterialById: (id: string) => Promise<MaterialsType | undefined>;
 
-	setCategory: React.Dispatch<React.SetStateAction<MaterialsType | null>>;
+	setMaterial: React.Dispatch<React.SetStateAction<MaterialsType | null>>;
 
-	loadingCategories: boolean;
+	loadingMaterials: boolean;
 }
 
 export interface LanguageContextType {

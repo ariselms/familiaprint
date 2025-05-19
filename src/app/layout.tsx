@@ -3,7 +3,7 @@ import { ThemeModeScript } from "flowbite-react";
 import { Geist, Geist_Mono } from "next/font/google";
 import type { Metadata } from "next";
 import { LanguageContextProvider } from "@/context/languageContext";
-import { CategoriesContextProvider } from "@/context/categoriesContext";
+import { MaterialsContextProvider } from "@/context/categoriesContext";
 import { ToastContainer } from "react-toastify";
 import MainNavigation from "@/components/layout/MainNavigation";
 import Footer from "@/components/layout/Footer";
@@ -59,13 +59,13 @@ export default function RootLayout({
 					className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
           <ToastContainer />
 					<AuthContextProvider>
-						<CategoriesContextProvider>
+						<MaterialsContextProvider>
 							<LanguageContextProvider>
                 <MainNavigation />
 								  {children}
 								<Footer />
 							</LanguageContextProvider>
-						</CategoriesContextProvider>
+						</MaterialsContextProvider>
 					</AuthContextProvider>
           <script src="/js/flowbite.js"></script>
 				</body>

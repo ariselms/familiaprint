@@ -1,33 +1,33 @@
 "use client";
-import { MaterialsListType, MaterialsType } from "@/types/categories";
-import type { CategoriesContextType } from "@/types/contextTypes";
+import { MaterialsListType, MaterialsType } from "@/types/materials";
+import type { MaterialsContextType } from "@/types/contextTypes";
 import React, { createContext, useState } from "react";
 
-export const CategoriesContext = createContext<CategoriesContextType | null>(null);
+export const CategoriesContext = createContext<MaterialsContextType | null>(null);
 
-export const CategoriesContextProvider = ({
+export const MaterialsContextProvider = ({
   children,
 }: {
   children: React.ReactNode;
 }) => {
-  const [categories, setCategories] = useState<MaterialsListType>([]);
+  const [materials, setMaterials] = useState<MaterialsListType>([]);
 
-  const [category, setCategory] = useState<MaterialsType | null>(null);
+  const [material, setMaterial] = useState<MaterialsType | null>(null);
 
-  const [loadingCategories, setLoadingCategories] = useState<boolean>(true)
+  const [loadingMaterials, setLoadingMaterials] = useState<boolean>(true)
 
-  // get all categories from firebase
+  // get all materials from firebase
   const getAllMaterials = async () => {
     const data = await fetch("/api/materials", {
       cache: "no-store",
     });
     const response = await data.json();
-    const categories = response.data;
-    if(categories){
-      setCategories(categories);
-      setLoadingCategories(false)
+    const materials = response.data;
+    if(materials){
+      setMaterials(materials);
+      setLoadingMaterials(false)
     }
-    return categories;
+    return materials;
   }
 
   // get firebase category by id
@@ -36,8 +36,8 @@ export const CategoriesContextProvider = ({
     const response = await data.json();
     const category = response.data;
     if(category){
-      setCategory(category[0]);
-      setLoadingCategories(false)
+      setMaterial(category[0]);
+      setLoadingMaterials(false)
     }
     return category;
   }
@@ -45,13 +45,13 @@ export const CategoriesContextProvider = ({
   return (
     <CategoriesContext.Provider
       value={{
-        categories,
-        setCategories,
+        materials,
+        setMaterials,
         getAllMaterials,
-        category,
-        setCategory,
+        material,
+        setMaterial,
         getMaterialById,
-        loadingCategories			}}>
+        loadingMaterials			}}>
       {children}
     </CategoriesContext.Provider>
   );

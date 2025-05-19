@@ -6,7 +6,7 @@ import { useNavigationData } from "@/hooks/navigation";
 import Image from "next/image";
 import { languageOptions } from "@/static";
 import Link from "next/link";
-import { MaterialsType } from "@/types/categories";
+import { MaterialsType } from "@/types/materials";
 
 export default function Footer() {
 	const { language } = useLanguageContext();

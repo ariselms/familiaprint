@@ -1,40 +1,32 @@
 "use client";
 import { useLanguageContext } from "@/context/languageContext";
-import type { MaterialsType } from "@/types/categories";
+import { languageOptions } from "@/static";
+import { useCategoriesContext } from "@/context/categoriesContext";
+import type { MaterialsType } from "@/types/materials";
 import Link from "next/link";
 import Spinner from "@/components/Spinner";
-import { languageOptions } from "@/static";
 import { useEffect } from "react";
-import { useCategoriesContext } from "@/context/categoriesContext";
 import MainFull from "@/components/layout/ContainerFull";
-import { Button, Card } from "flowbite-react";
+import SectionHeader from "./SectionHeader";
 
 
 const ServiceMaterialsHeader = () => {
 
-	const { language } = useLanguageContext();
-
 	return (
-		<>
-			<h2 className="text-3xl md:text-4xl mb-12 font-bold text-black dark:text-white text-center">
-				{language === languageOptions?.spanish
-					? "Materiales y Servicios"
-					: "Materials and Services"}
-			</h2>
-			<p className="mb-16 text-lg font-normal text-gray-700 lg:text-xl sm:px-16 lg:px-48 dark:text-gray-300 text-center">
-				{language === languageOptions.english
-					? "We offer a wide range of services and products that you can choose from a variety of materials for your needs. Keep reading and learning if you need more information. If you know what you want, click the Get a quote button below and let use know, we will get back to you as soon as you need it."
-					: "Ofrecemos una gran variedad de productos y servicios que puedes elegir de la variedad de materiales que ofrecemos. Continúa leyendo y aprendiendo si necesitas mas información. Si sabes lo que quieres, haz click en el botón de cotización déjanos saber, nos pondremos en contacto contigo lo antes posible."}
-			</p>
-		</>
+      <SectionHeader
+        enTitle="Materials"
+        spTitle="Materiales"
+        enDescription="We offer materials for every budget. If you want to learn more about our materials, click on the button learn more for more information including samples and photos. If you know what you want, click the Get a quote button below and let us know, we will get back to you as soon as you need it. We have what you are looking for."
+        spDescription="Ofrecemos materiales para todo tipo de presupuesto. Si quieres aprender más sobre los materiales que ofrecemos, oprime el botón Aprender más para información adicional y fotos. Si sabes lo que quieres, haz click en el botón de cotización y déjanos saber, nos pondremos en contacto contigo lo antes posible. Tenemos lo que buscas."
+      />
 	);
 };
 
-const ServicesMaterialsCard = ({category}: {category: MaterialsType}) => {
+const ServicesMaterialsCard = ({material}: {material: MaterialsType}) => {
 
 	const { language } = useLanguageContext();
 
-  const { id, enname, spname, endescription, spdescription } = category;
+  const { id, enname, spname, endescription, spdescription } = material;
 
 	return (
 		<div className="h-auto max-w-full rounded-lg transition-all">
@@ -80,7 +72,7 @@ const ServicesMaterialsCard = ({category}: {category: MaterialsType}) => {
 
 					<Link
 						href={`/quote?material=${language === languageOptions.english ? enname : spname}`}
-						className="inline-flex items-center py-3 px-5 text-sm font-medium text-black bg-gray-200 focus:outline-none rounded-lg border border-black focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-200 text-center">
+						className="inline-flex items-center py-3 px-5 text-sm font-medium text-black bg-gray-200 focus:outline-none rounded-lg border border-black focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-700 dark:text-gray-200 text-center">
 						<svg
 							className="w-[16px] h-[16px] text-black dark:text-white mr-1"
 							aria-hidden="true"
@@ -108,24 +100,24 @@ const ServicesMaterialsCard = ({category}: {category: MaterialsType}) => {
 };
 
 const ServicesMaterialsList = () => {
-	const { categories, loadingCategories, getAllMaterials } =
+	const { materials, loadingMaterials, getAllMaterials } =
 		useCategoriesContext();
 
 	useEffect(() => {
 		getAllMaterials();
 	}, []);
 
-	if (loadingCategories) {
+	if (loadingMaterials) {
 		return <Spinner />;
 	}
 
 	return (
-		<section className="py-24 bg-gray-200 dark:bg-gray-900" id="services">
+		<section className="pb-24 bg-gray-200 dark:bg-gray-900" id="services">
 			<MainFull>
 				<ServiceMaterialsHeader />
 				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-					{categories?.map((category: MaterialsType) => (
-							<ServicesMaterialsCard key={category.id} category={category} />
+					{materials?.map((material: MaterialsType) => (
+							<ServicesMaterialsCard key={material.id} material={material} />
 					))}
 				</div>
 			</MainFull>

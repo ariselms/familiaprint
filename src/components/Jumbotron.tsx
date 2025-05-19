@@ -46,7 +46,7 @@ const Jumbotron = ({ propsData }: { propsData: JumbotronProps }) => {
 						</Link>
 						<Link
 							href={propsData.enSecondButtonLink}
-							className="py-3 px-5 sm:ms-2 text-sm font-medium text-black bg-gray-200 focus:outline-none rounded-lg border border-black focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-200 text-center">
+							className="py-3 px-5 sm:ms-2 text-sm font-medium text-black bg-gray-200 focus:outline-none rounded-lg border border-black focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-700 dark:text-gray-200 text-center">
 							{language === languageOptions.english
 								? propsData.enSecondButtonText
 								: propsData.spSecondButtonText}
