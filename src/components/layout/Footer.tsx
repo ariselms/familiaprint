@@ -6,15 +6,15 @@ import { useNavigationData } from "@/hooks/navigation";
 import Image from "next/image";
 import { languageOptions } from "@/static";
 import Link from "next/link";
-import { CategoriesType } from "@/types/categories";
+import { MaterialsType } from "@/types/materials";
 
 export default function Footer() {
 	const { language } = useLanguageContext();
   const navigation = useNavigationData();
-  const {categories, getAllCategories} = useCategoriesContext();
+  const {categories, getAllMaterials} = useCategoriesContext();
 
   useEffect(() => {
-    getAllCategories();
+    getAllMaterials();
   }, []);
 
 	return (
@@ -33,11 +33,11 @@ export default function Footer() {
 							<div>
 								<h3 className="text-sm/6 font-semibold text-white">
 									{language === languageOptions.spanish
-										? "Servicios"
-										: "Services"}
+										? "Materiales"
+										: "Materials"}
 								</h3>
 								<ul role="list" className="mt-6 space-y-4 text-white">
-									{categories?.map((item: CategoriesType) => (
+									{categories?.map((item: MaterialsType) => (
 										<li key={item.id}>
 											<Link
 												href={"/services/" + item.id}

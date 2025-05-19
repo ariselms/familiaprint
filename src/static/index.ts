@@ -1,5 +1,3 @@
-import { PhoneIcon, PlayCircleIcon } from "@heroicons/react/20/solid";
-
 export const languageOptions = Object.freeze({
 	english: "en",
 	spanish: "es"
@@ -20,24 +18,11 @@ export const generalLanguage = Object.freeze({
 	enMenuSupport: "Support",
   esMenuLogin: "Sesión",
   enMenuLogin: "Login",
+  enProfile: "Profile",
+  esProfile: "Perfil",
+  enLogout: "Logout",
+  esLogout: "Cerrar sesión",
 });
-
-export const moreActions = [
-	{
-		id: 1,
-		spName: "Videos",
-		enName: "Videos",
-		href: "/videos",
-		icon: PlayCircleIcon
-	},
-	{
-		id: 2,
-		spName: "Contacto",
-		enName: "Contact",
-		href: "/contact",
-		icon: PhoneIcon
-	}
-];
 
 let baseUrl;
 

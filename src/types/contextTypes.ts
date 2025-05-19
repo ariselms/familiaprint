@@ -1,21 +1,21 @@
-import { CategoriesListType, CategoriesType } from "@/types/categories";
+import { MaterialsListType, MaterialsType } from "@/types/materials";
 import { User } from "@/types/user";
 import type { UserCredential } from "firebase/auth";
 
-export interface CategoriesContextType {
-	categories: CategoriesListType;
+export interface MaterialsContextType {
+	materials: MaterialsListType;
 
-	setCategories: React.Dispatch<React.SetStateAction<CategoriesListType>>;
+	setMaterials: React.Dispatch<React.SetStateAction<MaterialsListType>>;
 
-	getAllCategories: () => Promise<CategoriesListType | undefined>;
+	getAllMaterials: () => Promise<MaterialsListType | undefined>;
 
-	category: CategoriesType | null;
+	material: MaterialsType | null;
 
-	getCategoryById: (id: string) => Promise<CategoriesType | undefined>;
+	getMaterialById: (id: string) => Promise<MaterialsType | undefined>;
 
-	setCategory: React.Dispatch<React.SetStateAction<CategoriesType | null>>;
+	setMaterial: React.Dispatch<React.SetStateAction<MaterialsType | null>>;
 
-	loadingCategories: boolean;
+	loadingMaterials: boolean;
 }
 
 export interface LanguageContextType {
@@ -29,17 +29,17 @@ export interface LanguageContextType {
 }
 
 export interface StorageContextType {
-  categories: CategoriesListType;
+  categories: MaterialsListType;
 
-  setCategories: React.Dispatch<React.SetStateAction<CategoriesListType>>;
+  setCategories: React.Dispatch<React.SetStateAction<MaterialsListType>>;
 
-  getAllCategories: () => Promise<CategoriesListType | undefined>;
+  getAllMaterials: () => Promise<MaterialsListType | undefined>;
 
-  category: CategoriesType | null;
+  category: MaterialsType | null;
 
-  getCategoryById: (id: string) => Promise<CategoriesType | undefined>;
+  getMaterialById: (id: string) => Promise<MaterialsType | undefined>;
 
-  setCategory: React.Dispatch<React.SetStateAction<CategoriesType | null>>;
+  setCategory: React.Dispatch<React.SetStateAction<MaterialsType | null>>;
 
   loadingCategories: boolean
 }

@@ -2,7 +2,7 @@
 "use client";
 import { useLanguageContext } from "@/context/languageContext";
 import { languageOptions } from "@/static";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { DarkThemeToggle } from "flowbite-react";
 import { MenuIcon } from "@/components/svg/Icons";
 import Link from "next/link";
@@ -57,6 +57,10 @@ export default function MainNavigation() {
 		setShowMenu(!showMenu);
 	};
 
+  const isActiveLink = (path: string) => {
+		return pathname === path;
+	};
+
 	return (
 		<header>
 			<nav className="p-4 rounded-none bg-white dark:bg-gray-950 flex items-center justify-between relative">
@@ -73,7 +77,7 @@ export default function MainNavigation() {
 						alt="Familia Print Logo"
 					/>
 					<img
-						src="/logos/horizontal-white.svg"
+						src="/logos/horizontal-gradient.svg"
 						className="mr-3 h-6 sm:h-9 hidden dark:inline-block"
 						alt="Familia Print Logo"
 					/>
@@ -102,7 +106,7 @@ export default function MainNavigation() {
 								onClick={() => {
 									isMobile && setShowMenu(false);
 								}}
-								className="text-black dark:text-white hover:underline"
+								className={`${isActiveLink("/") && "underline"} text-black dark:text-white hover:underline`}
 								href="/">
 								{language === languageOptions.spanish ? "Inicio" : "Home"}
 							</Link>
@@ -112,7 +116,7 @@ export default function MainNavigation() {
 								onClick={() => {
 									isMobile && setShowMenu(false);
 								}}
-								className="text-black dark:text-white hover:underline"
+								className={`${isActiveLink("/about") && "underline"} text-black dark:text-white hover:underline`}
 								href="/about">
 								{language === languageOptions.spanish ? "Nosotros" : "About"}
 							</Link>
@@ -122,7 +126,7 @@ export default function MainNavigation() {
 								onClick={() => {
 									isMobile && setShowMenu(false);
 								}}
-								className="text-black dark:text-white hover:underline"
+								className={`${isActiveLink("/quote") && "underline"} text-black dark:text-white hover:underline`}
 								href="/quote">
 								{language === languageOptions.spanish
 									? "Cotización Gratis"
@@ -136,8 +140,8 @@ export default function MainNavigation() {
 									onClick={() => {
 										isMobile && setShowMenu(false);
 									}}
-									className="text-black dark:text-white hover:underline"
-									href="/admin">
+									className={`${isActiveLink("/profile") && "underline"} text-black dark:text-white hover:underline`}
+									href="/profile">
 									{language === languageOptions.spanish ? "Perfil" : "Profile"}
 								</Link>
 							</li>
@@ -148,7 +152,7 @@ export default function MainNavigation() {
 									onClick={() => {
 										isMobile && setShowMenu(false);
 									}}
-									className="text-black dark:text-white hover:underline"
+									className={`${isActiveLink("/login") && "underline"} text-black dark:text-white hover:underline`}
 									href="/login">
 									{language === languageOptions.spanish ? "Ingresar" : "Login"}
 								</Link>
@@ -162,7 +166,7 @@ export default function MainNavigation() {
 										isMobile && setShowMenu(false);
 										signOutUser();
 									}}
-									className="text-red-600 dark:text-red-500 hover:underline"
+									className={`${isActiveLink("/login") && "underline"} text-red-600 dark:text-red-500 hover:underline`}
 									href="/login">
 									{language === languageOptions.spanish ? "Salir" : "Logout"}
 								</Link>

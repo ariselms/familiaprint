@@ -1,43 +1,43 @@
 "use client";
-import { CategoriesListType, CategoriesType } from "@/types/categories";
-import type { CategoriesContextType } from "@/types/contextTypes";
+import { MaterialsListType, MaterialsType } from "@/types/materials";
+import type { MaterialsContextType } from "@/types/contextTypes";
 import React, { createContext, useState } from "react";
 
-export const CategoriesContext = createContext<CategoriesContextType | null>(null);
+export const CategoriesContext = createContext<MaterialsContextType | null>(null);
 
-export const CategoriesContextProvider = ({
+export const MaterialsContextProvider = ({
   children,
 }: {
   children: React.ReactNode;
 }) => {
-  const [categories, setCategories] = useState<CategoriesListType>([]);
+  const [materials, setMaterials] = useState<MaterialsListType>([]);
 
-  const [category, setCategory] = useState<CategoriesType | null>(null);
+  const [material, setMaterial] = useState<MaterialsType | null>(null);
 
-  const [loadingCategories, setLoadingCategories] = useState<boolean>(true)
+  const [loadingMaterials, setLoadingMaterials] = useState<boolean>(true)
 
-  // get all categories from firebase
-  const getAllCategories = async () => {
-    const data = await fetch("/api/categories", {
+  // get all materials from firebase
+  const getAllMaterials = async () => {
+    const data = await fetch("/api/materials", {
       cache: "no-store",
     });
     const response = await data.json();
-    const categories = response.data;
-    if(categories){
-      setCategories(categories);
-      setLoadingCategories(false)
+    const materials = response.data;
+    if(materials){
+      setMaterials(materials);
+      setLoadingMaterials(false)
     }
-    return categories;
+    return materials;
   }
 
   // get firebase category by id
-  const getCategoryById = async (id: string) => {
-    const data = await fetch(`/api/categories/${id}`);
+  const getMaterialById = async (id: string) => {
+    const data = await fetch(`/api/materials/${id}`);
     const response = await data.json();
     const category = response.data;
     if(category){
-      setCategory(category[0]);
-      setLoadingCategories(false)
+      setMaterial(category[0]);
+      setLoadingMaterials(false)
     }
     return category;
   }
@@ -45,13 +45,13 @@ export const CategoriesContextProvider = ({
   return (
     <CategoriesContext.Provider
       value={{
-        categories,
-        setCategories,
-        getAllCategories,
-        category,
-        setCategory,
-        getCategoryById,
-        loadingCategories			}}>
+        materials,
+        setMaterials,
+        getAllMaterials,
+        material,
+        setMaterial,
+        getMaterialById,
+        loadingMaterials			}}>
       {children}
     </CategoriesContext.Provider>
   );

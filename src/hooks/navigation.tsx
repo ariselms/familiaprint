@@ -2,6 +2,7 @@
 
 import { useLanguageContext } from '@/context/languageContext';
 import { languageOptions } from '@/static';
+import { usePathname } from 'next/navigation';
 
 export const useNavigationData = () => {
   const { language } = useLanguageContext();

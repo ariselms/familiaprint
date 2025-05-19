@@ -21,7 +21,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (user) {
-      router.push("/admin");
+      router.push("/profile");
     }
   },[user]);
 	const onEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -95,7 +95,7 @@ const LoginPage = () => {
 
 			if (response.success) {
         toast.success(response.message);
-        router.push("/admin");
+        router.push("/profile");
 			} else {
 				console.error(response.message);
 			}

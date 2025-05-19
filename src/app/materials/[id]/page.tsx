@@ -12,13 +12,13 @@ import { languageOptions } from "@/static";
 const ServicesPage = () => {
 	const { id } = useParams();
 
-	const { category, loadingCategories, getCategoryById } =
+	const { category, loadingCategories, getMaterialById } =
 		useCategoriesContext();
 
   const { language } = useLanguageContext();
 
 	useEffect(() => {
-		getCategoryById(String(id));
+		getMaterialById(String(id));
 	}, [id]);
 
 	if (loadingCategories) {

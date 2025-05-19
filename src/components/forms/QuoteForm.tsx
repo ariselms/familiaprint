@@ -19,7 +19,7 @@ import {
 
 export default function LeadForm() {
 	const { language } = useLanguageContext();
-	const { categories, getAllCategories } = useCategoriesContext();
+	const { categories, getAllMaterials } = useCategoriesContext();
 	const [loading, setLoading] = useState(false);
 	let [isOpen, setIsOpen] = useState(false);
 	const [projectType, setProjectType] = useState<string[]>([]);
@@ -39,7 +39,7 @@ export default function LeadForm() {
 	});
 
 	useEffect(() => {
-		getAllCategories();
+		getAllMaterials();
 	}, []);
 
 	const handleProjectTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
