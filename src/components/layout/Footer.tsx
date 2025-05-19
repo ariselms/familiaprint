@@ -11,7 +11,7 @@ import { MaterialsType } from "@/types/materials";
 export default function Footer() {
 	const { language } = useLanguageContext();
   const navigation = useNavigationData();
-  const {categories, getAllMaterials} = useCategoriesContext();
+  const {materials, getAllMaterials} = useCategoriesContext();
 
   useEffect(() => {
     getAllMaterials();
@@ -37,7 +37,7 @@ export default function Footer() {
 										: "Materials"}
 								</h3>
 								<ul role="list" className="mt-6 space-y-4 text-white">
-									{categories?.map((item: MaterialsType) => (
+									{materials?.map((item: MaterialsType) => (
 										<li key={item.id}>
 											<Link
 												href={"/services/" + item.id}

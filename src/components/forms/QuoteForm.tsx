@@ -19,7 +19,7 @@ import {
 
 export default function LeadForm() {
 	const { language } = useLanguageContext();
-	const { categories, getAllMaterials } = useCategoriesContext();
+	const { materials, getAllMaterials } = useCategoriesContext();
 	const [loading, setLoading] = useState(false);
 	let [isOpen, setIsOpen] = useState(false);
 	const [projectType, setProjectType] = useState<string[]>([]);
@@ -442,7 +442,7 @@ export default function LeadForm() {
 											: "Selecciona todos los que apliquen a tu proyecto."}
 									</p>
 									<div className="mt-6 space-y-6">
-										{categories?.map((category) => (
+										{materials?.map((category) => (
 											<div key={category.id} className="relative flex gap-x-3">
 												<div className="flex h-6 items-center">
 													<Checkbox
