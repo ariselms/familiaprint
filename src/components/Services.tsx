@@ -98,7 +98,6 @@ const ServicesList = () => {
 
 	useEffect(() => {
 		getAllServices();
-    console.log(services)
 	}, []);
 
 	if (loadingServices) {

@@ -67,8 +67,6 @@ export default function LeadForm() {
 				projectMaterial.filter((item) => item !== e.target.value)
 			);
 		}
-    console.log("projectMaterial");
-    console.log(projectMaterial);
 	};
 
 	const handleChange = (e: any) => {
