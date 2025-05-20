@@ -1,6 +1,7 @@
 "use client";
 import { useLanguageContext } from "@/context/languageContext";
-import { useCategoriesContext } from "@/context/categoriesContext";
+import { useServicesContext } from "@/context/servicesContext";
+import { useMaterialsContext } from "@/context/materialsContext";
 import { Spinner } from "flowbite-react";
 import { languageOptions } from "@/static";
 import { useState, useEffect } from "react";
@@ -19,10 +20,12 @@ import {
 
 export default function LeadForm() {
 	const { language } = useLanguageContext();
-	const { materials, getAllMaterials } = useCategoriesContext();
+  const { services, getAllServices } = useServicesContext();
+	const { materials, getAllMaterials } = useMaterialsContext();
 	const [loading, setLoading] = useState(false);
 	let [isOpen, setIsOpen] = useState(false);
-	const [projectType, setProjectType] = useState<string[]>([]);
+	const [projectService, setProjectService] = useState<string[]>([]);
+	const [projectMaterial, setProjectMaterial] = useState<string[]>([]);
 	const [errors, setErrors] = useState<any>({});
 	const [candidate, setCandidate] = useState<any>({
 		First: "",
@@ -33,21 +36,39 @@ export default function LeadForm() {
 		City: "",
 		State: "",
 		Zip: "",
-		ProjectType: projectType,
+		ProjectService: projectService,
+		ProjectMaterial: projectMaterial,
 		ProjectEstimateTimeframe: "",
 		Comments: ""
 	});
 
 	useEffect(() => {
+    getAllServices();
 		getAllMaterials();
 	}, []);
 
-	const handleProjectTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+	const handleProjectServiceChange = (
+		e: React.ChangeEvent<HTMLInputElement>
+	) => {
 		if (e.target.checked) {
-			setProjectType([...projectType, e.target.value]);
+			setProjectService([...projectService, e.target.value]);
 		} else {
-			setProjectType(projectType.filter((item) => item !== e.target.value));
+			setProjectService(
+				projectService.filter((item) => item !== e.target.value)
+			);
 		}
+	};
+
+	const handleProjectMaterialChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		if (e.target.checked) {
+			setProjectMaterial([...projectMaterial, e.target.value]);
+		} else {
+			setProjectMaterial(
+				projectMaterial.filter((item) => item !== e.target.value)
+			);
+		}
+    console.log("projectMaterial");
+    console.log(projectMaterial);
 	};
 
 	const handleChange = (e: any) => {
@@ -83,8 +104,13 @@ export default function LeadForm() {
 		if (candidate.Zip === "")
 			tempErrors.Zip =
 				language === languageOptions.english ? "Zip" : "Código postal";
-		if (projectType.length === 0)
-			tempErrors.ProjectType =
+		if (projectService.length === 0)
+			tempErrors.ProjectService =
+				language === languageOptions.english
+					? "Project service"
+					: "Servicio de proyecto";
+		if (projectMaterial.length === 0)
+			tempErrors.ProjectMaterial =
 				language === languageOptions.english
 					? "Project type"
 					: "Tipo de proyecto";
@@ -107,9 +133,10 @@ export default function LeadForm() {
 		try {
 			const validationErrors = validateForm();
 
-			// candidate.ProjectType = projectType.toString();
+			// candidate.ProjectMaterial = projectMaterial.toString();
 			// convert the array to a string for the email
-			let projectTypeString: string = projectType.toString();
+      let projectServiceString: string = projectService.toString();
+			let projectMaterialString: string = projectMaterial.toString();
 
 			if (Object.keys(validationErrors).length === 0) {
 				const quote = {
@@ -121,7 +148,8 @@ export default function LeadForm() {
 					City: candidate.City,
 					State: candidate.State,
 					Zip: candidate.Zip,
-					ProjectType: projectTypeString.toString(),
+          ProjectService: projectServiceString.toString(),
+					ProjectMaterial: projectMaterialString.toString(),
 					ProjectEstimateTimeframe: candidate.ProjectEstimateTimeframe,
 					Comments: candidate.Comments,
 					Language: language
@@ -149,7 +177,8 @@ export default function LeadForm() {
 						}
 					});
 
-					setProjectType([]);
+          setProjectService([]);
+					setProjectMaterial([]);
 
 					setCandidate({
 						First: "",
@@ -160,7 +189,8 @@ export default function LeadForm() {
 						City: "",
 						State: "",
 						Zip: "",
-						ProjectType: projectType,
+            ProjectService: projectService,
+						ProjectMaterial: projectMaterial,
 						ProjectEstimateTimeframe: "",
 						Comments: ""
 					});
@@ -203,10 +233,10 @@ export default function LeadForm() {
 					}
 				});
 
-				// Additional validation for ProjectType
-				if (projectType.length === 0) {
+				// Additional validation for ProjectMaterial
+				if (projectMaterial.length === 0) {
 					document
-						.querySelectorAll("input[name='ProjectType']")
+						.querySelectorAll("input[name='ProjectMaterial']")
 						.forEach((input) => {
 							input.classList.add("ring-2", "ring-red-500");
 						});
@@ -433,45 +463,144 @@ export default function LeadForm() {
 								<fieldset>
 									<legend className="text-sm font-semibold leading-6 text-gray-900 dark:text-gray-100">
 										{language === languageOptions.english
-											? "Project Type"
-											: "Tipo de proyecto"}
+											? "Service"
+											: "Servicio"}
 									</legend>
 									<p className="mt-1 text-sm leading-6 text-gray-600 dark:text-gray-200">
 										{language === languageOptions.english
-											? "Select all that apply to your project."
-											: "Selecciona todos los que apliquen a tu proyecto."}
+											? "Select all that apply to your project. Select other if unsure and add your needs in the comments."
+											: "Selecciona todos los que apliquen a tu proyecto. Selecciona otro si no estas seguro y agrega tus necesidades en los comentarios."}
 									</p>
 									<div className="mt-6 space-y-6">
-										{materials?.map((category) => (
-											<div key={category.id} className="relative flex gap-x-3">
+										<div className="relative flex gap-x-3">
+											<div className="flex h-6 items-center">
+												<Checkbox
+													id="OtherService"
+													name="ProjectService"
+													className="h-4 w-4 rounded border-gray-300 text-red-600 focus:ring-red-600"
+													value={
+														language === languageOptions.english
+															? "Other"
+															: "Otro"
+													}
+													onChange={handleProjectServiceChange}
+												/>
+											</div>
+											<div className="text-sm leading-6">
+												<Label
+													htmlFor="OtherService"
+													className="font-medium text-gray-900 dark:text-gray-100">
+													{language === languageOptions.english
+														? "Other"
+														: "Otro"}
+												</Label>
+											</div>
+										</div>
+										{services?.map((service) => (
+											<div key={service.id} className="relative flex gap-x-3">
 												<div className="flex h-6 items-center">
 													<Checkbox
 														id={
 															language === languageOptions.english
-																? category.enname
-																: category.spname
+																? service.enname
+																: service.spname
 														}
-														name="ProjectType"
+														name="ProjectService"
 														className="h-4 w-4 rounded border-gray-300 text-red-600 focus:ring-red-600"
 														value={
 															language === languageOptions.english
-																? category.enname
-																: category.spname
+																? service.enname
+																: service.spname
 														}
-														onChange={handleProjectTypeChange}
+														onChange={handleProjectServiceChange}
 													/>
 												</div>
 												<div className="text-sm leading-6">
 													<Label
 														htmlFor={
 															language === languageOptions.english
-																? category.enname
-																: category.spname
+																? service.enname
+																: service.spname
 														}
 														className="font-medium text-gray-900 dark:text-gray-100">
 														{language === languageOptions.english
-															? category.enname
-															: category.spname}
+															? service.enname
+															: service.spname}
+													</Label>
+												</div>
+											</div>
+										))}
+									</div>
+								</fieldset>
+							</div>
+
+							<div className="project-information p-4 border border-gray-900/10 dark:border-gray-700 rounded-2xl">
+								<fieldset>
+									<legend className="text-sm font-semibold leading-6 text-gray-900 dark:text-gray-100">
+										{language === languageOptions.english
+											? "Project Material"
+											: "Material del proyecto"}
+									</legend>
+									<p className="mt-1 text-sm leading-6 text-gray-600 dark:text-gray-200">
+										{language === languageOptions.english
+											? "Select all that apply to your project. Select other if unsure and add your needs in the comments."
+											: "Selecciona todos los que apliquen a tu proyecto. Selecciona otro si no estas seguro y agrega tus necesidades en los comentarios."}
+									</p>
+									<div className="mt-6 space-y-6">
+										<div className="relative flex gap-x-3">
+											<div className="flex h-6 items-center">
+												<Checkbox
+													id="OtherMaterial"
+													name="ProjectMaterial"
+													className="h-4 w-4 rounded border-gray-300 text-red-600 focus:ring-red-600"
+													value={
+														language === languageOptions.english
+															? "Other"
+															: "Otro"
+													}
+													onChange={handleProjectMaterialChange}
+												/>
+											</div>
+											<div className="text-sm leading-6">
+												<Label
+													htmlFor="OtherMaterial"
+													className="font-medium text-gray-900 dark:text-gray-100">
+													{language === languageOptions.english
+														? "Other"
+														: "Otro"}
+												</Label>
+											</div>
+										</div>
+										{materials?.map((material) => (
+											<div key={material.id} className="relative flex gap-x-3">
+												<div className="flex h-6 items-center">
+													<Checkbox
+														id={
+															language === languageOptions.english
+																? material.enname
+																: material.spname
+														}
+														name="ProjectMaterial"
+														className="h-4 w-4 rounded border-gray-300 text-red-600 focus:ring-red-600"
+														value={
+															language === languageOptions.english
+																? material.enname
+																: material.spname
+														}
+														onChange={handleProjectMaterialChange}
+													/>
+												</div>
+												<div className="text-sm leading-6">
+													<Label
+														htmlFor={
+															language === languageOptions.english
+																? material.enname
+																: material.spname
+														}
+														className="font-medium text-gray-900 dark:text-gray-100">
+														{language === languageOptions.english
+															? material.enname
+															: material.spname}
 													</Label>
 												</div>
 											</div>

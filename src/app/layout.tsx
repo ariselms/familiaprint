@@ -3,11 +3,12 @@ import { ThemeModeScript } from "flowbite-react";
 import { Geist, Geist_Mono } from "next/font/google";
 import type { Metadata } from "next";
 import { LanguageContextProvider } from "@/context/languageContext";
-import { MaterialsContextProvider } from "@/context/categoriesContext";
+import { MaterialsContextProvider } from "@/context/materialsContext";
 import { ToastContainer } from "react-toastify";
 import MainNavigation from "@/components/layout/MainNavigation";
 import Footer from "@/components/layout/Footer";
 import { AuthContextProvider } from "@/context/authContext";
+import { ServicesContextProvider } from "@/context/servicesContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,9 +31,7 @@ export default function RootLayout({
 }>) {
   return (
 		<>
-			<html
-				className="scroll-smooth dark:bg-black"
-				suppressHydrationWarning>
+			<html className="scroll-smooth dark:bg-black" suppressHydrationWarning>
 				<head>
 					<ThemeModeScript />
 					<link rel="icon" href="/favicon.ico" />
@@ -57,17 +56,19 @@ export default function RootLayout({
 				</head>
 				<body
 					className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-          <ToastContainer />
+					<ToastContainer />
 					<AuthContextProvider>
-						<MaterialsContextProvider>
-							<LanguageContextProvider>
-                <MainNavigation />
-								  {children}
-								<Footer />
-							</LanguageContextProvider>
-						</MaterialsContextProvider>
+						<ServicesContextProvider>
+							<MaterialsContextProvider>
+								<LanguageContextProvider>
+									<MainNavigation />
+									{children}
+									<Footer />
+								</LanguageContextProvider>
+							</MaterialsContextProvider>
+						</ServicesContextProvider>
 					</AuthContextProvider>
-          <script src="/js/flowbite.js"></script>
+					<script src="/js/flowbite.js"></script>
 				</body>
 			</html>
 		</>

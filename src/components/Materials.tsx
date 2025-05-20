@@ -1,7 +1,7 @@
 "use client";
 import { useLanguageContext } from "@/context/languageContext";
 import { languageOptions } from "@/static";
-import { useCategoriesContext } from "@/context/categoriesContext";
+import { useMaterialsContext } from "@/context/materialsContext";
 import type { MaterialsType } from "@/types/materials";
 import Link from "next/link";
 import Spinner from "@/components/Spinner";
@@ -13,12 +13,12 @@ import SectionHeader from "./SectionHeader";
 const ServiceMaterialsHeader = () => {
 
 	return (
-      <SectionHeader
-        enTitle="Materials"
-        spTitle="Materiales"
-        enDescription="We offer materials for every budget. If you want to learn more about our materials, click on the button learn more for more information including samples and photos. If you know what you want, click the Get a quote button below and let us know, we will get back to you as soon as you need it. We have what you are looking for."
-        spDescription="Ofrecemos materiales para todo tipo de presupuesto. Si quieres aprender más sobre los materiales que ofrecemos, oprime el botón Aprender más para información adicional y fotos. Si sabes lo que quieres, haz click en el botón de cotización y déjanos saber, nos pondremos en contacto contigo lo antes posible. Tenemos lo que buscas."
-      />
+		<SectionHeader
+			enTitle="Materials"
+			spTitle="Materiales"
+			enDescription="We offer materials for every budget. If you want to learn more about our materials, click on the button learn more for more information including samples and photos. If you know what you want, click the Get a quote button below and let us know, we will get back to you as soon as you need it. We have what you are looking for."
+			spDescription="Ofrecemos materiales para todo tipo de presupuesto. Si quieres aprender más sobre los materiales que ofrecemos, oprime el botón Aprender más para información adicional y fotos. Si sabes lo que quieres, haz click en el botón de cotización y déjanos saber, nos pondremos en contacto contigo lo antes posible. Tenemos lo que buscas."
+		/>
 	);
 };
 
@@ -50,9 +50,9 @@ const ServicesMaterialsCard = ({material}: {material: MaterialsType}) => {
 				<div className="mt-auto">
 					<Link
 						href={`/materials/${id}`}
-						className="inline-flex items-center mb-3 mr-3 py-3 px-5 text-sm font-medium text-white bg-blue-700 focus:outline-none rounded-lg border border-black focus:z-10 focus:ring-4 focus:ring-blue-100 dark:focus:ring-blue-700 dark:text-blue-200 text-center">
+						className="inline-flex justify-center items-center py-2.5 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900 me-2">
 						<svg
-							className="w-[16px] h-[16px] text-white dark:text-white mr-1"
+							className="w-6 h-6 text-white dark:text-white mr-1"
 							aria-hidden="true"
 							xmlns="http://www.w3.org/2000/svg"
 							width="24"
@@ -72,9 +72,9 @@ const ServicesMaterialsCard = ({material}: {material: MaterialsType}) => {
 
 					<Link
 						href={`/quote?material=${language === languageOptions.english ? enname : spname}`}
-						className="inline-flex items-center py-3 px-5 text-sm font-medium text-black bg-gray-200 focus:outline-none rounded-lg border border-black focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-700 dark:text-gray-200 text-center">
+						className="inline-flex justify-center items-center py-2.5 px-5 text-base font-medium text-center text-white rounded-lg bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-900 ms-2">
 						<svg
-							className="w-[16px] h-[16px] text-black dark:text-white mr-1"
+							className="w-6 h-6 mr-1"
 							aria-hidden="true"
 							xmlns="http://www.w3.org/2000/svg"
 							width="24"
@@ -101,7 +101,7 @@ const ServicesMaterialsCard = ({material}: {material: MaterialsType}) => {
 
 const ServicesMaterialsList = () => {
 	const { materials, loadingMaterials, getAllMaterials } =
-		useCategoriesContext();
+		useMaterialsContext();
 
 	useEffect(() => {
 		getAllMaterials();
@@ -112,7 +112,7 @@ const ServicesMaterialsList = () => {
 	}
 
 	return (
-		<section className="pb-24 bg-gray-200 dark:bg-gray-900" id="services">
+		<section className="pb-32 bg-gray-200 dark:bg-gray-900">
 			<MainFull>
 				<ServiceMaterialsHeader />
 				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">

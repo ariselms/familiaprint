@@ -1,6 +1,5 @@
 import { MaterialsListType, MaterialsType } from "@/types/materials";
-import { User } from "@/types/user";
-import type { UserCredential } from "firebase/auth";
+import { ServiceListType, ServiceType } from "@/types/services";
 
 export interface MaterialsContextType {
 	materials: MaterialsListType;
@@ -16,6 +15,22 @@ export interface MaterialsContextType {
 	setMaterial: React.Dispatch<React.SetStateAction<MaterialsType | null>>;
 
 	loadingMaterials: boolean;
+}
+
+export interface ServicesContextType {
+	services: ServiceListType;
+
+	setServices: React.Dispatch<React.SetStateAction<ServiceListType>>;
+
+	getAllServices: () => Promise<ServiceListType | undefined>;
+
+	service: ServiceType | null;
+
+	getServiceById: (id: string) => Promise<ServiceType | undefined>;
+
+	setService: React.Dispatch<React.SetStateAction<ServiceType | null>>;
+
+	loadingServices: boolean;
 }
 
 export interface LanguageContextType {
