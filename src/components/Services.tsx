@@ -155,7 +155,7 @@ const ServicesList = () => {
 				<div className="grid md:grid-cols-2 gap-8">
 					{services?.map((service: ServiceType) => (
 						<div
-							key={service.id}
+							key={service?.id}
 							className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-8 md:p-12">
 							<a
 								href="#"
@@ -169,18 +169,18 @@ const ServicesList = () => {
 									<path d="M17 11h-2.722L8 17.278a5.512 5.512 0 0 1-.9.722H17a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1ZM6 0H1a1 1 0 0 0-1 1v13.5a3.5 3.5 0 1 0 7 0V1a1 1 0 0 0-1-1ZM3.5 15.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2ZM16.132 4.9 12.6 1.368a1 1 0 0 0-1.414 0L9 3.55v9.9l7.132-7.132a1 1 0 0 0 0-1.418Z" />
 								</svg>
 								{language === languageOptions.english
-									? service.enname
-									: service.spname}
+									? service?.enname
+									: service?.spname}
 							</a>
 							<h2 className="text-gray-900 dark:text-white text-3xl font-extrabold mb-2">
 								{language === languageOptions.english
-									? service.entitle
-									: service.sptitle}
+									? service?.entitle
+									: service?.sptitle}
 							</h2>
 							<p className="text-lg font-normal text-gray-500 dark:text-gray-400 mb-4">
 								{language === languageOptions.english
-									? service.ensummary
-									: service.spsummary}
+									? service?.ensummary
+									: service?.spsummary}
 							</p>
 							<div className="flex items-center ">
 								<Link
