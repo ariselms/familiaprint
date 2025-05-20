@@ -104,6 +104,8 @@ const ServicesList = () => {
 		return <Spinner />;
 	}
 
+  console.log(services);
+
 	return (
 		<section className="pb-32 bg-gray-200 dark:bg-gray-900" id="services">
 			<MainFull>
