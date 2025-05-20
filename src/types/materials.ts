@@ -9,14 +9,3 @@ export interface MaterialsType {
 }
 
 export type MaterialsListType = MaterialsType[];
-
-export interface ServiceType {
-  id: string;
-  spname: string;
-  enname: string;
-  spdescription: string;
-  endescription: string;
-  imgurl?: string;
-}
-
-export type ServiceListType = ServiceType[];

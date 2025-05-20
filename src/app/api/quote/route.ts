@@ -16,16 +16,19 @@ export async function POST(req: Request) {
 			City,
 			State,
 			Zip,
-			ProjectType,
+      ProjectService,
+			ProjectMaterial,
 			ProjectEstimateTimeframe,
 			Comments,
 			Language
 		} = body;
 
 		const htmlBody = `
-      <h1>${Language === languageOptions.english
-        ? "You have requested a quote with the following information:"
-        : "Ha solicitado una cotización con la siguiente información:"}</h1>
+      <h1>${
+				Language === languageOptions.english
+					? "You have requested a quote with the following information:"
+					: "Ha solicitado una cotización con la siguiente información:"
+			}</h1>
 
       <p>
         <strong>
@@ -61,11 +64,22 @@ export async function POST(req: Request) {
         <strong>
           ${
 						Language === languageOptions.english
-							? "Project type"
-							: "Tipo de proyecto"
+							? "Service requested"
+							: "Servicio solicitado"
 					}:
         </strong>
-        ${ProjectType}
+        ${ProjectService}
+      </p>
+
+      <p>
+        <strong>
+          ${
+						Language === languageOptions.english
+							? "Material type"
+							: "Tipo de material"
+					}:
+        </strong>
+        ${ProjectMaterial}
       </p>
 
       <p>
@@ -116,7 +130,7 @@ export async function POST(req: Request) {
 
 		// Send an email to the user
 		await sendEmail(
-			[Email, "rnavedojr@gmail.com", "oyola57@gmail.com"],
+			[Email, "rnavedojr@gmail.com"],
 			emailSubject,
 			htmlBody
 		);

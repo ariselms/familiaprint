@@ -25,13 +25,13 @@ export default function Home() {
 					spSecondButtonText: "Cotización gratis"
 				}}
 			/>
-			<SectionHeader
-				enTitle="Materials and Services"
-				spTitle="Materiales y Servicios"
-				enDescription="We offer a wide range of services and products that you can choose from a variety of materials for your needs. Keep reading and learning if you need more information. If you know what you want, click the Get a quote button below and let use know, we will get back to you as soon as you need it."
-				spDescription="Ofrecemos una gran variedad de productos y servicios que puedes elegir de la variedad de materiales que ofrecemos. Continúa leyendo y aprendiendo si necesitas mas información. Si sabes lo que quieres, haz click en el botón de cotización déjanos saber, nos pondremos en contacto contigo lo antes posible."
-			/>
-      {/* <ServicesList /> */}
+			{/* <SectionHeader
+				enTitle="Products and Materials"
+				spTitle="Productos y Materiales"
+				enDescription="We offer a wide range of products and services that you can choose frombased on your budget and needs. Keep reading if you need more information. If you know what you want, click the Get a quote button below and send us a message with the required information. We will get back to you as soon as you need it."
+				spDescription="Ofrecemos una gran variedad de productos y servicios que puedes elegir basado en tu presupuesto y necesidades. Continua leyendo si necesitas mas información. Si sabes lo que quieres, haz click en el botón de cotización y envíanos un mensaje con la información necesaria. Nos pondremos en contacto contigo lo antes posible."
+			/> */}
+      <ServicesList />
 			<ServicesMaterialsList />
 		</>
 	);

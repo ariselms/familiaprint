@@ -1,20 +1,24 @@
 "use client";
 import { useLanguageContext } from "@/context/languageContext";
-import { useCategoriesContext } from "@/context/categoriesContext";
+import { useMaterialsContext } from "@/context/materialsContext";
+import { useServicesContext } from "@/context/servicesContext";
 import { useEffect } from "react";
 import { useNavigationData } from "@/hooks/navigation";
 import Image from "next/image";
 import { languageOptions } from "@/static";
 import Link from "next/link";
 import { MaterialsType } from "@/types/materials";
+import { ServiceType } from "@/types/services";
 
 export default function Footer() {
 	const { language } = useLanguageContext();
   const navigation = useNavigationData();
-  const {materials, getAllMaterials} = useCategoriesContext();
+  const {materials, getAllMaterials} = useMaterialsContext();
+  const {services, getAllServices} = useServicesContext();
 
   useEffect(() => {
     getAllMaterials();
+    getAllServices();
   }, []);
 
 	return (
@@ -28,8 +32,29 @@ export default function Footer() {
 						src="/logos/logo-gradient-squared.svg"
 						className="h-40 w-auto"
 					/>
+
 					<div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
 						<div className="md:grid md:grid-cols-2 md:gap-8">
+							<div>
+								<h3 className="text-sm/6 font-semibold text-white">
+									{language === languageOptions.spanish
+										? "Servicios"
+										: "Services"}
+								</h3>
+								<ul role="list" className="mt-6 space-y-4 text-white">
+									{services?.map((item: ServiceType) => (
+										<li key={item.id}>
+											<Link
+												href={"/services/" + item.id}
+												className="text-sm/6 text-white hover:underline">
+												{language === languageOptions.spanish
+													? item.spname
+													: item.enname}
+											</Link>
+										</li>
+									))}
+								</ul>
+							</div>
 							<div>
 								<h3 className="text-sm/6 font-semibold text-white">
 									{language === languageOptions.spanish

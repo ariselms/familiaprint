@@ -20,7 +20,7 @@ export default function AboutUsPage() {
 						"Tenemos historia. Queremos compartir contigo. Nuestros valiosos clientes.",
 					hasButtons: true,
 					enFirstButtonText: "Check our services",
-					enFirstButtonLink: "#services",
+					enFirstButtonLink: "/#services",
 					spFirstButtonText: "Explora servicios",
 					enSecondButtonText: "Free quotes",
 					enSecondButtonLink: "/quote",

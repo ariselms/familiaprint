@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect } from "react";
-import { useCategoriesContext } from "@/context/categoriesContext";
+import { useMaterialsContext } from "@/context/materialsContext";
 import { useLanguageContext } from "@/context/languageContext";
 import { useParams } from "next/navigation";
-import ServiceBanner from "@/components/ServiceBanner";
+import ServiceBanner from "@/components/MaterialBanner";
 import Container from "@/components/layout/Container";
 import Spinner from "@/components/Spinner";
 import { languageOptions } from "@/static";
@@ -13,7 +13,7 @@ const ServicesPage = () => {
 	const { id } = useParams();
 
 	const { material, loadingMaterials, getMaterialById } =
-		useCategoriesContext();
+		useMaterialsContext();
 
   const { language } = useLanguageContext();
 

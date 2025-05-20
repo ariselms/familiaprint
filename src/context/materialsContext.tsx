@@ -3,7 +3,7 @@ import { MaterialsListType, MaterialsType } from "@/types/materials";
 import type { MaterialsContextType } from "@/types/contextTypes";
 import React, { createContext, useState } from "react";
 
-export const CategoriesContext = createContext<MaterialsContextType | null>(null);
+export const MaterialsContext = createContext<MaterialsContextType | null>(null);
 
 export const MaterialsContextProvider = ({
   children,
@@ -43,7 +43,7 @@ export const MaterialsContextProvider = ({
   }
 
   return (
-    <CategoriesContext.Provider
+    <MaterialsContext.Provider
       value={{
         materials,
         setMaterials,
@@ -53,14 +53,14 @@ export const MaterialsContextProvider = ({
         getMaterialById,
         loadingMaterials			}}>
       {children}
-    </CategoriesContext.Provider>
+    </MaterialsContext.Provider>
   );
 }
 
-export const useCategoriesContext = () => {
-  const categoriesContext = React.useContext(CategoriesContext);
-  if (!categoriesContext) {
-    throw new Error("useLanguage must be used within a CategoriesProvider");
+export const useMaterialsContext = () => {
+  const materialsContext = React.useContext(MaterialsContext);
+  if (!materialsContext) {
+    throw new Error("useLanguage must be used within a MaterialsProvider");
   }
-  return categoriesContext;
+  return materialsContext;
 };

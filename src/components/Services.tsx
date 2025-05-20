@@ -2,30 +2,30 @@
 
 import { useLanguageContext } from "@/context/languageContext";
 import { languageOptions } from "@/static";
-import { useCategoriesContext } from "@/context/categoriesContext";
-import type { MaterialsType } from "@/types/materials";
+import { useServicesContext } from "@/context/servicesContext";
+import type { ServiceType } from "@/types/services";
 import Link from "next/link";
 import Spinner from "@/components/Spinner";
-import { useEffect } from "react";
+import { use, useEffect } from "react";
 import MainFull from "@/components/layout/ContainerFull";
 import SectionHeader from "./SectionHeader";
 
-const ServiceHeader = () => {
+const ServicesHeader = () => {
 
 	return (
-		<SectionHeader
-			enTitle="Materials"
-			spTitle="Materiales"
-			enDescription="We offer materials for every budget. If you want to learn more about our materials, click on the button learn more for more information including samples and photos. If you know what you want, click the Get a quote button below and let us know, we will get back to you as soon as you need it. We have what you are looking for."
-			spDescription="Ofrecemos materiales para todo tipo de presupuesto. Si quieres aprender más sobre los materiales que ofrecemos, oprime el botón Aprender más para información adicional y fotos. Si sabes lo que quieres, haz click en el botón de cotización y déjanos saber, nos pondremos en contacto contigo lo antes posible. Tenemos lo que buscas."
-		/>
+    <SectionHeader
+      enTitle="Services"
+      spTitle="Servicios"
+      enDescription="We offer a wide variety of services. Select from the following options to view more information related to specific services. You can also click the Get a quote button below and let us know, we will get back to you as soon as you need it. We have what you are looking for."
+      spDescription="Ofrecemos una gran variedad de servicios. Escoge entre las siguientes opciones y aprenda mas sobre los servicios que ofrecemos. Tambien puedes hacer click en el botón de cotización y dejanos saber, nos pondremos en contacto contigo lo antes posible. Tenemos lo que buscas."
+    />
 	);
 };
 
-const ServicesCard = ({ category }: { category: MaterialsType }) => {
+const ServicesCard = ({ service }: { service: ServiceType }) => {
 	const { language } = useLanguageContext();
 
-	const { id, enname, spname, endescription, spdescription } = category;
+	const { id, enname, spname, endescription, spdescription } = service;
 
 	return (
 		<div className="h-auto max-w-full rounded-lg transition-all">
@@ -40,7 +40,7 @@ const ServicesCard = ({ category }: { category: MaterialsType }) => {
 				</p>
 				<div className="mt-auto">
 					<Link
-						href={`/materials/${id}`}
+						href={`/services/${id}`}
 						className="inline-flex items-center mb-3 mr-3 py-3 px-5 text-sm font-medium text-white bg-blue-700 focus:outline-none rounded-lg border border-black focus:z-10 focus:ring-4 focus:ring-blue-100 dark:focus:ring-blue-700 dark:text-blue-200 text-center">
 						<svg
 							className="w-[16px] h-[16px] text-white dark:text-white mr-1"
@@ -62,7 +62,7 @@ const ServicesCard = ({ category }: { category: MaterialsType }) => {
 					</Link>
 
 					<Link
-						href={`/quote?material=${language === languageOptions.english ? enname : spname}`}
+						href={`/quote?service=${language === languageOptions.english ? enname : spname}`}
 						className="inline-flex items-center py-3 px-5 text-sm font-medium text-black bg-gray-200 focus:outline-none rounded-lg border border-black focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-700 dark:text-gray-200 text-center">
 						<svg
 							className="w-[16px] h-[16px] text-black dark:text-white mr-1"
@@ -91,23 +91,25 @@ const ServicesCard = ({ category }: { category: MaterialsType }) => {
 };
 
 const ServicesList = () => {
-	const { materials, loadingMaterials, getAllMaterials } =
-		useCategoriesContext();
+	const { services, loadingServices, getAllServices } =
+		useServicesContext();
 
   const { language } = useLanguageContext();
 
 	useEffect(() => {
-		getAllMaterials();
+		getAllServices();
+    console.log(services)
 	}, []);
 
-	if (loadingMaterials) {
+	if (loadingServices) {
 		return <Spinner />;
 	}
 
 	return (
-		<section className="bg-gray-200 dark:bg-gray-900" id="services">
+		<section className="pb-32 bg-gray-200 dark:bg-gray-900" id="services">
 			<MainFull>
-				<div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-8 md:p-12 mb-8">
+				<ServicesHeader />
+				{/* <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-8 md:p-12 mb-8">
 					<a
 						href="#"
 						className="bg-blue-100 text-blue-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded-md dark:bg-gray-700 dark:text-blue-400 mb-2">
@@ -148,10 +150,12 @@ const ServicesList = () => {
 							/>
 						</svg>
 					</a>
-				</div>
+				</div> */}
 				<div className="grid md:grid-cols-2 gap-8">
-					{materials?.map((material: MaterialsType) => (
-						<div key={material.id} className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-8 md:p-12">
+					{services?.map((service: ServiceType) => (
+						<div
+							key={service.id}
+							className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-8 md:p-12">
 							<a
 								href="#"
 								className="bg-green-100 text-green-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded-md dark:bg-gray-700 dark:text-green-400 mb-2">
@@ -163,35 +167,67 @@ const ServicesList = () => {
 									viewBox="0 0 18 18">
 									<path d="M17 11h-2.722L8 17.278a5.512 5.512 0 0 1-.9.722H17a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1ZM6 0H1a1 1 0 0 0-1 1v13.5a3.5 3.5 0 1 0 7 0V1a1 1 0 0 0-1-1ZM3.5 15.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2ZM16.132 4.9 12.6 1.368a1 1 0 0 0-1.414 0L9 3.55v9.9l7.132-7.132a1 1 0 0 0 0-1.418Z" />
 								</svg>
-								{language === languageOptions.english ? material.enname : material.spname}
+								{language === languageOptions.english
+									? service.enname
+									: service.spname}
 							</a>
 							<h2 className="text-gray-900 dark:text-white text-3xl font-extrabold mb-2">
-								Start with Flowbite Design System
+								{language === languageOptions.english
+									? service.entitle
+									: service.sptitle}
 							</h2>
 							<p className="text-lg font-normal text-gray-500 dark:text-gray-400 mb-4">
-								Static websites are now used to bootstrap lots of websites and
-								are becoming the basis for a variety of tools that even
-								influence both web designers and developers.
+								{language === languageOptions.english
+									? service.ensummary
+									: service.spsummary}
 							</p>
-							<a
-								href="#"
-								className="text-blue-600 dark:text-blue-500 hover:underline font-medium text-lg inline-flex items-center">
-								Read more
-								<svg
-									className="w-3.5 h-3.5 ms-2 rtl:rotate-180"
-									aria-hidden="true"
-									xmlns="http://www.w3.org/2000/svg"
-									fill="none"
-									viewBox="0 0 14 10">
-									<path
-										stroke="currentColor"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										strokeWidth="2"
-										d="M1 5h12m0 0L9 1m4 4L9 9"
-									/>
-								</svg>
-							</a>
+							<div className="flex items-center ">
+								<Link
+									href={`/services/${service?.id}`}
+									className="inline-flex justify-center items-center py-2.5 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900 me-2">
+									<svg
+										className="w-6 h-6 text-white dark:text-white mr-1"
+										aria-hidden="true"
+										xmlns="http://www.w3.org/2000/svg"
+										width="24"
+										height="24"
+										fill="currentColor"
+										viewBox="0 0 24 24">
+										<path
+											fillRule="evenodd"
+											d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm9.408-5.5a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2h-.01ZM10 10a1 1 0 1 0 0 2h1v3h-1a1 1 0 1 0 0 2h4a1 1 0 1 0 0-2h-1v-4a1 1 0 0 0-1-1h-2Z"
+											clipRule="evenodd"
+										/>
+									</svg>
+									{language === languageOptions.english
+										? "Learn more"
+										: "Aprender más"}
+								</Link>
+
+								<Link
+									href={`/quote?material=${language === languageOptions.english ? service?.enname : service?.spname}`}
+									className="inline-flex justify-center items-center py-2.5 px-5 text-base font-medium text-center text-white rounded-lg bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-900 ms-2">
+									<svg
+										className="w-6 h-6 mr-1"
+										aria-hidden="true"
+										xmlns="http://www.w3.org/2000/svg"
+										width="24"
+										height="24"
+										fill="none"
+										viewBox="0 0 24 24">
+										<path
+											stroke="currentColor"
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											strokeWidth="2"
+											d="M8 17.345a4.76 4.76 0 0 0 2.558 1.618c2.274.589 4.512-.446 4.999-2.31.487-1.866-1.273-3.9-3.546-4.49-2.273-.59-4.034-2.623-3.547-4.488.486-1.865 2.724-2.899 4.998-2.31.982.236 1.87.793 2.538 1.592m-3.879 12.171V21m0-18v2.2"
+										/>
+									</svg>
+									{language === languageOptions.english
+										? "Get a quote"
+										: "Obtener cotización"}
+								</Link>
+							</div>
 						</div>
 					))}
 				</div>
