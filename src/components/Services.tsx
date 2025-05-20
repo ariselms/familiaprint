@@ -108,8 +108,6 @@ const ServicesList = () => {
 	const { services, loadingServices, getAllServices } =
 		useServicesContext();
 
-  const { language } = useLanguageContext();
-
 	useEffect(() => {
 		getAllServices();
 	}, []);
