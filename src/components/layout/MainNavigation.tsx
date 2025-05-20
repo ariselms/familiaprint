@@ -133,7 +133,7 @@ export default function MainNavigation() {
 									: "Free Quote"}
 							</Link>
 						</li>
-						{user ? (
+						{/* {user ? (
 							<li className="p-2 md:p-0 text-center cursor-pointer hover:bg-gray-300 md:hover:bg-transparent hover:dark:bg-gray-700 md:dark:hover:bg-transparent trastition-all">
 								{" "}
 								<Link
@@ -171,7 +171,7 @@ export default function MainNavigation() {
 									{language === languageOptions.spanish ? "Salir" : "Logout"}
 								</Link>
 							</li>
-						)}
+						)} */}
 					</ul>
 				)}
 			</nav>

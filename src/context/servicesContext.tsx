@@ -16,7 +16,7 @@ export const ServicesContextProvider = ({
 
   const [loadingServices, setLoadingServices] = useState<boolean>(true)
 
-  // get all services from firebase
+  // get all services
   const getAllServices = async () => {
     const data = await fetch("/api/services", {
       cache: "no-store",
@@ -30,7 +30,7 @@ export const ServicesContextProvider = ({
     return services;
   }
 
-  // get firebase category by id
+  // get service by id
   const getServiceById = async (id: string) => {
     const data = await fetch(`/api/services/${id}`);
     const response = await data.json();

@@ -16,7 +16,7 @@ export const MaterialsContextProvider = ({
 
   const [loadingMaterials, setLoadingMaterials] = useState<boolean>(true)
 
-  // get all materials from firebase
+  // get all materials
   const getAllMaterials = async () => {
     const data = await fetch("/api/materials", {
       cache: "no-store",
@@ -30,7 +30,7 @@ export const MaterialsContextProvider = ({
     return materials;
   }
 
-  // get firebase category by id
+  // get material by id
   const getMaterialById = async (id: string) => {
     const data = await fetch(`/api/materials/${id}`);
     const response = await data.json();
