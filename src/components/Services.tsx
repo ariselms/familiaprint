@@ -164,12 +164,6 @@ const ServicesList = () => {
 						</svg>
 					</a>
 				</div> */}
-				<span className="text-gray-400">
-					{process.env.NEXT_PUBLIC_VERCEL_ENV}
-				</span>
-				<span className="text-gray-400">
-					{services[0]?.enname}
-				</span>
 				<div className="grid md:grid-cols-2 gap-8">
 					{services?.map((service: ServiceType) => (
 						<ServicesCard key={service?.id} service={service} />
