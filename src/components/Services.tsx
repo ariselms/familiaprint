@@ -30,10 +30,8 @@ const ServicesCard = ({ service }: { service: ServiceType }) => {
 	return (
 		<div
 			className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-8 md:p-12">
-      {languageOptions.english}
-      {language}
-			<a
-				href="#"
+			<Link
+				href={`/services/${service?.id}`}
 				className="bg-green-100 text-green-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded-md dark:bg-gray-700 dark:text-green-400 mb-2">
 				<svg
 					className="w-2.5 h-2.5 me-1.5"
@@ -46,7 +44,7 @@ const ServicesCard = ({ service }: { service: ServiceType }) => {
 				{language === languageOptions.english
 					? enname
 					: spname}
-			</a>
+			</Link>
 			<h2 className="text-gray-900 dark:text-white text-3xl font-extrabold mb-2">
 				{language === languageOptions.english
 					? entitle
