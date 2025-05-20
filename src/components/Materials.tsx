@@ -29,7 +29,7 @@ const ServicesMaterialsCard = ({material}: {material: MaterialsType}) => {
   const { id, enname, spname, endescription, spdescription } = material;
 
 	return (
-		<div className="h-auto max-w-full rounded-lg transition-all">
+		<div className="h-auto max-w-full rounded-lg">
 			<div className="p-6 h-full bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 flex flex-col">
 				{/* <svg
 					className="w-7 h-7 text-gray-500 dark:text-gray-400 mb-3"
@@ -47,10 +47,10 @@ const ServicesMaterialsCard = ({material}: {material: MaterialsType}) => {
 				<p className="mb-3 font-normal text-gray-500 dark:text-gray-400">
 					{language === languageOptions.english ? endescription : spdescription}
 				</p>
-				<div className="mt-auto">
+				<div className="flex-col mt-auto">
 					<Link
 						href={`/materials/${id}`}
-						className="inline-flex justify-center items-center py-2.5 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900 me-2">
+						className="flex justify-center items-center py-2.5 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900 mb-3">
 						<svg
 							className="w-6 h-6 text-white dark:text-white mr-1"
 							aria-hidden="true"
@@ -72,7 +72,7 @@ const ServicesMaterialsCard = ({material}: {material: MaterialsType}) => {
 
 					<Link
 						href={`/quote?material=${language === languageOptions.english ? enname : spname}`}
-						className="inline-flex justify-center items-center py-2.5 px-5 text-base font-medium text-center text-white rounded-lg bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-900 ms-2">
+						className="flex justify-center items-center py-2.5 px-5 text-base font-medium text-center text-white rounded-lg bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-900">
 						<svg
 							className="w-6 h-6 mr-1"
 							aria-hidden="true"
@@ -115,9 +115,9 @@ const ServicesMaterialsList = () => {
 		<section className="pb-32 bg-gray-200 dark:bg-gray-900">
 			<MainFull>
 				<ServiceMaterialsHeader />
-				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+				<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
 					{materials?.map((material: MaterialsType) => (
-							<ServicesMaterialsCard key={material?.id} material={material} />
+						<ServicesMaterialsCard key={material?.id} material={material} />
 					))}
 				</div>
 			</MainFull>
