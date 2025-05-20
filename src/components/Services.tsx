@@ -50,7 +50,7 @@ const ServicesCard = ({ service }: { service: ServiceType }) => {
 			<div className="flex-col mt-auto">
 				<Link
 					href={`/services/${service?.id}`}
-					className="flex justify-center items-center py-2.5 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900 mb-3">
+					className="flex justify-center items-center py-2.5 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900 mb-3 lg:inline-flex">
 					<svg
 						className="w-6 h-6 text-white dark:text-white mr-1"
 						aria-hidden="true"
@@ -69,7 +69,7 @@ const ServicesCard = ({ service }: { service: ServiceType }) => {
 				</Link>
 				<Link
 					href={`/quote?material=${language === languageOptions.english ? enname : spname}`}
-					className="flex justify-center items-center py-2.5 px-5 text-base font-medium text-center text-white rounded-lg bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-900">
+					className="flex justify-center items-center py-2.5 px-5 text-base font-medium text-center text-white rounded-lg bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-900 lg:inline-flex 2xl:ms-3">
 					<svg
 						className="w-6 h-6 mr-1"
 						aria-hidden="true"
