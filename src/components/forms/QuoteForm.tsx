@@ -20,7 +20,7 @@ import {
 
 export default function LeadForm() {
 	const { language } = useLanguageContext();
-  const { services, getAllServices } = useServicesContext();
+	const { services, getAllServices } = useServicesContext();
 	const { materials, getAllMaterials } = useMaterialsContext();
 	const [loading, setLoading] = useState(false);
 	let [isOpen, setIsOpen] = useState(false);
@@ -43,7 +43,7 @@ export default function LeadForm() {
 	});
 
 	useEffect(() => {
-    getAllServices();
+		getAllServices();
 		getAllMaterials();
 	}, []);
 
@@ -59,7 +59,9 @@ export default function LeadForm() {
 		}
 	};
 
-	const handleProjectMaterialChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+	const handleProjectMaterialChange = (
+		e: React.ChangeEvent<HTMLInputElement>
+	) => {
 		if (e.target.checked) {
 			setProjectMaterial([...projectMaterial, e.target.value]);
 		} else {
@@ -133,7 +135,7 @@ export default function LeadForm() {
 
 			// candidate.ProjectMaterial = projectMaterial.toString();
 			// convert the array to a string for the email
-      let projectServiceString: string = projectService.toString();
+			let projectServiceString: string = projectService.toString();
 			let projectMaterialString: string = projectMaterial.toString();
 
 			if (Object.keys(validationErrors).length === 0) {
@@ -146,7 +148,7 @@ export default function LeadForm() {
 					City: candidate.City,
 					State: candidate.State,
 					Zip: candidate.Zip,
-          ProjectService: projectServiceString.toString(),
+					ProjectService: projectServiceString.toString(),
 					ProjectMaterial: projectMaterialString.toString(),
 					ProjectEstimateTimeframe: candidate.ProjectEstimateTimeframe,
 					Comments: candidate.Comments,
@@ -175,7 +177,7 @@ export default function LeadForm() {
 						}
 					});
 
-          setProjectService([]);
+					setProjectService([]);
 					setProjectMaterial([]);
 
 					setCandidate({
@@ -187,7 +189,7 @@ export default function LeadForm() {
 						City: "",
 						State: "",
 						Zip: "",
-            ProjectService: projectService,
+						ProjectService: projectService,
 						ProjectMaterial: projectMaterial,
 						ProjectEstimateTimeframe: "",
 						Comments: ""
@@ -252,12 +254,17 @@ export default function LeadForm() {
 			}
 		} catch (error) {
 			console.error(error);
+
 			const errorMessage =
 				error instanceof Error ? error.message : "An error occurred";
-			toast.error(errorMessage);
+
+      toast.error(errorMessage);
 		} finally {
+
 			setLoading(false);
+
 			window.scrollTo(0, 0);
+
 		}
 	};
 
@@ -709,15 +716,18 @@ export default function LeadForm() {
 						color={"red"}
 						type="submit"
 						className="h-auto flex justify-center px-3 py-2 text-sm font-semibold focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-red-800 transition-all">
-						{loading && (
+						{loading ? (
 							<>
 								<Spinner size="sm" className="mr-2" light />
 								{language === languageOptions.english
 									? "Processing..."
 									: "Procesando..."}
 							</>
+						) : language === languageOptions.english ? (
+							"Send"
+						) : (
+							"Enviar"
 						)}
-						{language === languageOptions.english ? "Send" : "Enviar"}
 					</Button>
 				</div>
 			</form>
