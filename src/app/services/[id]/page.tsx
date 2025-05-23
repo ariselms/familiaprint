@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import { useServicesContext } from "@/context/servicesContext";
 import { useLanguageContext } from "@/context/languageContext";
 import { useParams } from "next/navigation";
-import Container from "@/components/layout/Container";
 import Spinner from "@/components/Spinner";
 import { languageOptions } from "@/static";
 import ServicesContent from "@/components/ServicesContent";
@@ -24,8 +23,6 @@ const ServicesPage = () => {
 	if (loadingServices) {
 		return <Spinner />;
 	}
-
-  console.log(loadingServices)
 
 	return (
 		<main>

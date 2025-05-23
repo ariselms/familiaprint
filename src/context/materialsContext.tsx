@@ -18,28 +18,38 @@ export const MaterialsContextProvider = ({
 
   // get all materials
   const getAllMaterials = async () => {
-    const data = await fetch("/api/materials", {
-      cache: "no-store",
-    });
-    const response = await data.json();
-    const materials = response.data;
-    if(materials){
-      setMaterials(materials);
-      setLoadingMaterials(false)
+    try {
+      setLoadingMaterials(true)
+      const data = await fetch("/api/materials", {
+        cache: "no-store",
+      });
+      const response = await data.json();
+      const materials = response.data;
+      if(materials){
+        setMaterials(materials);
+        setLoadingMaterials(false)
+      }
+      return materials;
+    } catch (error) {
+      console.error("getAllMaterials error: " + error);
     }
-    return materials;
   }
 
   // get material by id
   const getMaterialById = async (id: string) => {
-    const data = await fetch(`/api/materials/${id}`);
-    const response = await data.json();
-    const category = response.data;
-    if(category){
-      setMaterial(category[0]);
-      setLoadingMaterials(false)
+    try {
+      setLoadingMaterials(true);
+      const data = await fetch(`/api/materials/${id}`);
+      const response = await data.json();
+      const category = response.data;
+      if(category){
+        setMaterial(category[0]);
+        setLoadingMaterials(false)
+      }
+      return category;
+    } catch (error) {
+      console.error("getMaterialById error: " + error);
     }
-    return category;
   }
 
   return (
