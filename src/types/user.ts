@@ -1,14 +1,16 @@
 export interface User {
-  id: number | null; // starts at 1 auto increment
-  firstname: string;
-  lastname: string;
-  email: string; // make it required and unique
-  tel: string;
-  role: string;
-  emailCodeNumber: string;
-  emailCodeExpiry: Date | null;
-  sessionToken: string;
-  sessionTokenExpiry: Date | null;
-  createdAt: Date;
-  updatedAt: Date | null;
+	id: string | null; // or number | null, depending on your actual ID type
+	namefirst: string;
+	namelast: string;
+	email: string;
+	tel: string;
+	emailcodenumber: string;
+	emailcodeexpiry: string | null; // or Date | null, or number | null
+	sessiontoken: string;
+	sessiontokenexpiry: string | null; // or Date | null, or number | null
+	addressstreet: string;
+	addresscity: string;
+	addressstate: string;
+	addresszip: string;
+	// Add other properties that 'user' might have if they are part of User interface
 }

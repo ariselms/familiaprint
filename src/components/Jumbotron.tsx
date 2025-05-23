@@ -1,8 +1,6 @@
 "use client";
 
 import { useLanguageContext } from "@/context/languageContext";
-import { useEffect } from "react";
-import { useServicesContext } from "@/context/servicesContext";
 import { languageOptions } from "@/static";
 import Link from "next/link";
 import { BannerIconTheme } from "@/components/svg/Icons";
