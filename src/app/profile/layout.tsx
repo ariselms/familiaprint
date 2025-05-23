@@ -73,10 +73,10 @@ export default async function AuthenticatedLayout({
 								) : (
 									<strong>Nombre: </strong>
 								)}
+
 								{language?.value === languageOptions?.english
-									? user?.namefirst + " " + user?.namelast || "Not set yet"
-									: user?.namefirst + " " + user?.namelast ||
-										"Sin establecer aun"}
+									? user?.namefirst || "Not set yet"
+									: user?.namefirst || "Sin establecer"}
 							</span>
 							<span className="me-8 dark:text-gray-200">
 								{language?.value === languageOptions?.english ? (
