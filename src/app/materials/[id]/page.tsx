@@ -40,8 +40,8 @@ const ServicesPage = () => {
 				<Container>
 					<h2 className="text-2xl font-bold mb-8 text-center mx-auto">
 						{language === "es"
-							? `¿Qué son ${material?.spname}?`
-							: `What are ${material?.enname}?`}
+							? `¿Qué es ${material?.spname}?`
+							: `What is ${material?.enname}?`}
 					</h2>
 					<p className="text-lg max-w-[80ch] mx-auto">
 						{language === "es"

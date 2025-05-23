@@ -38,9 +38,9 @@ const ServicesCard = ({ service }: { service: ServiceType }) => {
 	return (
 		<div className="flex flex-col h-full bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-8 md:p-12">
 			<CardIcon service={service} />
-			<h2 className="text-gray-900 dark:text-white text-3xl font-extrabold mb-2">
+			<h3 className="text-gray-900 dark:text-white text-3xl font-extrabold mb-2">
 				{language === languageOptions.english ? entitle : sptitle}
-			</h2>
+			</h3>
 			<p className="text-lg font-normal text-gray-500 dark:text-gray-300 mb-8">
 				{language === languageOptions.english ? ensummary : spsummary}
 			</p>
