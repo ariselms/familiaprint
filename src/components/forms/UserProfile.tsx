@@ -38,6 +38,8 @@ export default function UserProfileForm({ user }: { user: any }) {
 
 		setLoading(true);
 
+    console.log(candidate);
+
     // TODO:
     // Validate the form data before sending it to the server
     // Create API endpoint to update user information
@@ -101,7 +103,9 @@ export default function UserProfileForm({ user }: { user: any }) {
 					: "Verifica y actualiza la información de tu perfil."}
 			</p>
 
-			<form onSubmit={handleSubmit} className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+			<form
+				onSubmit={handleSubmit}
+				className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 				<div className="sm:col-span-3">
 					<Label
 						htmlFor="first-name"
@@ -157,7 +161,13 @@ export default function UserProfileForm({ user }: { user: any }) {
 							className="block w-full rounded-md border-0 text-gray-900 dark:text-gray-100  focus:ring-2 focus:ring-inset focus:ring-red  -600 sm:text-sm sm:leading-6"
 							value={candidate.email}
 							onChange={handleChange}
+							disabled
 						/>
+						<small className="p-1 text-gray-800 dark:text-gray-300">
+							{language === languageOptions.english
+								? "This field is not editable. Your email is your personal identification. Therefore, you cannot change it."
+								: "Este campo no es editable. Tu correo electrónico es tu identificación personal. Por lo tanto, no puedes cambiarlo."}
+						</small>
 					</div>
 				</div>
 
