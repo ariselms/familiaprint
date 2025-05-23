@@ -4,10 +4,10 @@ export interface User {
 	namelast: string;
 	email: string;
 	tel: string;
-	emailcodenumber: string;
-	emailcodeexpiry: string | null; // or Date | null, or number | null
-	sessiontoken: string;
-	sessiontokenexpiry: string | null; // or Date | null, or number | null
+	emailcodenumber?: string;
+	emailcodeexpiry?: string | null; // or Date | null, or number | null
+	sessiontoken?: string;
+	sessiontokenexpiry?: string | null; // or Date | null, or number | null
 	addressstreet: string;
 	addresscity: string;
 	addressstate: string;
