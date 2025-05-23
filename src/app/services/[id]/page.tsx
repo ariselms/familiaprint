@@ -25,9 +25,12 @@ const ServicesPage = () => {
 		return <Spinner />;
 	}
 
+  console.log(loadingServices)
+
 	return (
 		<main>
-			<section className="py-16 text-black dark:text-white bg-gray-200 dark:bg-gray-900">
+			<span className="text-red-600">{loadingServices}</span>
+			<section className="py-16 px-4 text-black dark:text-white bg-gray-200 dark:bg-gray-900">
 				<ServicesContent
 					language={language}
 					languageOptions={languageOptions}

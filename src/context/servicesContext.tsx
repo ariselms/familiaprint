@@ -18,28 +18,38 @@ export const ServicesContextProvider = ({
 
   // get all services
   const getAllServices = async () => {
-    const data = await fetch("/api/services", {
-      cache: "no-store",
-    });
-    const response = await data.json();
-    const services = response.data;
-    if(services){
-      setServices(services);
-      setLoadingServices(false)
+    try {
+      setLoadingServices(true)
+      const data = await fetch("/api/services", {
+        cache: "no-store",
+      });
+      const response = await data.json();
+      const services = response.data;
+      if(services){
+        setServices(services);
+        setLoadingServices(false)
+      }
+      return services;
+    } catch (error) {
+      console.log("getAllServices error: " + error);
     }
-    return services;
   }
 
   // get service by id
   const getServiceById = async (id: string) => {
-    const data = await fetch(`/api/services/${id}`);
-    const response = await data.json();
-    const category = response.data;
-    if(category){
-      setService(category[0]);
-      setLoadingServices(false)
+    try {
+      setLoadingServices(true);
+      const data = await fetch(`/api/services/${id}`);
+      const response = await data.json();
+      const category = response.data;
+      if(category){
+        setService(category[0]);
+        setLoadingServices(false)
+      }
+      return category;
+    } catch (error) {
+      console.log("getServiceById error: " + error);
     }
-    return category;
   }
 
   return (
