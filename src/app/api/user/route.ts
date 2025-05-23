@@ -1,9 +1,10 @@
 export const dynamic = "force-dynamic";
 import { NextResponse } from "next/server";
-import { sendEmail } from "@/helpers/server";
-import { languageOptions } from "@/static";
+// import { sendEmail } from "@/helpers/server";
+// import { languageOptions } from "@/static";
 import { sql } from "@vercel/postgres";
 
+// update user
 export async function PUT(req: Request) {
 	try {
 		const body = await req.json(); // Parse the request body
