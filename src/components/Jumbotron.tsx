@@ -60,7 +60,7 @@ export default function Jumbotron({
 
 						<Link
 							href={propsData.enSecondButtonLink}
-							className="inline-flex justify-center items-center py-2.5 px-5 text-base font-medium text-center text-white rounded-lg bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-900 ms-2">
+							className="inline-flex justify-center items-center py-2.5 px-5 text-base font-medium text-center text-white rounded-lg bg-black hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 dark:bg-white dark:text-black dark:hover:bg-gray-200  dark:focus:ring-gray-900 ms-2">
 							{language === languageOptions.english
 								? propsData.enSecondButtonText
 								: propsData.spSecondButtonText}
