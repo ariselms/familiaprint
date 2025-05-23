@@ -66,7 +66,7 @@ const ServicesCard = ({ service }: { service: ServiceType }) => {
 				</Link>
 				<Link
 					href={`/quote?material=${language === languageOptions.english ? enname : spname}`}
-					className="flex justify-center items-center py-2.5 px-5 text-base font-medium text-center text-white rounded-lg bg-gray-700 hover:bg-gray-900 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-900 transition-all lg:inline-flex 2xl:ms-3">
+					className="flex justify-center items-center py-2.5 px-5 text-base font-medium text-center text-white rounded-lg bg-black hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 dark:bg-white dark:text-black dark:hover:bg-gray-200  dark:focus:ring-gray-900 transition-all lg:inline-flex 2xl:ms-3">
 					<svg
 						className="w-6 h-6 mr-1"
 						aria-hidden="true"
