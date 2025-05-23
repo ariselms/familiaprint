@@ -1,8 +1,12 @@
 "use client";
 
 import { useLanguageContext } from "@/context/languageContext";
+import { useEffect } from "react";
+import { useServicesContext } from "@/context/servicesContext";
 import { languageOptions } from "@/static";
 import Link from "next/link";
+import { BannerIconTheme } from "@/components/svg/Icons";
+import { ServiceListType } from "@/types/services";
 
 interface JumbotronProps {
 	enHeader: string;
@@ -12,18 +16,27 @@ interface JumbotronProps {
 	hasButtons: boolean;
 	enFirstButtonText: string;
 	enFirstButtonLink: string;
-  spFirstButtonText: string;
-  enSecondButtonText: string;
-  enSecondButtonLink: string;
+	spFirstButtonText: string;
+	enSecondButtonText: string;
+	enSecondButtonLink: string;
 	spSecondButtonText: string;
 }
 
-const Jumbotron = ({ propsData }: { propsData: JumbotronProps }) => {
-
+export default function Jumbotron({
+	propsData
+}: {
+	propsData: JumbotronProps;
+}) {
 	const { language } = useLanguageContext();
+  // const {services, getAllServices} = useServicesContext();
+
+  // useEffect(() => {
+  //   getAllServices();
+  // }, []);
 
 	return (
-		<section className="bg-white dark:bg-gray-950">
+		<section className="bg-white dark:bg-gray-950 relative">
+			{/* <JumbotronIcons services={services} /> */}
 			<div className="py-16 px-4 mx-auto max-w-screen-xl text-center lg:py-32">
 				<h1 className="mb-12 text-4xl md:text-5xl font-extrabold tracking-tight leading-none text-gray-900 lg:text-6xl dark:text-white">
 					{language === languageOptions.english
@@ -72,6 +85,18 @@ const Jumbotron = ({ propsData }: { propsData: JumbotronProps }) => {
 			</div>
 		</section>
 	);
-};
+}
 
-export default Jumbotron;
+const JumbotronIcons = ({services}:{services: ServiceListType}) => {
+
+  return (
+    services.map((service) => {
+      switch (service.enname) {
+        case "Banner":
+          return <BannerIconTheme key={service.id}/>
+        default:
+          return <div key={service.id} className="text-white ">{service.enname}</div>
+      }
+    })
+  )
+};

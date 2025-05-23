@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import { useServicesContext } from "@/context/servicesContext";
 import { useLanguageContext } from "@/context/languageContext";
 import { useParams } from "next/navigation";
-import Container from "@/components/layout/Container";
 import Spinner from "@/components/Spinner";
 import { languageOptions } from "@/static";
 import ServicesContent from "@/components/ServicesContent";
@@ -27,7 +26,8 @@ const ServicesPage = () => {
 
 	return (
 		<main>
-			<section className="py-16 text-black dark:text-white bg-gray-200 dark:bg-gray-900">
+			<span className="text-red-600">{loadingServices}</span>
+			<section className="py-16 px-4 text-black dark:text-white bg-gray-200 dark:bg-gray-900">
 				<ServicesContent
 					language={language}
 					languageOptions={languageOptions}
