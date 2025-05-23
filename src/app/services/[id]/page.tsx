@@ -33,10 +33,10 @@ const ServicesPage = () => {
 					languageOptions={languageOptions}
 					service={service}
 				/>
-				<div className="flex items-center justify-center">
+				<div className="flex items-center justify-center mt-8 mb-4">
 					<Link
 						href={`/quote?material=${language === languageOptions.english ? service?.enname : service?.spname}`}
-						className="inline-flex justify-center items-center py-2.5 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900 ms-2">
+						className="inline-flex justify-center items-center py-2.5 px-5 text-base font-medium text-center text-white rounded-lg bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900 ms-2">
 						<svg
 							className="w-6 h-6 mr-1"
 							aria-hidden="true"
