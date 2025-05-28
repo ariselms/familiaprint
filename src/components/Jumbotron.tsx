@@ -26,22 +26,17 @@ export default function Jumbotron({
 	propsData: JumbotronProps;
 }) {
 	const { language } = useLanguageContext();
-  // const {services, getAllServices} = useServicesContext();
-
-  // useEffect(() => {
-  //   getAllServices();
-  // }, []);
 
 	return (
-		<section className="bg-white dark:bg-gray-950 relative">
+		<section className="bg-white dark:bg-gray-950 relative border-t border-gray-200 dark:border-gray-800">
 			{/* <JumbotronIcons services={services} /> */}
-			<div className="py-16 px-4 mx-auto max-w-screen-xl text-center lg:py-32">
+			<div className="py-24 px-4 mx-auto max-w-screen-xl text-center lg:py-32">
 				<h1 className="mb-12 text-4xl md:text-5xl font-extrabold tracking-tight leading-none text-gray-900 lg:text-6xl dark:text-white">
 					{language === languageOptions.english
 						? propsData.enHeader
 						: propsData.spHeader}
 				</h1>
-				<p className="mb-16 text-lg font-normal text-gray-700 lg:text-xl sm:px-16 lg:px-48 dark:text-gray-300 mx-auto">
+				<p className={`${propsData.hasButtons && "mb-12"} text-lg font-normal text-gray-700 lg:text-xl sm:px-16 lg:px-48 dark:text-gray-300 mx-auto`}>
 					{language === languageOptions.english
 						? propsData.enDescription
 						: propsData.spDescription}
