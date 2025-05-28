@@ -30,7 +30,7 @@ export default function Jumbotron({
 	return (
 		<section className="bg-white dark:bg-gray-950 relative border-t border-gray-200 dark:border-gray-800">
 			{/* <JumbotronIcons services={services} /> */}
-			<div className="py-24 px-4 mx-auto max-w-screen-xl text-center lg:py-32">
+			<div className="py-32 px-4 mx-auto max-w-screen-xl text-center lg:py-40">
 				<h1 className="mb-12 text-4xl md:text-5xl font-extrabold tracking-tight leading-none text-gray-900 lg:text-6xl dark:text-white">
 					{language === languageOptions.english
 						? propsData.enHeader
