@@ -106,7 +106,7 @@ export default function MainNavigation() {
 								onClick={() => {
 									isMobile && setShowMenu(false);
 								}}
-								className={`${isActiveLink("/") && "border-b-2 border-red-600"} text-black dark:text-white hover:underline`}
+								className={`${isActiveLink("/") && "border-b-2 border-red-600"} text-black dark:text-white hover:border-b-2 hover:border-red-600`}
 								href="/">
 								{language === languageOptions.spanish ? "Inicio" : "Home"}
 							</Link>
@@ -116,7 +116,7 @@ export default function MainNavigation() {
 								onClick={() => {
 									isMobile && setShowMenu(false);
 								}}
-								className={`${isActiveLink("/about") && "border-b-2 border-red-600"} text-black dark:text-white hover:underline`}
+								className={`${isActiveLink("/about") && "border-b-2 border-red-600"} text-black dark:text-white hover:border-b-2 hover:border-red-600`}
 								href="/about">
 								{language === languageOptions.spanish ? "Nosotros" : "About"}
 							</Link>
@@ -126,7 +126,7 @@ export default function MainNavigation() {
 								onClick={() => {
 									isMobile && setShowMenu(false);
 								}}
-								className={`${isActiveLink("/quote") && "border-b-2 border-red-600"} text-black dark:text-white hover:underline`}
+								className={`${isActiveLink("/quote") && "border-b-2 border-red-600"} text-black dark:text-white hover:border-b-2 hover:border-red-600`}
 								href="/quote">
 								{language === languageOptions.spanish
 									? "Cotización Gratis"
@@ -140,7 +140,7 @@ export default function MainNavigation() {
 									onClick={() => {
 										isMobile && setShowMenu(false);
 									}}
-									className={`${isActiveLink("/profile") && "border-b-2 border-red-600"} text-black dark:text-white hover:underline`}
+									className={`${isActiveLink("/profile") && "border-b-2 border-red-600"} text-black dark:text-white hover:border-b-2 hover:border-red-600`}
 									href="/profile">
 									{language === languageOptions.spanish ? "Perfil" : "Profile"}
 								</Link>
@@ -152,7 +152,7 @@ export default function MainNavigation() {
 									onClick={() => {
 										isMobile && setShowMenu(false);
 									}}
-									className={`${isActiveLink("/login") && "border-b-2 border-red-600"} text-black dark:text-white hover:underline`}
+									className={`${isActiveLink("/login") && "border-b-2 border-red-600"} text-black dark:text-white hover:border-b-2 hover:border-red-600`}
 									href="/login">
 									{language === languageOptions.spanish ? "Ingresar" : "Login"}
 								</Link>
@@ -166,7 +166,7 @@ export default function MainNavigation() {
 										isMobile && setShowMenu(false);
 										signOutUser();
 									}}
-									className={`${isActiveLink("/login") && "border-b-2 border-red-600"} text-red-600 dark:text-red-500 hover:underline`}
+									className={`${isActiveLink("/login") && "border-b-2 border-red-600"} text-red-600 dark:text-red-500 hover:border-b-2 hover:border-red-600`}
 									href="/login">
 									{language === languageOptions.spanish ? "Salir" : "Logout"}
 								</Link>
