@@ -2,7 +2,7 @@
 "use client";
 import { useLanguageContext } from "@/context/languageContext";
 import { languageOptions } from "@/static";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { DarkThemeToggle } from "flowbite-react";
 import { MenuIcon } from "@/components/svg/Icons";
 import Link from "next/link";
@@ -100,78 +100,78 @@ export default function MainNavigation() {
 				{showMenu && (
 					<ul
 						id="menu"
-						className="flex flex-col md:flex-row md:items-center absolute md:static right-0 top-16 z-20 gap-x-8 order-2 bg-gray-200 dark:bg-gray-800 md:dark:bg-transparent md:bg-transparent w-full md:w-auto py-2">
-						<li className="p-2 md:p-0 text-center cursor-pointer hover:bg-gray-300 md:hover:bg-transparent hover:dark:bg-gray-700 md:dark:hover:bg-transparent trastition-all">
+						className="flex flex-col md:flex-row md:items-center absolute md:static right-0 top-16 z-20 gap-x-8 order-2 bg-gray-200 dark:bg-gray-800 md:dark:bg-transparent md:bg-transparent w-full md:w-auto">
+						<li className="md:p-0 text-center cursor-pointer hover:bg-gray-300 md:hover:bg-transparent hover:dark:bg-gray-700 md:dark:hover:bg-transparent trastition-all">
 							<Link
 								onClick={() => {
 									isMobile && setShowMenu(false);
 								}}
-								className={`${isActiveLink("/") && "underline"} text-black dark:text-white hover:underline`}
+								className={`${isActiveLink("/") && "border-b-2 border-red-600"} text-black dark:text-white hover:underline`}
 								href="/">
 								{language === languageOptions.spanish ? "Inicio" : "Home"}
 							</Link>
 						</li>
-						<li className="p-2 md:p-0 text-center cursor-pointer hover:bg-gray-300 md:hover:bg-transparent hover:dark:bg-gray-700 md:dark:hover:bg-transparent trastition-all">
+						<li className="md:p-0 text-center cursor-pointer hover:bg-gray-300 md:hover:bg-transparent hover:dark:bg-gray-700 md:dark:hover:bg-transparent trastition-all">
 							<Link
 								onClick={() => {
 									isMobile && setShowMenu(false);
 								}}
-								className={`${isActiveLink("/about") && "underline"} text-black dark:text-white hover:underline`}
+								className={`${isActiveLink("/about") && "border-b-2 border-red-600"} text-black dark:text-white hover:underline`}
 								href="/about">
 								{language === languageOptions.spanish ? "Nosotros" : "About"}
 							</Link>
 						</li>
-						<li className="p-2 md:p-0 text-center cursor-pointer hover:bg-gray-300 md:hover:bg-transparent hover:dark:bg-gray-700 md:dark:hover:bg-transparent trastition-all">
+						<li className="md:p-0 text-center cursor-pointer hover:bg-gray-300 md:hover:bg-transparent hover:dark:bg-gray-700 md:dark:hover:bg-transparent trastition-all">
 							<Link
 								onClick={() => {
 									isMobile && setShowMenu(false);
 								}}
-								className={`${isActiveLink("/quote") && "underline"} text-black dark:text-white hover:underline`}
+								className={`${isActiveLink("/quote") && "border-b-2 border-red-600"} text-black dark:text-white hover:underline`}
 								href="/quote">
 								{language === languageOptions.spanish
 									? "Cotización Gratis"
 									: "Free Quote"}
 							</Link>
 						</li>
-						{/* {user ? (
-							<li className="p-2 md:p-0 text-center cursor-pointer hover:bg-gray-300 md:hover:bg-transparent hover:dark:bg-gray-700 md:dark:hover:bg-transparent trastition-all">
+						{user ? (
+							<li className="md:p-0 text-center cursor-pointer hover:bg-gray-300 md:hover:bg-transparent hover:dark:bg-gray-700 md:dark:hover:bg-transparent trastition-all">
 								{" "}
 								<Link
 									onClick={() => {
 										isMobile && setShowMenu(false);
 									}}
-									className={`${isActiveLink("/profile") && "underline"} text-black dark:text-white hover:underline`}
+									className={`${isActiveLink("/profile") && "border-b-2 border-red-600"} text-black dark:text-white hover:underline`}
 									href="/profile">
 									{language === languageOptions.spanish ? "Perfil" : "Profile"}
 								</Link>
 							</li>
 						) : (
-							<li className="p-2 md:p-0 text-center cursor-pointer hover:bg-gray-300 md:hover:bg-transparent hover:dark:bg-gray-700 md:dark:hover:bg-transparent trastition-all">
+							<li className="md:p-0 text-center cursor-pointer hover:bg-gray-300 md:hover:bg-transparent hover:dark:bg-gray-700 md:dark:hover:bg-transparent trastition-all">
 								{" "}
 								<Link
 									onClick={() => {
 										isMobile && setShowMenu(false);
 									}}
-									className={`${isActiveLink("/login") && "underline"} text-black dark:text-white hover:underline`}
+									className={`${isActiveLink("/login") && "border-b-2 border-red-600"} text-black dark:text-white hover:underline`}
 									href="/login">
 									{language === languageOptions.spanish ? "Ingresar" : "Login"}
 								</Link>
 							</li>
 						)}
 						{user && (
-							<li className="p-2 md:p-0 text-center cursor-pointer hover:bg-gray-300 md:hover:bg-transparent hover:dark:bg-gray-700 md:dark:hover:bg-transparent trastition-all">
+							<li className="md:p-0 text-center cursor-pointer hover:bg-gray-300 md:hover:bg-transparent hover:dark:bg-gray-700 md:dark:hover:bg-transparent trastition-all">
 								{" "}
 								<Link
 									onClick={() => {
 										isMobile && setShowMenu(false);
 										signOutUser();
 									}}
-									className={`${isActiveLink("/login") && "underline"} text-red-600 dark:text-red-500 hover:underline`}
+									className={`${isActiveLink("/login") && "border-b-2 border-red-600"} text-red-600 dark:text-red-500 hover:underline`}
 									href="/login">
 									{language === languageOptions.spanish ? "Salir" : "Logout"}
 								</Link>
 							</li>
-						)} */}
+						)}
 					</ul>
 				)}
 			</nav>
