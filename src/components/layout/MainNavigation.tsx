@@ -63,7 +63,7 @@ export default function MainNavigation() {
 
 	return (
 		<header>
-			<nav className="px-4 py-8 rounded-none bg-white dark:bg-gray-950 flex items-center justify-between relative">
+			<nav className="px-4 py-8 rounded-none bg-white dark:bg-gray-950 flex items-center justify-between relative border-b border-gray-200 dark:border-gray-800">
 				{/* logo */}
 				<Link
 					onClick={() => {
