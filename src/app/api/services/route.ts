@@ -3,6 +3,10 @@ export const dynamic = "force-dynamic"; // Ensures the route is not cached
 import { NextResponse } from "next/server";
 import { sql } from "@vercel/postgres";
 
+// TODO:
+// check parameters from the server console to ensure all table functionalities are working as expected
+// create the update and delete routes for services
+
 export async function GET(request: Request) {
 	// Added 'request: Request' to access URL params if needed in future
 	try {

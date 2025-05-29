@@ -1,10 +1,8 @@
 "use client";
-
+import Link from "next/link";
 import {
 	Admin,
 	Resource,
-	ListGuesser,
-	EditGuesser,
 	BooleanField,
 	Datagrid,
 	DateField,
@@ -14,18 +12,47 @@ import {
 	DateInput,
 	Edit,
 	SimpleForm,
-	TextInput
+	TextInput,
+	Menu,
+	MenuItemLink,
+	useResourceDefinitions,
+  Layout
 } from "react-admin";
 import customDataProvider from "@/react-admin/customDataProvider";
 
 export default function ReactAdmin() {
 	return (
-		<Admin dataProvider={customDataProvider}>
+		<Admin dataProvider={customDataProvider} layout={CustomLayout}>
 			<Resource name="services" list={ServiceList} edit={ServiceEdit} />
 			<Resource name="materials" list={MaterialList} edit={MaterialEdit} />
 		</Admin>
 	);
 }
+
+const CustomLayout = (props: any) => <Layout {...props} menu={CustomMenu} />;
+
+export const CustomMenu = (props: any) => {
+  const resources = useResourceDefinitions();
+
+	return (
+		<Menu {...props}>
+			{/* Standard resource links (optional, you can just list your resources here) */}
+			{/* Your custom link to /profile */}
+			<Link style={{padding: "6px 16px", color: "#ffffffb3"}} href="/profile">
+				Profile
+			</Link>
+			{resources.services && (
+				<MenuItemLink to="/services" primaryText="Services" />
+			)}
+			{resources.materials && (
+				<MenuItemLink to="/materials" primaryText="Materials" />
+			)}
+
+			{/* Add more custom links or standard resources here */}
+			{/* <MenuItemLink to="/custom-page" primaryText="Custom Page" leftIcon={<SomeOtherIcon />} /> */}
+		</Menu>
+	);
+};
 
 export const ServiceList = () => (
 	<List>
@@ -75,14 +102,14 @@ export const MaterialList = () => (
 );
 
 export const MaterialEdit = () => (
-  <Edit>
-    <SimpleForm>
-      <TextInput source="endescription" />
-      <TextInput source="spdescription" />
-      <TextInput source="enname" />
-      <TextInput source="spname" />
-      <TextInput source="imgurl" />
-      <BooleanInput source="reachcapacity" />
-    </SimpleForm>
-  </Edit>
+	<Edit>
+		<SimpleForm>
+			<TextInput source="endescription" />
+			<TextInput source="spdescription" />
+			<TextInput source="enname" />
+			<TextInput source="spname" />
+			<TextInput source="imgurl" />
+			<BooleanInput source="reachcapacity" />
+		</SimpleForm>
+	</Edit>
 );

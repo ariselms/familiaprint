@@ -11,12 +11,11 @@ import Link from "next/link";
 export default async function ProfilePage() {
 	const cookie = (await cookies()).get("sessiontoken");
 	const language = (await cookies()).get("language");
+  let value: string | undefined;
 
-	if (!cookie) {
-		redirect("/login");
-	}
-
-	const { value } = cookie;
+  if (cookie) {
+    value = cookie.value;
+  }
 
 	let user;
 
@@ -24,16 +23,6 @@ export default async function ProfilePage() {
 		await sql`SELECT * FROM users WHERE sessiontoken = ${value}`;
 
 	user = userDb[0];
-
-  console.log("User:", user);
-
-	if (!user) {
-		redirect("/login");
-	}
-
-	if (user.sessiontokenexpiration < new Date()) {
-		redirect("/login");
-	}
 
 	return (
 		<section>
