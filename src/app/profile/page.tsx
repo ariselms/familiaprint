@@ -8,11 +8,7 @@ import UserProfileForm from "@/components/forms/UserProfile";
 import { sql } from "@vercel/postgres";
 import Link from "next/link";
 
-export default async function ProfilePage({
-	children
-}: Readonly<{
-	children: React.ReactNode;
-}>) {
+export default async function ProfilePage() {
 	const cookie = (await cookies()).get("sessiontoken");
 	const language = (await cookies()).get("language");
 
