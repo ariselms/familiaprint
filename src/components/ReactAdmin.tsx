@@ -42,7 +42,7 @@ export const CustomMenu = (props: any) => {
 		<Menu {...props}>
 			{/* Standard resource links (optional, you can just list your resources here) */}
 			{/* Your custom link to /profile */}
-			<Link className="text-blue-500 px-4" href="/profile">
+			<Link className="text-blue-500 px-4 py-[6px] underline" href="/profile">
 				Profile
 			</Link>
 			{resources.services && (
