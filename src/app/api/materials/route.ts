@@ -156,3 +156,55 @@ export async function GET(request: Request) {
     );
   }
 }
+
+// POST (CREATE) a new material
+export async function POST(request: Request) {
+    try {
+        const body = await request.json();
+
+        const columns = Object.keys(body);
+        const values = Object.values(body);
+
+        const placeholders = columns.map((_, index) => `$${index + 1}`).join(', ');
+        const columnNames = columns.map(col => `"${col}"`).join(', ');
+
+        const insertQuery = `
+            INSERT INTO materials (${columnNames})
+            VALUES (${placeholders})
+            RETURNING *;
+        `;
+
+        const { rows: newMaterialRows } = await sql.query(insertQuery, values);
+
+        if (newMaterialRows.length === 0) {
+            return NextResponse.json({
+                success: false,
+                message: "Failed to create material.",
+                data: null
+            }, { status: 500 });
+        }
+
+        const newMaterial = newMaterialRows[0];
+
+        // If your database returns a primary key column other than 'id',
+        // make sure to map it to 'id' before returning to React-admin
+        // Example if your DB uses 'material_id' as PK:
+        // if (newMaterial && !newMaterial.id && newMaterial.material_id) {
+        //     newMaterial.id = newMaterial.material_id;
+        // }
+
+        return NextResponse.json({
+            success: true,
+            message: "Material created successfully",
+            data: newMaterial
+        }, { status: 201 }); // 201 Created status code
+
+    } catch (error) {
+        console.error("Error creating material:", error);
+        return NextResponse.json({
+            success: false,
+            message: "Error creating material",
+            data: null
+        }, { status: 500 });
+    }
+}

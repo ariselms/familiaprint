@@ -149,3 +149,59 @@ export async function GET(request: Request) {
     );
   }
 }
+
+// POST (CREATE) a new service
+export async function POST(request: Request) {
+    try {
+        const body = await request.json();
+
+        // Extract column names and values from the request body
+        const columns = Object.keys(body);
+        const values = Object.values(body);
+
+        // Generate placeholders for the SQL query ($1, $2, ...)
+        const placeholders = columns.map((_, index) => `$${index + 1}`).join(', ');
+        const columnNames = columns.map(col => `"${col}"`).join(', '); // Wrap column names in quotes for safety
+
+        // Construct the INSERT query
+        // RETURNING * will return the newly created row, including its generated ID
+        const insertQuery = `
+            INSERT INTO services (${columnNames})
+            VALUES (${placeholders})
+            RETURNING *;
+        `;
+
+        const { rows: newServiceRows } = await sql.query(insertQuery, values);
+
+        if (newServiceRows.length === 0) {
+            return NextResponse.json({
+                success: false,
+                message: "Failed to create service.",
+                data: null
+            }, { status: 500 });
+        }
+
+        const newService = newServiceRows[0];
+
+        // If your database returns a primary key column other than 'id',
+        // make sure to map it to 'id' before returning to React-admin
+        // Example if your DB uses 'service_id' as PK:
+        // if (newService && !newService.id && newService.service_id) {
+        //     newService.id = newService.service_id;
+        // }
+
+        return NextResponse.json({
+            success: true,
+            message: "Service created successfully",
+            data: newService // React-admin expects the new record here
+        }, { status: 201 }); // 201 Created status code
+
+    } catch (error) {
+        console.error("Error creating service:", error);
+        return NextResponse.json({
+            success: false,
+            message: "Error creating service",
+            data: null
+        }, { status: 500 });
+    }
+}
