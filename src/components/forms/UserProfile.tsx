@@ -42,7 +42,6 @@ export default function UserProfileForm({ user }: { user: any }) {
 
     // TODO:
     // Validate the form data before sending it to the server
-    // Create API endpoint to update user information
 
 
 		try {
@@ -266,6 +265,7 @@ export default function UserProfileForm({ user }: { user: any }) {
 							type="text"
 							autoComplete="postal-code"
 							className="block w-full rounded-md border-0 text-gray-900 dark:text-gray-100  focus:ring-2 focus:ring-inset focus:ring-red  -600 sm:text-sm sm:leading-6"
+							maxLength={5}
 							value={candidate.addresszip}
 							onChange={handleChange}
 						/>
