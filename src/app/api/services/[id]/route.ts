@@ -33,7 +33,7 @@ export async function PUT(
     request: Request,
     { params }: any // Adjusted to use 'any' for params to avoid type issues
 ) {
-    const { id } = params; // The ID of the record to update
+    const { id } = await params; // The ID of the record to update
 
     try {
         // Parse the request body to get the updated data
@@ -115,7 +115,7 @@ export async function DELETE(
     request: Request,
     { params }: any
 ) {
-    const { id } = params; // The ID of the record to delete
+    const { id } = await params; // The ID of the record to delete
 
     try {
         // Execute the DELETE query
