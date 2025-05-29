@@ -31,7 +31,7 @@ export async function GET(
 // PUT (UPDATE) a single service
 export async function PUT(
     request: Request,
-    { params }: { params: { id: string } }
+    { params }: any // Adjusted to use 'any' for params to avoid type issues
 ) {
     const { id } = params; // The ID of the record to update
 
@@ -113,7 +113,7 @@ export async function PUT(
 // DELETE a single service
 export async function DELETE(
     request: Request,
-    { params }: { params: { id: string } }
+    { params }: any
 ) {
     const { id } = params; // The ID of the record to delete
 

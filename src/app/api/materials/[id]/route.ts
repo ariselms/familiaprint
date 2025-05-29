@@ -31,7 +31,7 @@ export async function GET(
 // PUT (UPDATE) a single material
 export async function PUT(
     request: Request,
-    { params }: { params: { id: string } }
+    { params }: any
 ) {
     const { id } = params; // The ID of the record to update
 
@@ -110,7 +110,7 @@ export async function PUT(
 // DELETE a single material
 export async function DELETE(
     request: Request,
-    { params }: { params: { id: string } }
+    { params }: any
 ) {
     const { id } = params; // The ID of the record to delete
 
