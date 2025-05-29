@@ -8,6 +8,8 @@ export async function GET(
 ) {
 	const { id } = await params;
 
+  console.log("Fetching material with ID:", id);
+
 	try {
 		const { rows: category } =
 			await sql`SELECT * FROM materials WHERE id = ${id}`;

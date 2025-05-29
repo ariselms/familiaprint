@@ -1,7 +1,9 @@
+"use client";
+
 import "./globals.css";
 import { ThemeModeScript } from "flowbite-react";
 import { Geist, Geist_Mono } from "next/font/google";
-import type { Metadata } from "next";
+// import type { Metadata } from "next";
 import { LanguageContextProvider } from "@/context/languageContext";
 import { MaterialsContextProvider } from "@/context/materialsContext";
 import { ToastContainer } from "react-toastify";
@@ -9,27 +11,31 @@ import MainNavigation from "@/components/layout/MainNavigation";
 import Footer from "@/components/layout/Footer";
 import { AuthContextProvider } from "@/context/authContext";
 import { ServicesContextProvider } from "@/context/servicesContext";
+import { usePathname } from "next/navigation"; // Import usePathname
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+	variable: "--font-geist-sans",
+	subsets: ["latin"]
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+	variable: "--font-geist-mono",
+	subsets: ["latin"]
 });
 
-export const metadata: Metadata = {
-  title: "Familia Print",
-};
+// export const metadata: Metadata = {
+// 	title: "Familia Print"
+// };
 
 export default function RootLayout({
-  children,
+	children
 }: Readonly<{
-  children: React.ReactNode;
+	children: React.ReactNode;
 }>) {
-  return (
+	const pathname = usePathname(); // Get the current pathname
+	const isAdminPage = pathname.startsWith("/profile/admin"); // Check if the current page is an admin page
+
+	return (
 		<>
 			<html className="scroll-smooth dark:bg-black" suppressHydrationWarning>
 				<head>
@@ -61,9 +67,19 @@ export default function RootLayout({
 						<ServicesContextProvider>
 							<MaterialsContextProvider>
 								<LanguageContextProvider>
-									<MainNavigation />
-									{children}
-									<Footer />
+									{isAdminPage ? (
+										// If it's an admin page, just render the children (your React Admin page)
+										// without the main navigation and footer
+										children
+									) : (
+										// Otherwise, render the main navigation, children, and footer
+										<>
+											<MainNavigation />
+											{/* It's good practice to wrap your main content */}
+											{children}
+											<Footer />
+										</>
+									)}
 								</LanguageContextProvider>
 							</MaterialsContextProvider>
 						</ServicesContextProvider>

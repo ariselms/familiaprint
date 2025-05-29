@@ -51,33 +51,17 @@ export default async function ProfilePage() {
 					{user.role === "admin" && (
 						<Link
 							href="/profile/admin"
-							className="text-sm text-gray-500 dark:text-gray-300">
-							Profile
+							className="text-sm text-cyan-500 dark:text-cyan-400 hover:underline">
+							{language?.value === languageOptions?.english ? (
+								<>
+									Go to Admin Dashboard
+									<span className="ms-1" aria-hidden="true">&rarr;</span>
+								</>
+							) : (
+								"Ir al Panel de Administración"
+							)}
 						</Link>
 					)}
-					<div className="flex items-center mb-8">
-						<span className="me-8 dark:text-gray-200">
-							{language?.value === languageOptions?.english ? (
-								<strong>Name: </strong>
-							) : (
-								<strong>Nombre: </strong>
-							)}
-
-							{language?.value === languageOptions?.english
-								? user?.namefirst || "Not set yet"
-								: user?.namefirst || "Sin establecer"}
-						</span>
-						<span className="me-8 dark:text-gray-200">
-							{language?.value === languageOptions?.english ? (
-								<strong>Email: </strong>
-							) : (
-								<strong>Correo electrónico: </strong>
-							)}
-							{language?.value === languageOptions?.english
-								? user?.email || "Not set yet"
-								: user?.email || "Sin establecer aún"}
-						</span>
-					</div>
 				</MainContainer>
 			</nav>
 			<div className="bg-gray-200 dark:bg-gray-900">
