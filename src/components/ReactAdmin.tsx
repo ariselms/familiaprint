@@ -35,13 +35,14 @@ export default function ReactAdmin() {
 const CustomLayout = (props: any) => <Layout {...props} menu={CustomMenu} />;
 
 export const CustomMenu = (props: any) => {
+
   const resources = useResourceDefinitions();
 
 	return (
 		<Menu {...props}>
 			{/* Standard resource links (optional, you can just list your resources here) */}
 			{/* Your custom link to /profile */}
-			<Link style={{padding: "6px 16px", color: "#ffffffb3"}} href="/profile">
+			<Link className="text-blue-500 px-4" href="/profile">
 				Profile
 			</Link>
 			{resources.services && (

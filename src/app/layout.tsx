@@ -33,6 +33,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	const pathname = usePathname(); // Get the current pathname
+	
 	const isAdminPage = pathname.startsWith("/profile/admin"); // Check if the current page is an admin page
 
 	return (
