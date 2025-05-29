@@ -18,6 +18,7 @@ import {
 	useResourceDefinitions,
   Layout
 } from "react-admin";
+import { RichTextInput } from 'ra-input-rich-text';
 import customDataProvider from "@/react-admin/customDataProvider";
 
 export default function ReactAdmin() {
@@ -74,8 +75,8 @@ export const ServiceList = () => (
 export const ServiceEdit = () => (
 	<Edit>
 		<SimpleForm>
-			<TextInput source="endescription" />
-			<TextInput source="spdescription" />
+			<RichTextInput source="endescription" />
+			<RichTextInput source="spdescription" />
 			<TextInput source="enname" />
 			<TextInput source="spname" />
 			<DateInput source="imgurl" />
@@ -104,8 +105,8 @@ export const MaterialList = () => (
 export const MaterialEdit = () => (
 	<Edit>
 		<SimpleForm>
-			<TextInput source="endescription" />
-			<TextInput source="spdescription" />
+			<RichTextInput source="endescription" />
+			<RichTextInput source="spdescription" />
 			<TextInput source="enname" />
 			<TextInput source="spname" />
 			<TextInput source="imgurl" />

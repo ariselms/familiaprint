@@ -3,50 +3,156 @@ export const dynamic = "force-dynamic";
 import { NextResponse } from "next/server";
 import { sql } from "@vercel/postgres";
 
-// TODO:
-// check parameters from the server console to ensure all table functionalities are working as expected
-// create the update and delete routes for materials
+// Helper function to sanitize and build WHERE clause from filter
+// This is a simplified example. For complex filters (e.g., gt, lt),
+// you'd need a more sophisticated parser.
+function buildWhereClause(filter: any): { clause: string; values: any[] } {
+  let conditions: string[] = [];
+  let values: any[] = [];
+  let paramIndex = 1; // Start index for SQL parameters ($1, $2, etc.)
+
+  for (const key in filter) {
+    if (filter.hasOwnProperty(key)) {
+      const value = filter[key];
+
+      // Handle 'q' (global search) filter
+      if (key === 'q') {
+        // Apply a case-insensitive LIKE across relevant text fields
+        conditions.push(`(
+          endescription ILIKE $${paramIndex} OR
+          spdescription ILIKE $${paramIndex} OR
+          enname ILIKE $${paramIndex} OR
+          spname ILIKE $${paramIndex} OR
+          entitle ILIKE $${paramIndex} OR
+          sptitle ILIKE $${paramIndex} OR
+          ensummary ILIKE $${paramIndex} OR
+          spsummary ILIKE $${paramIndex}
+        )`);
+        values.push(`%${value}%`);
+        paramIndex++;
+      }
+      // Handle array filters (e.g., for 'id' from getMany)
+      else if (Array.isArray(value)) {
+        if (value.length > 0) {
+          const placeholders = value.map(() => `$${paramIndex++}`).join(',');
+          conditions.push(`"${key}" IN (${placeholders})`);
+          values.push(...value);
+        }
+      }
+      // Handle exact match filters for other fields
+      else {
+        conditions.push(`"${key}" = $${paramIndex}`);
+        values.push(value);
+        paramIndex++;
+      }
+    }
+  }
+
+  const clause = conditions.length > 0 ? `WHERE ${conditions.join(' AND ')}` : '';
+  return { clause, values };
+}
 
 export async function GET(request: Request) {
-	// Added 'request: Request' for consistency
-	try {
-		const { rows: materials } = await sql`SELECT * FROM materials`;
+  try {
+    const { searchParams } = new URL(request.url);
 
-		// --- Calculate values for Content-Range header ---
-		const totalCount = materials.length;
-		const startIndex = 0;
-		const endIndex = totalCount > 0 ? totalCount - 1 : 0;
+    // 1. Parse Filter Parameter
+    const filterStr = searchParams.get('filter') || '{}';
+    const filter = JSON.parse(decodeURIComponent(filterStr));
 
-		// Construct the Content-Range header string
-		const contentRangeHeader = `items ${startIndex}-${endIndex}/${totalCount}`;
+    // 2. Parse Range Parameter for Pagination
+    const rangeStr = searchParams.get('range');
+    let offset = 0;
+    let limit = 10; // Default limit
+    if (rangeStr) {
+      const range = JSON.parse(decodeURIComponent(rangeStr));
+      const start = parseInt(range[0], 10);
+      const end = parseInt(range[1], 10);
+      offset = start;
+      limit = end - start + 1;
+    }
 
-		return NextResponse.json(
-			{
-				success: true,
-				message: "Materials fetched successfully",
-				data: materials, // This matches what your frontend customDataProvider expects (response.data.data)
-				total: totalCount // This matches what your frontend customDataProvider expects (response.data.total)
-			},
-			{
-				status: 200,
-				headers: {
-					"Content-Range": contentRangeHeader // Add the Content-Range header here
-					// As mentioned before, 'Access-Control-Expose-Headers' is typically not needed
-					// for same-origin Next.js deployments.
-				}
-			}
-		);
-	} catch (error) {
-		console.error("Error fetching materials:", error); // More descriptive logging
-		return NextResponse.json(
-			// Ensure to return NextResponse.json for error cases too
-			{
-				success: false,
-				message: "Error fetching materials",
-				data: [], // Return empty array for data consistency on error
-				total: 0
-			},
-			{ status: 500 }
-		);
-	}
+    // 3. Parse Sort Parameter
+    const sortStr = searchParams.get('sort');
+    let sortField = 'id'; // Default sort field
+    let sortOrder = 'ASC'; // Default sort order
+    if (sortStr) {
+      const sort = JSON.parse(decodeURIComponent(sortStr));
+      sortField = sort[0];
+      sortOrder = sort[1];
+
+      // Basic Whitelisting for Sort Field to prevent SQL Injection
+      const allowedSortFields = [
+        'id', 'endescription', 'spdescription', 'enname', 'spname',
+        'imgurl', 'reachcapacity', 'entitle', 'sptitle', 'ensummary', 'spsummary'
+        // Add all your actual column names that you allow sorting by
+      ];
+      if (!allowedSortFields.includes(sortField)) {
+        console.warn(`Attempted to sort by disallowed field: ${sortField}`);
+        sortField = 'id'; // Fallback to a safe default
+      }
+      if (!['ASC', 'DESC'].includes(sortOrder.toUpperCase())) {
+        console.warn(`Attempted to sort with disallowed order: ${sortOrder}`);
+        sortOrder = 'ASC'; // Fallback to a safe default
+      }
+    }
+
+    // Build the WHERE clause
+    const { clause: whereClause, values: whereValues } = buildWhereClause(filter);
+
+    // --- First Query: Get Total Count (with filters, but no pagination) ---
+    const countQuery = `SELECT COUNT(*) FROM materials ${whereClause};`;
+    const { rows: countRows } = await sql.query(countQuery, whereValues);
+    const totalCount = parseInt(countRows[0].count, 10);
+
+    // --- Second Query: Get Paginated and Sorted Data (with filters, sort, limit, offset) ---
+    // Use parameterized queries for ORDER BY by constructing the query string carefully
+    // Column names need to be safely inserted, using interpolation for whitelisted fields
+    // and parameterized values for filter values.
+    const dataQuery = `
+      SELECT * FROM materials
+      ${whereClause}
+      ORDER BY "${sortField}" ${sortOrder}
+      LIMIT $${whereValues.length + 1} OFFSET $${whereValues.length + 2};
+    `;
+    const { rows: materials } = await sql.query(dataQuery, [...whereValues, limit, offset]);
+
+    // --- Construct Content-Range header ---
+    // The range represents the items *returned in this specific response*
+    const startIndex = offset;
+    const endIndex = offset + materials.length - 1;
+
+    // Ensure endIndex is not -1 for empty lists
+    const finalEndIndex = materials.length > 0 ? endIndex : offset;
+
+
+    const contentRangeHeader = `items ${startIndex}-${finalEndIndex}/${totalCount}`;
+
+    return NextResponse.json(
+      {
+        success: true,
+        message: "Materials fetched successfully",
+        data: materials,
+        total: totalCount
+      },
+      {
+        status: 200,
+        headers: {
+          'Content-Range': contentRangeHeader,
+        }
+      }
+    );
+
+  } catch (error) {
+    console.error("Error fetching materials:", error);
+    return NextResponse.json(
+      {
+        success: false,
+        message: "Error fetching materials",
+        data: [],
+        total: 0
+      },
+      { status: 500 }
+    );
+  }
 }
