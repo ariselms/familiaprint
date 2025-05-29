@@ -100,33 +100,33 @@ export default function MainNavigation() {
 				{showMenu && (
 					<ul
 						id="menu"
-						className="flex flex-col md:flex-row md:items-center absolute md:static right-0 top-16 z-20 gap-x-8 order-2 bg-gray-200 dark:bg-gray-800 md:dark:bg-transparent md:bg-transparent w-full md:w-auto">
-						<li className="md:p-0 text-center cursor-pointer hover:bg-gray-300 md:hover:bg-transparent hover:dark:bg-gray-700 md:dark:hover:bg-transparent trastition-all">
+						className="flex flex-col md:flex-row md:items-center absolute md:static right-0 top-26 z-20 gap-x-8 order-2 bg-gray-200 dark:bg-gray-800 md:dark:bg-transparent md:bg-transparent w-full md:w-auto">
+						<li className="pt-4 pb-1 md:p-0 text-center hover:bg-gray-300 md:hover:bg-transparent hover:dark:bg-gray-700 md:dark:hover:bg-transparent trastition-all">
 							<Link
 								onClick={() => {
 									isMobile && setShowMenu(false);
 								}}
-								className={`${isActiveLink("/") && "border-b-2 border-red-600"} text-black dark:text-white hover:border-b-2 hover:border-red-600`}
+								className={`${isActiveLink("/") && "border-b-2 border-red-600"} cursor-pointer text-black dark:text-white hover:border-b-2 hover:border-red-600`}
 								href="/">
 								{language === languageOptions.spanish ? "Inicio" : "Home"}
 							</Link>
 						</li>
-						<li className="md:p-0 text-center cursor-pointer hover:bg-gray-300 md:hover:bg-transparent hover:dark:bg-gray-700 md:dark:hover:bg-transparent trastition-all">
+						<li className="pt-2 pb-1 md:p-0 text-center hover:bg-gray-300 md:hover:bg-transparent hover:dark:bg-gray-700 md:dark:hover:bg-transparent trastition-all">
 							<Link
 								onClick={() => {
 									isMobile && setShowMenu(false);
 								}}
-								className={`${isActiveLink("/about") && "border-b-2 border-red-600"} text-black dark:text-white hover:border-b-2 hover:border-red-600`}
+								className={`${isActiveLink("/about") && "border-b-2 border-red-600"} cursor-pointer text-black dark:text-white hover:border-b-2 hover:border-red-600`}
 								href="/about">
 								{language === languageOptions.spanish ? "Nosotros" : "About"}
 							</Link>
 						</li>
-						<li className="md:p-0 text-center cursor-pointer hover:bg-gray-300 md:hover:bg-transparent hover:dark:bg-gray-700 md:dark:hover:bg-transparent trastition-all">
+						<li className="pt-2 pb-1 md:p-0 text-center hover:bg-gray-300 md:hover:bg-transparent hover:dark:bg-gray-700 md:dark:hover:bg-transparent trastition-all">
 							<Link
 								onClick={() => {
 									isMobile && setShowMenu(false);
 								}}
-								className={`${isActiveLink("/quote") && "border-b-2 border-red-600"} text-black dark:text-white hover:border-b-2 hover:border-red-600`}
+								className={`${isActiveLink("/quote") && "border-b-2 border-red-600"} cursor-pointer text-black dark:text-white hover:border-b-2 hover:border-red-600`}
 								href="/quote">
 								{language === languageOptions.spanish
 									? "Cotización Gratis"
@@ -134,41 +134,43 @@ export default function MainNavigation() {
 							</Link>
 						</li>
 						{user ? (
-							<li className="md:p-0 text-center cursor-pointer hover:bg-gray-300 md:hover:bg-transparent hover:dark:bg-gray-700 md:dark:hover:bg-transparent trastition-all">
-								{" "}
-								<Link
-									onClick={() => {
-										isMobile && setShowMenu(false);
-									}}
-									className={`${isActiveLink("/profile") && "border-b-2 border-red-600"} text-black dark:text-white hover:border-b-2 hover:border-red-600`}
-									href="/profile">
-									{language === languageOptions.spanish ? "Perfil" : "Profile"}
-								</Link>
-							</li>
+							<ul className="flex flex-col md:flex-row md:items-center md:gap-x-2 md:bg-gray-200 md:dark:bg-gray-900 rounded-xl border border-gray-400 dark:border-gray-800">
+								<li className="pt-2 pb-1 md:pl-4 md:pr-2 md:py-1 border-r border-gray-400 md:p-0 text-center hover:bg-gray-300 md:hover:bg-transparent hover:dark:bg-gray-700 md:dark:hover:bg-transparent trastition-all">
+									{" "}
+									<Link
+										onClick={() => {
+											isMobile && setShowMenu(false);
+										}}
+										className={`${isActiveLink("/profile") && "border-b-2 border-red-600"} cursor-pointer text-black dark:text-white hover:border-b-2 hover:border-red-600`}
+										href="/profile">
+										{language === languageOptions.spanish
+											? "Perfil"
+											: "Profile"}
+									</Link>
+								</li>
+								<li className="pt-2 pb-4 md:p-0  md:pl-2 md:pr-4 md:py-1 text-center hover:bg-gray-300 md:hover:bg-transparent hover:dark:bg-gray-700 md:dark:hover:bg-transparent trastition-all">
+									{" "}
+									<Link
+										onClick={() => {
+											isMobile && setShowMenu(false);
+											signOutUser();
+										}}
+										className={`${isActiveLink("/login") && "border-b-2 border-red-600"} cursor-pointer text-red-600 hover:border-b-2 hover:border-red-600`}
+										href="/login">
+										{language === languageOptions.spanish ? "Salir" : "Logout"}
+									</Link>
+								</li>
+							</ul>
 						) : (
-							<li className="md:p-0 text-center cursor-pointer hover:bg-gray-300 md:hover:bg-transparent hover:dark:bg-gray-700 md:dark:hover:bg-transparent trastition-all">
+							<li className="pt-2 pb-4 md:p-0 text-center hover:bg-gray-300 md:hover:bg-transparent hover:dark:bg-gray-700 md:dark:hover:bg-transparent trastition-all">
 								{" "}
 								<Link
 									onClick={() => {
 										isMobile && setShowMenu(false);
 									}}
-									className={`${isActiveLink("/login") && "border-b-2 border-red-600"} text-black dark:text-white hover:border-b-2 hover:border-red-600`}
+									className={`${isActiveLink("/login") && "border-b-2 border-red-600"} cursor-pointer text-black dark:text-white hover:border-b-2 hover:border-red-600`}
 									href="/login">
 									{language === languageOptions.spanish ? "Ingresar" : "Login"}
-								</Link>
-							</li>
-						)}
-						{user && (
-							<li className="md:p-0 text-center cursor-pointer hover:bg-gray-300 md:hover:bg-transparent hover:dark:bg-gray-700 md:dark:hover:bg-transparent trastition-all">
-								{" "}
-								<Link
-									onClick={() => {
-										isMobile && setShowMenu(false);
-										signOutUser();
-									}}
-									className={`${isActiveLink("/login") && "border-b-2 border-red-600"} text-red-600 dark:text-red-500 hover:border-b-2 hover:border-red-600`}
-									href="/login">
-									{language === languageOptions.spanish ? "Salir" : "Logout"}
 								</Link>
 							</li>
 						)}
