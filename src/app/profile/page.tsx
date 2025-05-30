@@ -1,12 +1,12 @@
 "use server";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 import MainContainer from "@/components/layout/Container";
 import { languageOptions } from "@/static";
 import { Badge, TabItem, Tabs } from "flowbite-react";
 import UserProfileForm from "@/components/forms/UserProfile";
 import { sql } from "@vercel/postgres";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 export default async function ProfilePage() {
 	const cookie = (await cookies()).get("sessiontoken");
@@ -17,7 +17,15 @@ export default async function ProfilePage() {
     value = cookie.value;
   }
 
+  if (!cookie) {
+		redirect("/login");
+	}
+
 	let user;
+
+  if(!user) {
+    redirect("/login");
+  }
 
 	const { rows: userDb } =
 		await sql`SELECT * FROM users WHERE sessiontoken = ${value}`;
