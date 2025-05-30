@@ -26,7 +26,7 @@ export default function QuotePage() {
 			/>
 			<section className="py-16 bg-gray-200 dark:bg-gray-900">
 				<MainContainer>
-          <QuoteForm />
+          			<QuoteForm />
 				</MainContainer>
 			</section>
 		</>

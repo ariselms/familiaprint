@@ -241,6 +241,16 @@ export default function LeadForm() {
 							input.classList.add("ring-2", "ring-red-500");
 						});
 				}
+
+				// Additional validation for ProjectService
+				if (projectService.length === 0) {
+					document
+						.querySelectorAll("input[name='ProjectService']")
+						.forEach((input) => {
+							input.classList.add("ring-2", "ring-red-500");
+						});
+				}
+
 				// Additional validation for ProjectEstimateTimeframe
 				if (candidate.ProjectEstimateTimeframe === "") {
 					document
@@ -258,7 +268,7 @@ export default function LeadForm() {
 			const errorMessage =
 				error instanceof Error ? error.message : "An error occurred";
 
-      toast.error(errorMessage);
+			toast.error(errorMessage);
 		} finally {
 
 			setLoading(false);
