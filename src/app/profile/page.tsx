@@ -11,21 +11,13 @@ import { redirect } from "next/navigation";
 export default async function ProfilePage() {
 	const cookie = (await cookies()).get("sessiontoken");
 	const language = (await cookies()).get("language");
-  let value: string | undefined;
+  	let value: string | undefined;
 
-  if (cookie) {
-    value = cookie.value;
-  }
-
-  if (!cookie) {
-		redirect("/login");
+	if (cookie) {
+		value = cookie.value;
 	}
 
 	let user;
-
-  if(!user) {
-    redirect("/login");
-  }
 
 	const { rows: userDb } =
 		await sql`SELECT * FROM users WHERE sessiontoken = ${value}`;
