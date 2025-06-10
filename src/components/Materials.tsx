@@ -39,9 +39,13 @@ const ServicesMaterialsCard = ({ material }: { material: MaterialsType }) => {
 				<h3 className="text-gray-900 dark:text-white text-3xl font-extrabold mb-2">
 					{language === languageOptions.english ? enname : spname}
 				</h3>
-				<p className="text-lg font-normal text-gray-500 dark:text-gray-300 mb-8">
-					{language === languageOptions.english ? endescription : spdescription}
-				</p>
+				<div className="text-lg font-normal text-gray-500 dark:text-gray-300 mb-8">
+					{language === languageOptions.english ? (
+						<div dangerouslySetInnerHTML={{ __html: endescription }}></div>
+					) : (
+						<div dangerouslySetInnerHTML={{ __html: spdescription }}></div>
+					)}
+				</div>
 				<div className="flex-col mt-auto">
 					<Link
 						href={`/materials/${id}`}
