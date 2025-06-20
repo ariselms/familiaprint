@@ -49,18 +49,18 @@ export default function RootLayout({
 						width={300}
 						height={300}
 						sizes="100vw"
-            className="my-10"
+						className="my-10"
 					/>
 					<h1 className="text-4xl font-bold">Muy Pronto / Coming Soon</h1>
-          <p>Disponible en español e inglés</p>
-          <p>Available in Spanish and English</p>
-					<p className="text-lg mt-4">
+					<p>Disponible en español e inglés</p>
+					<p>Available in Spanish and English</p>
+					<p className="text-lg mt-4 max-w-[80ch]">
 						Confeccionando soluciones visuales de anuncios, letreros, diseño
 						gráfico, websites y más. Descubre nuestra plataforma todo en uno,
 						hecho en Puerto Rico. Tenemos la solución medida a tus necesidades
 						de negocio.
 					</p>
-					<p className="text-lg mt-4">
+					<p className="text-lg mt-4 max-w-[80ch]">
 						Crafting visual solutions for ads, signs, graphic design, websites
 						and much more. Discover our platform all in one, made in Puerto
 						Rico. We have the solution to meet your business needs.
