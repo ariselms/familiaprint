@@ -37,38 +37,38 @@ export default function RootLayout({
 
 	const isAdminPage = pathname.startsWith("/profile/admin"); // Check if the current page is an admin page
 
-  return (
-		<html>
-			<body>
-				<section
-					className={`flex min-h-screen flex-col items-center justify-center bg-white px-4 py-8 dark:bg-gray-900 ${geistSans.variable} ${geistMono.variable}`}
-					suppressHydrationWarning>
-					<Image
-						src="/logos/horizontal-gradient.svg"
-						alt="Logo"
-						width={300}
-						height={300}
-						sizes="100vw"
-						className="my-10"
-					/>
-					<h1 className="text-4xl font-bold">Muy Pronto / Coming Soon</h1>
-					<p>Disponible en español e inglés</p>
-					<p>Available in Spanish and English</p>
-					<p className="text-lg mt-4 max-w-[80ch]">
-						Confeccionando soluciones visuales de anuncios, letreros, diseño
-						gráfico, websites y más. Descubre nuestra plataforma todo en uno,
-						hecho en Puerto Rico. Tenemos la solución medida a tus necesidades
-						de negocio.
-					</p>
-					<p className="text-lg mt-4 max-w-[80ch]">
-						Crafting visual solutions for ads, signs, graphic design, websites
-						and much more. Discover our platform all in one, made in Puerto
-						Rico. We have the solution to meet your business needs.
-					</p>
-				</section>
-			</body>
-		</html>
-	);
+  // return (
+	// 	<html>
+	// 		<body>
+	// 			<section
+	// 				className={`flex min-h-screen flex-col items-center justify-center bg-white px-4 py-8 dark:bg-gray-900 ${geistSans.variable} ${geistMono.variable}`}
+	// 				suppressHydrationWarning>
+	// 				<Image
+	// 					src="/logos/horizontal-gradient.svg"
+	// 					alt="Logo"
+	// 					width={300}
+	// 					height={300}
+	// 					sizes="100vw"
+	// 					className="my-10"
+	// 				/>
+	// 				<h1 className="text-4xl font-bold">Muy Pronto / Coming Soon</h1>
+	// 				<p>Disponible en español e inglés</p>
+	// 				<p>Available in Spanish and English</p>
+	// 				<p className="text-lg mt-4 max-w-[80ch]">
+	// 					Confeccionando soluciones visuales de anuncios, letreros, diseño
+	// 					gráfico, websites y más. Descubre nuestra plataforma todo en uno,
+	// 					hecho en Puerto Rico. Tenemos la solución medida a tus necesidades
+	// 					de negocio.
+	// 				</p>
+	// 				<p className="text-lg mt-4 max-w-[80ch]">
+	// 					Crafting visual solutions for ads, signs, graphic design, websites
+	// 					and much more. Discover our platform all in one, made in Puerto
+	// 					Rico. We have the solution to meet your business needs.
+	// 				</p>
+	// 			</section>
+	// 		</body>
+	// 	</html>
+	// );
 
 	return (
 		<>
