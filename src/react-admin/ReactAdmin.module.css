@@ -1,0 +1,79 @@
+/* === HEADINGS === */
+.ReactAdminContainer h1,
+.ReactAdminContainer h2,
+.ReactAdminContainer h3,
+.ReactAdminContainer h4,
+.ReactAdminContainer h5,
+.ReactAdminContainer h6 {
+    font-weight: 600;
+    line-height: 1.25;
+    margin-top: 1.2em;
+    margin-bottom: 0.6em;
+}
+
+.ReactAdminContainer h1 { font-size: 2.25rem; }
+.ReactAdminContainer h2 { font-size: 1.875rem; }
+.ReactAdminContainer h3 { font-size: 1.5rem; }
+.ReactAdminContainer h4 { font-size: 1.25rem; }
+
+/* === PARAGRAPHS === */
+.ReactAdminContainer p {
+    margin-bottom: 1em;
+    line-height: 1.6;
+}
+
+/* === PARAGRAPHS INSIDE a TAG === */
+.ReactAdminContainer a p {
+    margin: 0;
+}
+
+/* === LISTS === */
+.ReactAdminContainer ul {
+    list-style-type: disc;
+    padding-left: 1.5rem; /* Indentation */
+    margin-bottom: 1em;
+}
+
+.ReactAdminContainer ol {
+    list-style-type: decimal;
+    padding-left: 1.5rem; /* Indentation */
+    margin-bottom: 1em;
+}
+
+.ReactAdminContainer li {
+    margin-bottom: 0.5em;
+}
+
+/* === LINKS === */
+.ReactAdminContainer a {
+    color: #3b82f6; /* A nice blue color */
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.ReactAdminContainer a:hover {
+    color: #2563eb;
+}
+
+/* === TEXT FORMATTING === */
+.ReactAdminContainer strong {
+    font-weight: bold;
+}
+
+.ReactAdminContainer em {
+    font-style: italic;
+}
+
+.ReactAdminContainer u {
+    text-decoration: underline;
+}
+
+/* === BLOCKQUOTES === */
+.ReactAdminContainer blockquote {
+    border-left: 4px solid #d1d5db; /* A light gray border */
+    padding-left: 1rem;
+    margin-left: 0;
+    margin-right: 0;
+    font-style: italic;
+    color: #6b7280; /* A slightly muted text color */
+}

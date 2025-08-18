@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 
 // Dynamically import the AdminClientComponent and disable SSR
 const ReactAdmin = dynamic(
-	() => import("@/components/ReactAdmin"), // Adjust path as needed
+	() => import("@/react-admin/ReactAdmin"), // Adjust path as needed
 	{ ssr: false }
 );
 

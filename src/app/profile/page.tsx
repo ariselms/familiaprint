@@ -6,7 +6,6 @@ import { Badge, TabItem, Tabs } from "flowbite-react";
 import UserProfileForm from "@/components/forms/UserProfile";
 import { sql } from "@vercel/postgres";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 
 export default async function ProfilePage() {
 	const cookie = (await cookies()).get("sessiontoken");
