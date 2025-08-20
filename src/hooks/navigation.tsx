@@ -13,21 +13,21 @@ export const useNavigationData = () => {
         name: language === languageOptions.english ? "Contact" : "Ayuda",
         href: "/contact"
       },
-      {
-        name:
-          language === languageOptions.english ? "FAQ" : "Preguntas frecuentes",
-        href: "/faq"
-      }
+      // {
+      //   name:
+      //     language === languageOptions.english ? "FAQ" : "Preguntas frecuentes",
+      //   href: "/faq"
+      // }
     ],
     company: [
       {
         name: language === languageOptions.english ? "About" : "Acerca de",
         href: "/about"
       },
-      {
-        name: language === languageOptions.english ? "Jobs" : "Empleos",
-        href: "/jobs"
-      }
+      // {
+      //   name: language === languageOptions.english ? "Jobs" : "Empleos",
+      //   href: "/jobs"
+      // }
     ],
     legal: [
       {
@@ -48,10 +48,10 @@ export const useNavigationData = () => {
         name: language === languageOptions.english ? "Cookies" : "Cookies",
         href: "/cookies"
       },
-      {
-        name: language === languageOptions.english ? "Licenses" : "Licencias",
-        href: "/licenses"
-      }
+      // {
+      //   name: language === languageOptions.english ? "Licenses" : "Licencias",
+      //   href: "/licenses"
+      // }
     ],
     social: [
     	{

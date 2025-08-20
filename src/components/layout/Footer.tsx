@@ -129,7 +129,7 @@ export default function Footer() {
 					</div>
 				</div>
 				<div className="mt-8 border-t border-white/10 pt-8 md:flex md:items-center md:justify-between">
-					<div className="flex gap-x-6 md:order-2">
+					{/* <div className="flex gap-x-6 md:order-2">
 						{navigation.social.map((item) => (
 							<a
 								key={item.name}
@@ -139,7 +139,7 @@ export default function Footer() {
 								<item.icon aria-hidden="true" className="size-6" />
 							</a>
 						))}
-					</div>
+					</div> */}
 					<p className="mt-8 text-sm/6 text-gray-100 md:order-1 md:mt-0">
 						&copy; {new Date().getFullYear()} Familia Print by Leonidas, LLC.
 						{language === languageOptions.spanish
